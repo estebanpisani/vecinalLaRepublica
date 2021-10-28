@@ -19,9 +19,10 @@ public class UsuarioServicio {
 
 	@Transactional
 	public void crearUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
-			String nombre, String apellido, Integer telefono) {
+			String nombre, String apellido, Integer telefono) throws Exception {
 		try {
-			validarDatosUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido);
+			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido);
+			validarContrasenia(contrasenia, contrasenia2);
 
 			Usuario usuario = new Usuario();
 			usuario.setNombreUsuario(nombreUsuario);
@@ -38,27 +39,54 @@ public class UsuarioServicio {
 
 		} catch (Exception e) {
 			e.getMessage();
+			throw new Exception("Error en uno de los campos");
 		}
 
 	}
 
 	@Transactional
-	public void modificarUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
-			String nombre, String apellido, Integer telefono, Integer id) throws Exception {
+	public void modificarUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido,
+			Integer telefono, Integer id) throws Exception {
 		try {
-			validarDatosUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido);
+			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido);
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
 
 			if (respuesta.isPresent()) {
 				Usuario usuario = respuesta.get();
 				usuario.setNombreUsuario(nombreUsuario);
-				usuario.setContrasenia(contrasenia);
 				usuario.setEmailUsuario(emailUsuario);
 				usuario.setNombre(nombre);
 				usuario.setApellido(apellido);
 				usuario.setTelefono(telefono);
 
 				usuarioRepo.save(usuario);
+
+			} else {
+				throw new Exception("Usuario no encontrado");
+			}
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+	}
+
+	@Transactional
+	public void modificarContrasenia(String contrasenia, String contrasenia1, String contrasenia2, Integer id)
+			throws Exception {
+		try {
+
+			Optional<Usuario> respuesta = usuarioRepo.findById(id);
+
+			if (respuesta.isPresent()) {
+				Usuario usuario = respuesta.get();
+				if (usuario.getContrasenia().equals(contrasenia)) {
+					validarContrasenia(contrasenia1, contrasenia2);
+					usuario.setContrasenia(contrasenia1);
+					usuarioRepo.save(usuario);
+				} else {
+					throw new Exception("Contraseña incorrecta");
+				}
 
 			} else {
 				throw new Exception("Usuario no encontrado");
@@ -193,33 +221,13 @@ public class UsuarioServicio {
 
 	}
 
-	public void validarDatosUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
-			String nombre, String apellido) throws Exception {
+	public void validarDatosUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido)
+			throws Exception {
 
 		if (nombreUsuario == null || nombreUsuario.isEmpty())
 
 		{
 			throw new Exception("El campo no puede estar vacio.");
-
-		}
-
-		if (contrasenia == null || contrasenia.isEmpty())
-
-		{
-			throw new Exception("El campo no puede estar vacio.");
-
-		}
-
-		if (contrasenia2 == null || contrasenia2.isEmpty())
-
-		{
-			throw new Exception("El campo no puede estar vacio.");
-
-		}
-
-		if (!contrasenia.equals(contrasenia2)) {
-
-			throw new Exception("Las contraseñas no coiciden");
 
 		}
 
@@ -244,4 +252,25 @@ public class UsuarioServicio {
 
 	}
 
+	public void validarContrasenia(String contrasenia, String contrasenia2) throws Exception {
+		if (contrasenia == null || contrasenia.isEmpty())
+
+		{
+			throw new Exception("El campo no puede estar vacio.");
+
+		}
+
+		if (contrasenia2 == null || contrasenia2.isEmpty())
+
+		{
+			throw new Exception("El campo no puede estar vacio.");
+
+		}
+
+		if (!contrasenia.equals(contrasenia2)) {
+
+			throw new Exception("Las contraseñas no coiciden");
+
+		}
+	}
 }
