@@ -11,10 +11,5 @@ import javax.persistence.Table;
 public class Actividad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idUsuario;
-	private String nombreUsuario;
-	private String contrasenia;
-	private String emailUsuario;
-	private Boolean admin;
-	private String nombre;
+	private Integer idActividades;
 }
