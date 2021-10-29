@@ -1,0 +1,79 @@
+:root {
+	--turquesa: #76D7C4;
+}
+
+* {
+	margin: 0;
+	border: 0;
+}
+
+body {
+	font-family: 'Ubuntu',sans-serif;
+}
+
+header {
+	background: var(--turquesa);
+	height: 80px;
+}
+
+header > .main > .title {
+	font-size: 35px;
+	font-weight: 800;
+	position: absolute;
+	margin-top: 20px;
+}
+
+nav {
+	background: black;
+	height: 50px;
+}
+
+nav > .main > .left > li {
+	margin-top: 12.5px;
+	float: left;
+	list-style: none;
+	margin-right: 15px;
+}
+
+nav > .main > .left > li > a {
+	text-decoration: none;
+	color: white;
+	font-size: 20px;
+	float: left;
+}
+
+nav > .main > .left > li > a:hover {
+  border-bottom: 3px solid var(--turquesa);
+  transition: .3s all ease-in;
+}
+
+nav > .main > .right > li {
+	margin-top: 12.5px;
+	float: right;
+	list-style: none;
+	margin-right: 15px;
+}
+
+nav > .main > .right > li > a {
+	text-decoration: none;
+	color: white;
+	font-size: 20px;
+	float: left;
+}
+
+.main {
+	margin-left: auto;
+	margin-right: auto;
+
+	background: red;
+	width: 80%;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
+
