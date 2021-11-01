@@ -12,7 +12,7 @@ spring:
  jpa:
   show-sql: true
   hibernate:
-    ddl-auto: update
+    ddl-auto: drop-and-create
   properties:
     hibernate:
       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -21,4 +21,4 @@ spring:
  thymeleaf:
   cache: false
 server:
- port: 8080
+ port: 8081

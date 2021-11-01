@@ -39,7 +39,7 @@ public class UsuarioServicio {
 
 		} catch (Exception e) {
 			e.getMessage();
-			throw new Exception("Error en uno de los campos");
+			throw new Exception(e.getMessage());
 		}
 
 	}
