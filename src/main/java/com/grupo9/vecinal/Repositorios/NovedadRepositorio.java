@@ -13,21 +13,21 @@ import com.grupo9.vecinal.Entidades.Novedad;
 @Repository
 public interface NovedadRepositorio extends JpaRepository<Novedad, Integer> {
 
-	@Query("SELECT n FROM Novedad n WHERE n.alta = true ORDER BY n.fecha ASC")
+	@Query("SELECT n FROM Novedad n WHERE n.alta = true ORDER BY n.fecha DESC")
 	public List<Novedad> novedadesAlta();
 	
-	@Query("SELECT n FROM Novedad n WHERE n.alta = false ORDER BY n.fecha ASC")
+	@Query("SELECT n FROM Novedad n WHERE n.alta = false ORDER BY n.fecha DESC")
 	public List<Novedad> novedadesBaja();
 	
-	@Query("SELECT n FROM Novedad n WHERE n.fecha = 'fecha' ORDER BY n.fecha ASC")
+	@Query("SELECT n FROM Novedad n WHERE n.fecha = 'fecha' ORDER BY n.fecha DESC")
 	public List<Novedad> novedadesPorFecha(@Param("fecha") Date fecha);
 	
-	@Query("SELECT n FROM Novedad n WHERE n.titulo = '%titulo%' ORDER BY n.fecha ASC")
+	@Query("SELECT n FROM Novedad n WHERE n.titulo = '%titulo%' ORDER BY n.fecha DESC")
 	public List<Novedad> novedadesPorTitulo(@Param("titulo") String titulo);
 	
-	@Query("SELECT n FROM Novedad n WHERE n.descripcion = '%descripcion%' ORDER BY n.fecha ASC")
+	@Query("SELECT n FROM Novedad n WHERE n.descripcion = '%descripcion%' ORDER BY n.fecha DESC")
 	public List<Novedad> novedadesPorDescripcion(@Param("descripcion") String descripcion);
 	
-	@Query("SELECT n FROM Novedad n WHERE n.destacado = true ORDER BY n.fecha ASC")
+	@Query("SELECT n FROM Novedad n WHERE n.destacado = true ORDER BY n.fecha DESC")
 	public List<Novedad> novedadesPorDestacado(@Param("destacado") Boolean destacado);
 }

@@ -26,5 +26,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
 	
 	@Query("SELECT u FROM Usuario u WHERE u.cuotaAlDia = false AND u.alta = true ORDER BY u.apellido ASC, u.nombre ASC")
 	public List<Usuario> usuariosAdeudada();
+	
+	@Query("SELECT u FROM Usuario u WHERE u.nombreUsuario LIKE 'nombreUsuario'")
+	public Usuario usuarioPorNombreUsuario(@Param("nombreUsuario") String nombreUsuario);
 
 }
