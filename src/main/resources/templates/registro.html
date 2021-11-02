@@ -14,7 +14,7 @@
     <form th:action="@{/usuarios/registro}" method="POST"> 
       <input th:type="text" name="nombreUsuario" id="" placeholder="Nombre de Usuario" required>
       <input th:type="password" name="contrasenia" id="" placeholder="Contraseña" required>
-            <p style="color:red;" th:if="${error != null}" th:text="${error}"></p><br>
+      <p style="color:red;" th:if="${error != null}" th:text="${error}"></p>
       <input th:type="password" name="contrasenia2" id="" placeholder="Confirme contraseña" required>
       <input th:type="email" name="emailUsuario" id="" placeholder="Email" required>
       <input th:type="text" name="nombre" id="" placeholder="Nombre" required>

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Usuario;
@@ -48,7 +52,6 @@ public class UsuarioServicio implements UserDetailsService {
 
 		} catch (Exception e) {
 			e.getMessage();
-			throw new Exception(e.getMessage());
 		}
 
 	}
@@ -297,6 +300,11 @@ public class UsuarioServicio implements UserDetailsService {
 				GrantedAuthority p2 = new SimpleGrantedAuthority("admin");
 				permisos.add(p2);
 			}
+
+			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+			HttpSession session = attr.getRequest().getSession(true);
+			session.setAttribute("usuariologueado", usuario);
+
 			User user = new User(usuario.getNombreUsuario(), usuario.getContrasenia(), permisos);
 
 			return user;

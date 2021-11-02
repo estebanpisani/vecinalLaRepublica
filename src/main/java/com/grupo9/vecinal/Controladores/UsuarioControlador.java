@@ -31,7 +31,7 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.crearUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
-			return "registro.html";
+			return "redirect:/";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			return "redirect:/usuarios/registro";
