@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
 
 :root {
-	--turquesa: rgb(180, 240, 205);
+	--turquesa: #b4f0cd;
     --grisOscuro: #262626;
+    --rosa: #f2d5f8;
+    --lavanda: #e4d9ff;
 }
 
 * {
@@ -13,9 +15,10 @@
 
 body {
 	font-family: 'Ubuntu',sans-serif;
-    background-color: #f6f6f6;
+    background-color: #F8F9FA;
 }
 
+/* Header */
 header {
     background: linear-gradient(90deg, rgba(180,240,205,1) 0%, rgba(180,240,205,1) 24%, rgba(175,232,198,1) 49%, rgba(162,212,182,1) 79%, rgba(162,203,178,1) 100%);
     height: 80px;
@@ -30,13 +33,12 @@ header > .title {
 header > .title > h1 {
 	font-size: 35px;
 	font-weight: 300;
-    letter-spacing: 3px;
+    letter-spacing: 5px;
     line-height: 80px;
 }
 
 nav {
     display:inline-block;
-    flex-direction: row;
 	background:var(--grisOscuro);
 	height: 50px;
     width: 100%;
@@ -85,34 +87,268 @@ nav > a:focus, a:hover {
     transition: .8s;
 }
 
+/* Main */
 .main {
-    width: 50%;
+    width: 100%;
+    height: 800px;
+    border-radius: 2%;
+}
+
+
+/* Novedades */
+.main > .novedades {   
+    width: 100%;
     margin: auto;
 }
 
-.main > .nosotros {
-    margin-top: 30px;
+
+.novedades-titulo {
+    display: inline-block;
+    margin: 40px auto 30px auto;
+    padding-left: 65px;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+.titulo-btn-novedades {
+    height: 100px;
+}
+
+.btn-novedades {
+    float: right;   
+    background-color: #7f7f7f; 
+    color: #fff;  
+    font-size: 14px;
+    font-weight: 300;
+    margin: 40px 100px 30px auto;
+    padding: 5px;
+    border-radius: 7px;
+
+}
+
+.titulo-btn-novedades > a:hover {
+    background-color: #ccc;
+    color: #000;
+    transition: .5s;
+}
+
+
+.container.bootstrap.snippets.bootdey {
+    display: flex;
+    margin-left: 100px;
+}
+
+
+.widget.single-news {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.widget.single-news .image img {
+    display: block;
+    width: 100%;
+}
+
+.widget.single-news .image .gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0d…IxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjbGVzc2hhdC1nZW5lcmF0ZWQpIiAvPjwvc3ZnPg==);
+    background-image: -webkit-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+    background-image: -moz-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+    background-image: -o-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+    background-image: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+}
+
+.widget.single-news .details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+}
+
+.widget.single-news .details .category {
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.widget.single-news .details .category a {
+    color: #fff;
+    zoom: 1;
+    -webkit-opacity: 0.5;
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    filter: alpha(opacity=50);
+}
+
+.widget.single-news .details h3 {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 19px;
+}
+
+.widget.single-news .details h3 a {
+    color: #fff;
+    zoom: 1;
+    -webkit-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    filter: alpha(opacity=80);
+}
+
+.widget.single-news .details:hover time {
+    position: relative;
+    display: block;
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: -20px;
+    -webkit-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    -moz-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    -o-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    zoom: 1;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+}
+
+
+
+
+
+
+
+/*Actividades*/
+.main > .actividades {
+    width: 90%;
+    margin: 80px auto 100px auto;
+}
+
+.actividades > .actividades-titulo {
+    margin-bottom: 30px;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+.bloque-actividades {
+    display: flex;
+    justify-content:space-between;
+
+    
+}
+
+
+ .card-body {
+    width: 240px;
+    border-color: var(--grisOscuro);
+}
+
+.card-img-top {
+    height: 200px;
+}
+
+.card-text {
+    height: 80px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    max-width: 100ch;
+
+}
+
+.card-body > .btn {
+    color: var(--grisOscuro);
+    background-color: var(--turquesa);
+    border-color: var(--turquesa);
+}
+
+.card-body > a:hover {
+    color: #f2d5f8;
+    background-color: var(--grisOscuro);
+    border-color: var(--grisOscuro);
+    transition: .5s;
+}
+
+
+
+/* Form Mensaje */
+
+.form {
+    width: 100%;   
+	background: #7f7f7f;
+}
+
+form{
+    width: 50%;
+	margin: auto;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	margin-top: 20px;
+	border-radius: 7px;
+}
+
+h5{
+	color:#fff;
+	text-align: center;
+	font-size: 30px;
+    font-weight: 300;
+    letter-spacing: 3px;
+	margin-bottom: 22px;
+}
+
+input, textarea{
+width: 100%;
+margin-bottom: 20px;
+padding: 7px;
+font-size: 15px;
+border: none;
+}
+
+textarea{
+	font-family: 'Ubuntu',sans-serif;
+	min-height: 100px;
+	max-height: 250px;
+	max-width: 100%;
+}
+
+#boton{
+	background: var(--turquesa);
+	color: #000;
+	padding: 5px;
+	border-radius: 7px;
+    width: 100%;
+}
+
+#boton:hover{
+	cursor: pointer;
+    background: #ccc;
+    color: #000;
+    transition: .5s;
+}
+
+@media (max-width:480px){
+	form{
+		width: 100%;
+	}
+
+
+
+
+/*Nosotros*/
+/* .carousel.slide {
+    width:50%;
+    height:400px;
+    margin: auto;
 }
 
 .carousel-inner > h5 > p {
     text-align: center;
-}
-
-.carousel-inner > .carousel-item {
-    width:640px;
-    height:360px;
-  }
-
-  .carousel-control-prev, .carousel-control-next {
-      padding-right: 40px;
-  }
-
-  h5 {
-      font-size: 30px;
-  }
-
-  .carousel-caption > p { 
-    background-color: rgba(255,255,255, 0.2);
-    font-size: 18px;
-    font-weight: 300;
-  }
+} */
