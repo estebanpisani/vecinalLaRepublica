@@ -1,12 +1,15 @@
 package com.grupo9.vecinal.Entidades;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -18,6 +21,7 @@ public class Actividad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idActividades; 
+	
 	private String nombreActividad; 
 	private String descripcionActividad;
 	@DateTimeFormat(style = "dd-mm-YYYY")
@@ -25,9 +29,14 @@ public class Actividad {
 	private Boolean alta; 
 	private Integer cupo; 
 	private Integer inscriptos;
-	
+
 	@ManyToMany
-	private List<Usuario> usuarios;
+	@JoinTable(
+			name="actividades_usuario",
+			joinColumns= @JoinColumn(name="actividad_id"),
+			inverseJoinColumns=@JoinColumn(name="usuario_id"))
+	
+	private Set<Usuario> usuarios = new HashSet<>();
 
 	public Actividad() {
 	}
@@ -90,11 +99,11 @@ public class Actividad {
 	
 	
 
-	public List<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 
@@ -104,8 +113,5 @@ public class Actividad {
 				+ ", descripcionActividad=" + descripcionActividad + ", fecha=" + fecha + ", alta=" + alta + ", cupo="
 				+ cupo + ", inscriptos=" + inscriptos + "]";
 	}
-	
-	
-	
 	
 }
