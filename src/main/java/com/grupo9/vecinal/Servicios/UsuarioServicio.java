@@ -1,10 +1,18 @@
 package com.grupo9.vecinal.Servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +21,7 @@ import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Repositorios.UsuarioRepositorio;
 
 @Service
-public class UsuarioServicio {
+public class UsuarioServicio implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepositorio usuarioRepo;
@@ -27,7 +35,8 @@ public class UsuarioServicio {
 
 			Usuario usuario = new Usuario();
 			usuario.setNombreUsuario(nombreUsuario);
-			usuario.setContrasenia(contrasenia);
+			String encriptada = new BCryptPasswordEncoder().encode(contrasenia);
+			usuario.setContrasenia(encriptada);
 			usuario.setEmailUsuario(emailUsuario);
 			usuario.setNombre(nombre);
 			usuario.setApellido(apellido);
@@ -40,7 +49,7 @@ public class UsuarioServicio {
 
 		} catch (Exception e) {
 			e.getMessage();
-			throw new Exception("Error en uno de los campos");
+			throw new Exception(e.getMessage());
 		}
 
 	}
@@ -77,13 +86,15 @@ public class UsuarioServicio {
 			throws Exception {
 		try {
 
+			String encriptada = new BCryptPasswordEncoder().encode(contrasenia);
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
 
 			if (respuesta.isPresent()) {
 				Usuario usuario = respuesta.get();
-				if (usuario.getContrasenia().equals(contrasenia)) {
+				if (usuario.getContrasenia().equals(encriptada)) {
 					validarContrasenia(contrasenia1, contrasenia2);
-					usuario.setContrasenia(contrasenia1);
+					String encriptada1 = new BCryptPasswordEncoder().encode(contrasenia1);
+					usuario.setContrasenia(encriptada1);
 					usuarioRepo.save(usuario);
 				} else {
 					throw new Exception("Contraseña incorrecta");
@@ -273,5 +284,26 @@ public class UsuarioServicio {
 			throw new Exception("Las contraseñas no coiciden");
 
 		}
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario usuario = usuarioRepo.usuarioPorNombreUsuario(username);
+		if (usuario != null) {
+			List<GrantedAuthority> permisos = new ArrayList<>();
+
+			GrantedAuthority p1 = new SimpleGrantedAuthority("Logueado");
+			permisos.add(p1);
+			if (usuario.getAdmin()) {
+				GrantedAuthority p2 = new SimpleGrantedAuthority("admin");
+				permisos.add(p2);
+			}
+			User user = new User(usuario.getNombreUsuario(), usuario.getContrasenia(), permisos);
+
+			return user;
+		} else {
+			return null;
+		}
+
 	}
 }
