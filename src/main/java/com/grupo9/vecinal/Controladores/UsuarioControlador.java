@@ -16,13 +16,12 @@ public class UsuarioControlador {
 
 	@Autowired
 	private UsuarioServicio usuarioServ;
-	
+
 	@GetMapping("/registro")
 	public String registro() {
 		return "registro.html";
 	}
 
-	
 	@PostMapping("/registro")
 	public String registro(ModelMap modelo, @RequestParam String nombreUsuario, @RequestParam String contrasenia,
 			@RequestParam String contrasenia2, @RequestParam String emailUsuario, @RequestParam String nombre,
@@ -31,22 +30,21 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.crearUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
-			return "redirect:/";
+
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			return "redirect:/usuarios/registro";
 		}
-
+		return "redirect:/";
 	}
 
 	@PostMapping("/modificar")
-	public String modificarUsuario(ModelMap modelo, @RequestParam String nombreUsuario, @RequestParam String emailUsuario,
-			@RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer telefono,
-			@RequestParam Integer id) {
+	public String modificarUsuario(ModelMap modelo, @RequestParam String nombreUsuario,
+			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
+			@RequestParam Integer telefono, @RequestParam Integer id) {
 
 		try {
-			usuarioServ.modificarUsuario(nombreUsuario, emailUsuario, nombre, apellido,
-					telefono, id);
+			usuarioServ.modificarUsuario(nombreUsuario, emailUsuario, nombre, apellido, telefono, id);
 			return "usuarios.html";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());

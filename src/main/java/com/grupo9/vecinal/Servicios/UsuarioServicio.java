@@ -295,10 +295,10 @@ public class UsuarioServicio implements UserDetailsService {
 		if (usuario != null) {
 			List<GrantedAuthority> permisos = new ArrayList<>();
 
-			GrantedAuthority p1 = new SimpleGrantedAuthority("Logueado");
+			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_LOGUEADO");
 			permisos.add(p1);
 			if (usuario.getAdmin()) {
-				GrantedAuthority p2 = new SimpleGrantedAuthority("admin");
+				GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_USUARIO_ADMIN");
 				permisos.add(p2);
 			}
 
