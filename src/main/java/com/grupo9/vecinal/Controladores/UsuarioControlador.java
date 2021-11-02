@@ -30,12 +30,20 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.crearUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
-
+			return "redirect:/";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
-			return "redirect:/usuarios/registro";
+			modelo.put("nombreUsuario", nombreUsuario);
+			modelo.put("contrasenia", contrasenia);
+			modelo.put("contrasenia2", contrasenia2);
+			modelo.put("emailUsuario", emailUsuario);
+			modelo.put("nombre", nombre);
+			modelo.put("apellido", apellido);
+			modelo.put("telefono", telefono);
+
+			return "registro.html";
 		}
-		return "redirect:/";
+		
 	}
 
 	@PostMapping("/modificar")
