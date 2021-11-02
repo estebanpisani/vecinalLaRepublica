@@ -3,6 +3,7 @@ package com.grupo9.vecinal.Servicios;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -163,10 +164,10 @@ public class UsuarioServicio implements UserDetailsService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Actividad> mostrarActividadesUsuario(Integer id) throws Exception {
+	public Set<Actividad> mostrarActividadesUsuario(Integer id) throws Exception {
 		try {
 			Usuario usuario = buscarUsuario(id);
-			List<Actividad> actividades = usuario.getActividades();
+			Set<Actividad> actividades = usuario.getActividades();
 
 			if (actividades.isEmpty() || actividades == null) {
 				throw new Exception("No se encontraron actividades para el afiliado " + usuario.getNombre() + " "

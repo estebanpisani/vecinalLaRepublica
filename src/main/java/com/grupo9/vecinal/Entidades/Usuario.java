@@ -1,6 +1,7 @@
 package com.grupo9.vecinal.Entidades;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "emailUsuario", "nombreUsuario" }) })
-
+//@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "emailUsuario", "nombreUsuario" }) })
+@Table(name = "usuario")
 public class Usuario {
 
 	@Id
@@ -27,8 +27,8 @@ public class Usuario {
 	private Integer telefono;
 	private Boolean alta;
 	private Boolean cuotaAlDia;
-	@ManyToMany
-	private List<Actividad> actividades;
+	@ManyToMany(mappedBy = "usuarios")	
+	private Set<Actividad> actividades = new HashSet<>();
 
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -110,11 +110,11 @@ public class Usuario {
 		this.cuotaAlDia = cuotaAlDia;
 	}
 
-	public List<Actividad> getActividades() {
+	public Set<Actividad> getActividades() {
 		return actividades;
 	}
 
-	public void setActividades(List<Actividad> actividades) {
+	public void setActividades(Set<Actividad> actividades) {
 		this.actividades = actividades;
 	}
 
