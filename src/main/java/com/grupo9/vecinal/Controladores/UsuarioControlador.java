@@ -46,6 +46,7 @@ public class UsuarioControlador {
 		
 	}
 
+	
 	@PostMapping("/modificar")
 	public String modificarUsuario(ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,

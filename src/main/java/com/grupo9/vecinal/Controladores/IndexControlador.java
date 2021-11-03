@@ -10,6 +10,8 @@ public class IndexControlador {
 
 	@GetMapping("/")
 	public String index() {
+		
+		
 		return "index.html";
 	}
 }
