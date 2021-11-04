@@ -29,9 +29,12 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepositorio usuarioRepo;
+	
+	@Autowired
+	private ActividadServicio actividadServ;
 
 	@Transactional
-	public void crearUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
+ 	public void crearUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
 			String nombre, String apellido, Integer telefono) throws Exception {
 		try {
 			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido);
@@ -52,7 +55,7 @@ public class UsuarioServicio implements UserDetailsService {
 			usuarioRepo.save(usuario);
 
 		} catch (Exception e) {
-			e.getMessage();
+			throw new Exception(e.getMessage());
 		}
 
 	}
@@ -163,6 +166,26 @@ public class UsuarioServicio implements UserDetailsService {
 
 	}
 
+	@Transactional
+	public void inscripcionActividad(Integer idUsuario, Integer idActividad) throws Exception{
+		try {
+			Usuario usuario = buscarUsuario(idUsuario);
+			Actividad actividad = actividadServ.buscarActividad(idActividad);
+			
+			System.out.println(usuario.getIdUsuario() + " : " + usuario.getActividades().size());
+			Set<Actividad> setActividad = usuario.getActividades();
+			setActividad.add(actividad);
+			usuario.setActividades(setActividad);
+			usuarioRepo.save(usuario);
+			System.out.println(usuario.getIdUsuario() + " : " + usuario.getActividades().size());
+			//actividad.getUsuarios().add(usuario);
+			//actividadRepo.save(actividad);
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
 	@Transactional(readOnly = true)
 	public Set<Actividad> mostrarActividadesUsuario(Integer id) throws Exception {
 		try {

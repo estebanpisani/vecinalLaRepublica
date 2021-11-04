@@ -30,7 +30,7 @@ class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 
 		http.headers().frameOptions().sameOrigin().and().authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*")
 				.permitAll().and().formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
-				.usernameParameter("nombreUsuario").passwordParameter("contrasenia").defaultSuccessUrl("/index").permitAll()
+				.usernameParameter("nombreUsuario").passwordParameter("contrasenia").defaultSuccessUrl("/").permitAll()
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
 
 	}

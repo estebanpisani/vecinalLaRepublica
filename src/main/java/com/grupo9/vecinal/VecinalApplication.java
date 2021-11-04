@@ -14,7 +14,8 @@ public class VecinalApplication {
 	@Autowired
 	private UsuarioServicio usuarioServ;
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
+		
 		SpringApplication.run(VecinalApplication.class, args);
 	}
 	

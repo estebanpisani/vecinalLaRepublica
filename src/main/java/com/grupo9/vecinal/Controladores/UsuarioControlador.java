@@ -30,14 +30,23 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.crearUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
-
+			return "redirect:/";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
-			return "redirect:/usuarios/registro";
+			modelo.put("nombreUsuario", nombreUsuario);
+			modelo.put("contrasenia", contrasenia);
+			modelo.put("contrasenia2", contrasenia2);
+			modelo.put("emailUsuario", emailUsuario);
+			modelo.put("nombre", nombre);
+			modelo.put("apellido", apellido);
+			modelo.put("telefono", telefono);
+
+			return "registro.html";
 		}
-		return "redirect:/";
+		
 	}
 
+	
 	@PostMapping("/modificar")
 	public String modificarUsuario(ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
@@ -52,4 +61,24 @@ public class UsuarioControlador {
 		}
 
 	}
+	
+	@GetMapping("/inscripcion")
+	public String inscripcion() {
+		return "inscripcion_back.html";
+	}
+	
+	@PostMapping("/inscribir")
+	public String inscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad) {
+		try {
+			usuarioServ.inscripcionActividad(idUsuario, idActividad);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return "inscripcion_back.html";
+	}
+	
+	
 }
