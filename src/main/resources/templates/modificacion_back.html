@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/styles/index.css">
+	<title>Registro de Usuario</title>
+</head>
+
+<body>
+
+	<header>
+		<div class="title">
+			<h1>Vecinal "La República"</h1>
+		</div>
+	</header>
+
+	<nav>
+
+		<a href="" class="link" text-decoration: none>Inicio</a>
+		<a href="" class="link">Instituciones</a>
+		<a href="" class="link">Comercios</a>
+		<a href="" class="link">Actividades</a>
+		<span class="right">
+			<a href="">Registrarse</a>
+			<a href="">Ingresar</a>
+		</span>
+	</nav>
+
+	<div class="main">
+		<div class="left-r">
+			<form th:action="@{/usuarios/modificar}" method="POST">
+
+				<p style="color: red" th:if="${error != null}" th:text="${error}"></p><br>
+				<input th:type="text" th:value="${usuario !=null} ? ${usuario.idUsuario} : ''" name="idUsuario">
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.nombreUsuario} : ''" name="nombreUsuario" class="form-control"
+						id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriba su nombre de usuario"
+						required>
+				</div>
+
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Email</label>
+					<input th:type="email" th:value="${usuario !=null} ? ${usuario.emailUsuario} : ''" name="emailUsuario" class="form-control"
+						id="exampleInputPassword1" placeholder="petito@gmail.com" required>
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Nombre</label>
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.nombre} : ''" name="nombre" class="form-control"
+						id="exampleInputPassword1" placeholder="Escriba su nombre de pila" required>
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Apellido</label>
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.apellido} : ''" name="apellido" class="form-control"
+						id="exampleInputPassword1" placeholder="Escriba su apellido" required>
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Telefono</label>
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.telefono} : ''" name="telefono" class="form-control"
+						id="exampleInputPassword1" placeholder="Escriba su telefono">
+				</div>
+				<button th:type="submit" class="btn btn-primary">Modificar</button>
+			</form>
+		</div>
+
+		<div class="right-r">
+
+		</div>
+
+	</div>
+</body>
+
+</html>

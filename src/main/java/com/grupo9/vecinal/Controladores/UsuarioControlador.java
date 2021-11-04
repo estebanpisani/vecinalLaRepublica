@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Servicios.UsuarioServicio;
 
 @Controller
@@ -43,42 +44,51 @@ public class UsuarioControlador {
 
 			return "registro.html";
 		}
-		
+
 	}
 
-	
+	@GetMapping("/modificar")
+	public String modificarUsuario(ModelMap modelo) {
+		try {
+			Usuario usuario = usuarioServ.buscarUsuario(1);
+			modelo.addAttribute("usuario", usuario);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		return "modificacion_back.html";
+	}
+
 	@PostMapping("/modificar")
 	public String modificarUsuario(ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
-			@RequestParam Integer telefono, @RequestParam Integer id) {
+			@RequestParam(required = false) Integer telefono, @RequestParam Integer idUsuario) throws Exception {
 
 		try {
-			usuarioServ.modificarUsuario(nombreUsuario, emailUsuario, nombre, apellido, telefono, id);
-			return "usuarios.html";
+			usuarioServ.modificarUsuario(nombreUsuario, emailUsuario, nombre, apellido, telefono, idUsuario);
+			return "redirect:/usuarios/modificar";
 		} catch (Exception e) {
+			Usuario usuario = usuarioServ.buscarUsuario(idUsuario);
+			modelo.addAttribute("usuario", usuario);
 			modelo.put("error", e.getMessage());
-			return "redirect:/usuarios/registro";
+			return "modificacion_back";
 		}
-
 	}
-	
+
 	@GetMapping("/inscripcion")
 	public String inscripcion() {
 		return "inscripcion_back.html";
 	}
-	
+
 	@PostMapping("/inscribir")
-	public String inscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad) {
+	public String inscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {
 		try {
 			usuarioServ.inscripcionActividad(idUsuario, idActividad);
-			
+
 		} catch (Exception e) {
-			// TODO: handle exception
+			modelo.put("error", e.getMessage());
 		}
-		
-		
+
 		return "inscripcion_back.html";
 	}
-	
-	
+
 }

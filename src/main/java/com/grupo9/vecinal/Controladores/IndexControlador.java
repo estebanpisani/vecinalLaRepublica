@@ -14,4 +14,9 @@ public class IndexControlador {
 		
 		return "index.html";
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login.html";
+	}
 }
