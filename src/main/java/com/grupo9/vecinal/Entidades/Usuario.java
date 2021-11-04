@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +28,7 @@ public class Usuario {
 	private Integer telefono;
 	private Boolean alta;
 	private Boolean cuotaAlDia;
-	@ManyToMany(mappedBy = "usuarios")	
+	@ManyToMany//(mappedBy = "usuarios")	
 	private Set<Actividad> actividades = new HashSet<>();
 
 	public Integer getIdUsuario() {

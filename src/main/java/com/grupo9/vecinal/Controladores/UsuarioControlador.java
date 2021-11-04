@@ -61,4 +61,24 @@ public class UsuarioControlador {
 		}
 
 	}
+	
+	@GetMapping("/inscripcion")
+	public String inscripcion() {
+		return "inscripcion_back.html";
+	}
+	
+	@PostMapping("/inscribir")
+	public String inscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad) {
+		try {
+			usuarioServ.inscripcionActividad(idUsuario, idActividad);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return "inscripcion_back.html";
+	}
+	
+	
 }

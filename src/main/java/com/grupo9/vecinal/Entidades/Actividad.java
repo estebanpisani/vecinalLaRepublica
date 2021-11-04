@@ -1,16 +1,11 @@
 package com.grupo9.vecinal.Entidades;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,14 +25,15 @@ public class Actividad {
 	private Integer cupo; 
 	private Integer inscriptos;
 
-	@ManyToMany
-	@JoinTable(
+// @ManyToMany
+/*	@JoinTable(
 			name="actividades_usuario",
-			joinColumns= @JoinColumn(name="actividad_id"),
-			inverseJoinColumns=@JoinColumn(name="usuario_id"))
-	
-	private Set<Usuario> usuarios = new HashSet<>();
+			joinColumns= @JoinColumn(name="idActividades"),
+			inverseJoinColumns=@JoinColumn(name="idUsuario"))
 
+	@ManyToOne
+	private Set<Usuario> usuarios = new HashSet<>();
+*/
 	public Actividad() {
 	}
 
@@ -98,7 +94,7 @@ public class Actividad {
 	}
 	
 	
-
+/*
 	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -106,7 +102,8 @@ public class Actividad {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-
+*/
+	
 	@Override
 	public String toString() {
 		return "Actividad [idActividades=" + idActividades + ", nombreActividad=" + nombreActividad
