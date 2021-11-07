@@ -1,29 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="../templates/registro.html">
-    <title>Registro de Usuario</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../static/styles/index.css">
+<<<<<<< HEAD
+  <link rel="stylesheet" type="text/css" href="../static/styles/login.css">
+=======
+>>>>>>> 4669b605e4bf47fd56fb461cb69eb1e40ae7adf2
+  <title>Registro de Usuario</title>
 </head>
 <body>
-  <div class="main">
 
-    <form th:action="@{/usuarios/registro}" method="POST"> 
-      <input th:type="text" name="nombreUsuario" id="" placeholder="Nombre de Usuario" required>
-      <input th:type="password" name="contrasenia" id="" placeholder="Contraseña" required>
-      <p style="color:red;" th:if="${error != null}" th:text="${error}"></p>
-      <input th:type="password" name="contrasenia2" id="" placeholder="Confirme contraseña" required>
-      <input th:type="email" name="emailUsuario" id="" placeholder="Email" required>
-      <input th:type="text" name="nombre" id="" placeholder="Nombre" required>
-      <input th:type="text" name="apellido" id="" placeholder="Apellido" required>
-      <input th:type="number" name="telefono" id="" placeholder="Telefono (opcional)">
-      <button class="btn" th:type="submit">Registrar</button>
-    </form>
+  <div class="login">
+      <div class="title">Iniciar Sesión</div>
 
-  </div>
-</body>
+      <form th:action="@{/usuarios/registro}" method="POST">
+        <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
 
-</html>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
+          <input th:type="text" th:value="${nombreUsuario}" name="nombreUsuario" class="form-control" placeholder="Escriba su nombre de usuario" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input th:type="password" th:value="${contrasenia}" name="contrasenia" class="form-control" placeholder="Su contraseña debe contener entre 5 y 15 caracteres" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Confirmar Contraseña</label>
+          <input th:type="password" th:value="${contrasenia2}" name="contrasenia2" class="form-control"  placeholder="Vuelva a escribir su contraseña anterior" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Email</label>
+          <input th:type="email" th:value="${emailUsuario}" name="emailUsuario" class="form-control" placeholder="petito@gmail.com" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Nombre</label>
+          <input th:type="text" th:value="${nombre}" name="nombre" class="form-control" placeholder="Escriba su nombre de pila" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Apellido</label>
+          <input th:type="text" th:value="${apellido}" name="apellido" class="form-control" placeholder="Escriba su apellido" required></div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Telefono</label>
+            <input th:type="text" th:value="${telefono}" name="telefono" class="form-control" placeholder="Escriba su telefono">
+          </div>
+
+          <button th:type="submit" class="btn btn-primary">Registrarme</button>
+      </form>
+    </div>
+<<<<<<< HEAD
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+  </html>
+
+=======
+  </body></html>
+>>>>>>> 4669b605e4bf47fd56fb461cb69eb1e40ae7adf2

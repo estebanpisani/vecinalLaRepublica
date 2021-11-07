@@ -1,6 +1,5 @@
 package com.grupo9.vecinal.Entidades;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -27,8 +26,8 @@ public class Usuario {
 	private Integer telefono;
 	private Boolean alta;
 	private Boolean cuotaAlDia;
-	@ManyToMany(mappedBy = "usuarios")	
-	private Set<Actividad> actividades = new HashSet<>();
+	@ManyToMany	
+	private Set<Actividad> actividades;
 
 	public Integer getIdUsuario() {
 		return idUsuario;

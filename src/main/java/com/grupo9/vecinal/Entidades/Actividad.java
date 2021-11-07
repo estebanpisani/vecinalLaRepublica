@@ -1,15 +1,12 @@
 package com.grupo9.vecinal.Entidades;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -20,25 +17,28 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Actividad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idActividades; 
-	
-	private String nombreActividad; 
+	private Integer idActividades;
+
+	private String nombreActividad;
 	private String descripcionActividad;
 	@DateTimeFormat(style = "dd-mm-YYYY")
-	private Date fecha; 
-	private Boolean alta; 
-	private Integer cupo; 
+	private Date fecha;
+	private Boolean alta;
+	private Integer cupo;
 	private Integer inscriptos;
 
-	@ManyToMany
-	@JoinTable(
-			name="actividades_usuario",
-			joinColumns= @JoinColumn(name="actividad_id"),
-			inverseJoinColumns=@JoinColumn(name="usuario_id"))
-	
-	private Set<Usuario> usuarios = new HashSet<>();
+	@ManyToMany(mappedBy = "actividades")
+	private Set<Usuario> usuarios;
 
 	public Actividad() {
+	}
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	public Integer getIdActividades() {
@@ -96,16 +96,12 @@ public class Actividad {
 	public void setInscriptos(Integer inscriptos) {
 		this.inscriptos = inscriptos;
 	}
-	
-	
 
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
+	/*
+	 * public Set<Usuario> getUsuarios() { return usuarios; }
+	 * 
+	 * public void setUsuarios(Set<Usuario> usuarios) { this.usuarios = usuarios; }
+	 */
 
 	@Override
 	public String toString() {
@@ -113,5 +109,5 @@ public class Actividad {
 				+ ", descripcionActividad=" + descripcionActividad + ", fecha=" + fecha + ", alta=" + alta + ", cupo="
 				+ cupo + ", inscriptos=" + inscriptos + "]";
 	}
-	
+
 }

@@ -21,5 +21,7 @@ public interface ActividadRepositorio  extends JpaRepository<Actividad, Integer>
 	
 	@Query("SELECT a FROM Actividad a WHERE a.nombreActividad LIKE '%nombre%' ORDER BY a.nombreActividad ASC")
 	public List<Actividad> actividadNombre(@Param("nombre") String nombre);
+
+	
 }
 

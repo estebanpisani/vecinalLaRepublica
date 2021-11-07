@@ -3,13 +3,17 @@ package com.grupo9.vecinal.Servicios;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.grupo9.vecinal.Entidades.Actividad;
+import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Repositorios.ActividadRepositorio;
 
+@Service
 public class ActividadServicio {
 	
 	@Autowired
@@ -164,6 +168,17 @@ public class ActividadServicio {
 			throw new Exception("No se encontraron actividades dadas de baja.");
 		}
 
+	}
+	
+	public Set<Usuario> usuariosAnotados(Integer id) throws Exception{
+		 
+		try {
+			Actividad actividad = buscarActividad(id);
+			return actividad.getUsuarios();
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
 	}
 	
 	
