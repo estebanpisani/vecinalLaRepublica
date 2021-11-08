@@ -43,7 +43,7 @@ public class UsuarioServicio implements UserDetailsService {
 
 			Usuario usuario = new Usuario();
 			usuario.setNombreUsuario(nombreUsuario);
-			String encriptada = new BCryptPasswordEncoder().encode(contrasenia);
+			String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
 			usuario.setContrasenia(encriptada);
 			usuario.setEmailUsuario(emailUsuario);
 			usuario.setNombre(nombre);
@@ -95,7 +95,7 @@ public class UsuarioServicio implements UserDetailsService {
 			throws Exception {
 		try {
 
-			String encriptada = new BCryptPasswordEncoder().encode(contrasenia);
+			String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
 
 			if (respuesta.isPresent()) {
