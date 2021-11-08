@@ -29,15 +29,16 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepositorio usuarioRepo;
-	
+
 	@Autowired
 	private ActividadServicio actividadServ;
 
 	@Transactional
- 	public void crearUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
+	public void crearUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
 			String nombre, String apellido, Integer telefono) throws Exception {
 		try {
-			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido);
+			
+			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido, null);
 			validarContrasenia(contrasenia, contrasenia2);
 
 			Usuario usuario = new Usuario();
@@ -64,11 +65,12 @@ public class UsuarioServicio implements UserDetailsService {
 	public void modificarUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido,
 			Integer telefono, Integer id) throws Exception {
 		try {
-			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido);
+			
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
 
 			if (respuesta.isPresent()) {
 				Usuario usuario = respuesta.get();
+				validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido, usuario);
 				usuario.setNombreUsuario(nombreUsuario);
 				usuario.setEmailUsuario(emailUsuario);
 				usuario.setNombre(nombre);
@@ -82,7 +84,8 @@ public class UsuarioServicio implements UserDetailsService {
 			}
 
 		} catch (Exception e) {
-			e.getMessage();
+			
+			throw new Exception(e.getMessage());
 		}
 
 	}
@@ -161,31 +164,30 @@ public class UsuarioServicio implements UserDetailsService {
 			}
 
 		} catch (Exception e) {
-			throw new Exception("No se encontraron afiliados");
+			throw new Exception("No se encontraron socios con esos datos");
 		}
 
 	}
 
 	@Transactional
-	public void inscripcionActividad(Integer idUsuario, Integer idActividad) throws Exception{
+	public void inscripcionActividad(Integer idUsuario, Integer idActividad) throws Exception {
 		try {
 			Usuario usuario = buscarUsuario(idUsuario);
 			Actividad actividad = actividadServ.buscarActividad(idActividad);
-			
-			System.out.println(usuario.getIdUsuario() + " : " + usuario.getActividades().size());
-			Set<Actividad> setActividad = usuario.getActividades();
-			setActividad.add(actividad);
-			usuario.setActividades(setActividad);
+			for (Actividad act : usuario.getActividades()) {
+				if (act.getIdActividades().equals(actividad.getIdActividades())) {
+					throw new Exception("Ya estas anotando");
+				}
+
+			}
+			usuario.getActividades().add(actividad);
 			usuarioRepo.save(usuario);
-			System.out.println(usuario.getIdUsuario() + " : " + usuario.getActividades().size());
-			//actividad.getUsuarios().add(usuario);
-			//actividadRepo.save(actividad);
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Set<Actividad> mostrarActividadesUsuario(Integer id) throws Exception {
 		try {
@@ -259,7 +261,7 @@ public class UsuarioServicio implements UserDetailsService {
 
 	}
 
-	public void validarDatosUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido)
+	public void validarDatosUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido,Usuario usuario)
 			throws Exception {
 
 		if (nombreUsuario == null || nombreUsuario.isEmpty())
@@ -268,6 +270,18 @@ public class UsuarioServicio implements UserDetailsService {
 			throw new Exception("El campo no puede estar vacio.");
 
 		}
+		
+			List<Usuario> usuario1 =usuarioRepo.findAll();
+			for (Usuario usuario2 : usuario1) {
+				if (usuario2.getNombreUsuario().equals(nombreUsuario) && (usuario==null || !usuario.getNombreUsuario().equals(nombreUsuario))) {
+					throw new Exception("El nombre de usuario: "+nombreUsuario+" ya existe, por favor ingrese uno distinto");
+				}
+				if (usuario2.getEmailUsuario().equals(emailUsuario)  && (usuario==null || !usuario.getEmailUsuario().equals(emailUsuario))) {
+					throw new Exception("El mail: "+emailUsuario+" ya existe, por favor ingrese uno distinto");
+				}
+			}
+		
+		
 
 		if (emailUsuario == null || emailUsuario.isEmpty())
 
