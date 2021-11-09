@@ -168,6 +168,23 @@ public class UsuarioServicio implements UserDetailsService {
 		}
 
 	}
+	
+	@Transactional(readOnly = true)
+	public Usuario buscarUsuarioNobreUsuario(String nombreUsuario) throws Exception {
+		try {
+			Usuario usuario = usuarioRepo.usuarioPorNombreUsuario(nombreUsuario);
+
+			if (usuario != null) {
+				return usuario;
+			} else {
+				throw new Exception("Usuario no encontrado");
+			}
+
+		} catch (Exception e) {
+			throw new Exception("No se encontraron socios con esos datos");
+		}
+
+	}
 
 	@Transactional
 	public void inscripcionActividad(Integer idUsuario, Integer idActividad) throws Exception {
@@ -332,7 +349,7 @@ public class UsuarioServicio implements UserDetailsService {
 		if (usuario != null) {
 			List<GrantedAuthority> permisos = new ArrayList<>();
 
-			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_LOGUEADO");
+			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO");
 			permisos.add(p1);
 			if (usuario.getAdmin()) {
 				GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_USUARIO_ADMIN");
