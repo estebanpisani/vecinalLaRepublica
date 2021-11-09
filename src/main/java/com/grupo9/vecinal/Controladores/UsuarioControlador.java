@@ -1,6 +1,7 @@
 package com.grupo9.vecinal.Controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,6 +75,7 @@ public class UsuarioControlador {
 		}
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/inscripcion")
 	public String inscripcion() {
 		return "inscripcion_back.html";

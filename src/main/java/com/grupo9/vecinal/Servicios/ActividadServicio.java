@@ -56,7 +56,7 @@ public class ActividadServicio {
 			validarActividad(nombreActividad, descripcionActividad, cupo);
 			
 			//SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");
-			DateFormat formatter = new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH);
+			DateFormat formatter = new SimpleDateFormat("dd-mm-YYYY", Locale.ENGLISH);
 
 			Date date = formatter.parse(fecha);
 			

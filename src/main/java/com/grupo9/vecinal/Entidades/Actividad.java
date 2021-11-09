@@ -26,7 +26,7 @@ public class Actividad {
 	private String descripcionActividad;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(style = "dd-mm-YYYY")
+	@DateTimeFormat(style = "S-")
 	private Date fecha;
 	private Boolean alta;
 	private Integer cupo;
