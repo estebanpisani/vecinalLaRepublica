@@ -43,7 +43,7 @@ public class UsuarioServicio implements UserDetailsService {
 
 			Usuario usuario = new Usuario();
 			usuario.setNombreUsuario(nombreUsuario);
-			String encriptada = new BCryptPasswordEncoder().encode(contrasenia);
+			String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
 			usuario.setContrasenia(encriptada);
 			usuario.setEmailUsuario(emailUsuario);
 			usuario.setNombre(nombre);
@@ -95,7 +95,7 @@ public class UsuarioServicio implements UserDetailsService {
 			throws Exception {
 		try {
 
-			String encriptada = new BCryptPasswordEncoder().encode(contrasenia);
+			String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
 
 			if (respuesta.isPresent()) {
@@ -158,6 +158,23 @@ public class UsuarioServicio implements UserDetailsService {
 
 			if (respuesta.isPresent()) {
 				Usuario usuario = respuesta.get();
+				return usuario;
+			} else {
+				throw new Exception("Usuario no encontrado");
+			}
+
+		} catch (Exception e) {
+			throw new Exception("No se encontraron socios con esos datos");
+		}
+
+	}
+	
+	@Transactional(readOnly = true)
+	public Usuario buscarUsuarioNobreUsuario(String nombreUsuario) throws Exception {
+		try {
+			Usuario usuario = usuarioRepo.usuarioPorNombreUsuario(nombreUsuario);
+
+			if (usuario != null) {
 				return usuario;
 			} else {
 				throw new Exception("Usuario no encontrado");
@@ -332,7 +349,7 @@ public class UsuarioServicio implements UserDetailsService {
 		if (usuario != null) {
 			List<GrantedAuthority> permisos = new ArrayList<>();
 
-			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_LOGUEADO");
+			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO");
 			permisos.add(p1);
 			if (usuario.getAdmin()) {
 				GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_USUARIO_ADMIN");
