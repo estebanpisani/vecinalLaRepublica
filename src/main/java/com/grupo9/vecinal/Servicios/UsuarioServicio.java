@@ -176,7 +176,7 @@ public class UsuarioServicio implements UserDetailsService {
 			Actividad actividad = actividadServ.buscarActividad(idActividad);
 			for (Actividad act : usuario.getActividades()) {
 				if (act.getIdActividades().equals(actividad.getIdActividades())) {
-					throw new Exception("Ya estas anotando");
+					throw new Exception("Ya estas anotado");
 				}
 
 			}

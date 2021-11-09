@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "actividades")
@@ -21,6 +24,8 @@ public class Actividad {
 
 	private String nombreActividad;
 	private String descripcionActividad;
+	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(style = "dd-mm-YYYY")
 	private Date fecha;
 	private Boolean alta;
