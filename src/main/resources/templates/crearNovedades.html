@@ -37,7 +37,7 @@
 				<th>Título</th>
 				<th>Descripción</th>
 				<th>Destacado</th>
-
+				<th>Fecha</th>
 			</tr>
 			</tr>
 		</thead>
@@ -46,7 +46,7 @@
 				<td th:text="${novedad.titulo}"></td>
 				<td th:text="${novedad.descripcion}"></td>
 				<td th:text="${novedad.destacado}"></td>
-
+				<td th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}"></td>
 			</tr>
 		</tbody>
 	</table>

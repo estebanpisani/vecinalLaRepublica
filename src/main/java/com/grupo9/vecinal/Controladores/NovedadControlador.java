@@ -1,6 +1,5 @@
 package com.grupo9.vecinal.Controladores;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class NovedadControlador {
 	public String crearNovedad(ModelMap modelo) {
 
 		try {
-			List<Novedad> novedades = novedadServ.mostrarNovedadesPorFechaVieja(new Date());
+			List<Novedad> novedades = novedadServ.mostrarAltaNovedades();
 			modelo.addAttribute("novedades",novedades);
 
 		} catch (Exception e) {

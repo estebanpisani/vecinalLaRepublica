@@ -1,6 +1,9 @@
 package com.grupo9.vecinal.Servicios;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +32,8 @@ public class NovedadServicio {
 			novedad.setDescripcion(descripcion);
 			novedad.setTitulo(titulo);
 			novedad.setAlta(true);
-			novedad.setFecha(new Date());
+			novedad.setFecha(LocalDateTime.now().minusHours(3));
 			novedad.setDestacado(destacado);
-
 			novedadRepo.save(novedad);
 
 		} catch (Exception e) {
@@ -50,7 +52,7 @@ public class NovedadServicio {
 				Novedad novedad = respuesta.get();
 				novedad.setDescripcion(descripcion);
 				novedad.setTitulo(titulo);
-				novedad.setFecha(new Date());
+				novedad.setFecha(LocalDateTime.now().minusHours(3));
 				novedad.setDestacado(destacado);
 
 				novedadRepo.save(novedad);
@@ -105,7 +107,7 @@ public class NovedadServicio {
 
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarBajaNovedades() throws Exception {
-		List<Novedad> novedades = novedadRepo.novedadesAlta();
+		List<Novedad> novedades = novedadRepo.novedadesBaja();
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias dadas de baja");
 		} else {
@@ -114,7 +116,7 @@ public class NovedadServicio {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Novedad> mostrarNovedadesPorFechaActual(Date fecha) throws Exception {
+	public List<Novedad> mostrarNovedadesPorFechaActual(LocalDateTime fecha) throws Exception {
 		List<Novedad> novedades = novedadRepo.novedadesPorFechaNueva(fecha);
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias con esa fecha");
@@ -124,7 +126,7 @@ public class NovedadServicio {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Novedad> mostrarNovedadesPorFechaVieja(Date fecha) throws Exception {
+	public List<Novedad> mostrarNovedadesPorFechaVieja(LocalDateTime fecha) throws Exception {
 		List<Novedad> novedades = novedadRepo.novedadesPorFechaVieja(fecha);
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias con esa fecha");

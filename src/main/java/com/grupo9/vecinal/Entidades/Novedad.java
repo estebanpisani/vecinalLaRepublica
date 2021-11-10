@@ -1,14 +1,12 @@
 package com.grupo9.vecinal.Entidades;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "novedades")
@@ -21,14 +19,13 @@ public class Novedad {
 	private String descripcion;
 	private Boolean destacado;
 	private Boolean alta;
-	@DateTimeFormat(style = "dd-mm-YYYY")
-	private Date fecha;
+	private LocalDateTime fecha;
 
-	public Date getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
 
@@ -77,8 +74,8 @@ public class Novedad {
 
 	@Override
 	public String toString() {
-		return "Novedades [actividadId=" + actividadId + ", titulo=" + titulo + ", descripcion=" + descripcion
-				+ ", destacado=" + destacado + ", alta=" + alta + "]";
+		return "Novedad [actividadId=" + actividadId + ", titulo=" + titulo + ", descripcion=" + descripcion
+				+ ", destacado=" + destacado + ", alta=" + alta + ", fecha=" + fecha + "]";
 	}
 
 }
