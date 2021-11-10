@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.grupo9.vecinal.Entidades.Foto;
 import com.grupo9.vecinal.Entidades.Institucion;
 import com.grupo9.vecinal.Repositorios.InstitucionRepositorio;
 
@@ -14,9 +16,12 @@ public class InstitucionServicio {
 	
 	@Autowired
 	InstitucionRepositorio institucionRepo;
+	
+	@Autowired
+	FotoServicio fotoServ;
 
 	@Transactional
-	public void crearInstitucion(String nombre, String descripcion, String direccion, Long telefono) throws Exception {
+	public void crearInstitucion(MultipartFile archivo, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 
 		try {
 			
@@ -30,6 +35,9 @@ public class InstitucionServicio {
 			institucion.setAlta(true);
 			institucion.setTelefono(telefono);
 			
+			Foto foto = fotoServ.guardar(archivo);
+			institucion.setFoto(foto);
+			
 			institucionRepo.save(institucion);
 
 		} catch (Exception e) {
@@ -40,7 +48,7 @@ public class InstitucionServicio {
 	}
 	
 	@Transactional
-	public void modificarInstitucion(Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
+	public void modificarInstitucion(MultipartFile archivo, Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 
 		try {
 			
@@ -56,6 +64,13 @@ public class InstitucionServicio {
 				institucion.setDescripcion(descripcion);
 				institucion.setDireccion(direccion);
 				institucion.setTelefono(telefono);
+				
+				Integer idFoto = null;
+				if (institucion.getFoto() != null) {
+					idFoto = institucion.getFoto().getId()
+;				}
+				Foto foto = fotoServ.actualizar(idFoto, archivo);
+				institucion.setFoto(foto);
 				
 				institucionRepo.save(institucion);
 				
