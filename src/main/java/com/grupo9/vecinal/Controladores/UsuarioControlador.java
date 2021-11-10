@@ -32,7 +32,7 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.crearUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
-			return "redirect:/";
+			return "redirect:/login";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreUsuario", nombreUsuario);

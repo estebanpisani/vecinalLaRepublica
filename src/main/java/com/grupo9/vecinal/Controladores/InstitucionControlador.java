@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Institucion;
 import com.grupo9.vecinal.Repositorios.InstitucionRepositorio;
@@ -32,10 +33,10 @@ public class InstitucionControlador {
 	}
 	
 	@PostMapping("/registrar")
-	public String registrarInstitucion(ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
+	public String registrarInstitucion(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		try {
-			institucionServ.crearInstitucion(nombre, descripcion, direccion, telefono);
+			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
 			return "instituciones.html";
 			
 		} catch (Exception e) {
@@ -52,11 +53,11 @@ public class InstitucionControlador {
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarInstitucion(ModelMap modelo, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
+	public String modificarInstitucion(ModelMap modelo, MultipartFile archivo, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		
 		try {
-			institucionServ.modificarInstitucion(id, nombre, descripcion, direccion, telefono);
+			institucionServ.modificarInstitucion(archivo, id, nombre, descripcion, direccion, telefono);
 			return "instituciones.html";
 			
 		} catch (Exception e) {
