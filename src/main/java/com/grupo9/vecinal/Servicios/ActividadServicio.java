@@ -2,6 +2,8 @@ package com.grupo9.vecinal.Servicios;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -56,15 +58,18 @@ public class ActividadServicio {
 			validarActividad(nombreActividad, descripcionActividad, cupo);
 			
 			//SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");
-			DateFormat formatter = new SimpleDateFormat("dd-mm-YYYY", Locale.ENGLISH);
+			//DateFormat formatter = new SimpleDateFormat("dd-mm-YYYY", Locale.ENGLISH);
+			//Date date = formatter.parse(fecha);
+			//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			
+			LocalDate localDate = LocalDate.parse(fecha);
 
-			Date date = formatter.parse(fecha);
 			
 			
 			Actividad actividad = new Actividad();
 			actividad.setNombreActividad(nombreActividad);
 			actividad.setDescripcionActividad(descripcionActividad);
-			actividad.setFecha(date);
+			actividad.setFecha(localDate);
 			actividad.setCupo(cupo);
 			actividad.setAlta(true);
 
@@ -72,7 +77,7 @@ public class ActividadServicio {
 
 		} catch (Exception e) {
 			e.getMessage();
-			throw new Exception("Error en uno de los campos");
+			throw new Exception(e.getMessage());
 		}
 
 	}

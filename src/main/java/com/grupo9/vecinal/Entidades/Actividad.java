@@ -1,5 +1,6 @@
 package com.grupo9.vecinal.Entidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -24,10 +25,11 @@ public class Actividad {
 
 	private String nombreActividad;
 	private String descripcionActividad;
+	//ESTO NO SIRVE.
+	//@Temporal(TemporalType.DATE)
+	//@DateTimeFormat(style = "S-")
+	private LocalDate fecha;
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(style = "S-")
-	private Date fecha;
 	private Boolean alta;
 	private Integer cupo;
 	private Integer inscriptos;
@@ -70,11 +72,11 @@ public class Actividad {
 		this.descripcionActividad = descripcionActividad;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

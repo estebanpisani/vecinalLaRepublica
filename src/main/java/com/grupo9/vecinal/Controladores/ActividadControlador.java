@@ -31,7 +31,7 @@ public class ActividadControlador {
 	}
 
 	@PostMapping("/registro-actividad")
-	public String registroActividad(ModelMap modelo, @RequestParam String nombreActividad, @RequestParam String descripcion, @RequestParam String fecha) throws ParseException {
+	public String registroActividad(ModelMap modelo, @RequestParam String nombreActividad, @RequestParam String descripcion, @RequestParam String fecha, @RequestParam Integer cupo) throws ParseException {
 
 
 		try {
