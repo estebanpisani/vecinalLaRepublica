@@ -18,7 +18,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
 	@Query("SELECT u FROM Usuario u WHERE u.alta = false ORDER BY u.apellido ASC, u.nombre ASC")
 	public List<Usuario> usuariosBaja();
 	
-	@Query("SELECT u FROM Usuario u WHERE u.apellido LIKE '%apellido%' ORDER BY u.apellido ASC, u.nombre ASC")
+	@Query("SELECT u FROM Usuario u WHERE u.apellido LIKE :apellido ORDER BY u.apellido ASC, u.nombre ASC")
 	public List<Usuario> usuariosApellido(@Param("apellido") String apellido );
 	
 	@Query("SELECT u FROM Usuario u WHERE u.cuotaAlDia = true ORDER BY u.apellido ASC, u.nombre ASC")

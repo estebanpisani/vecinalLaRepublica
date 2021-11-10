@@ -270,7 +270,7 @@ public class UsuarioServicio implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public List<Usuario> mostrarUsuariosApellido(String apellido) throws Exception {
 		try {
-			return usuarioRepo.usuariosApellido(apellido);
+			return usuarioRepo.usuariosApellido("%"+apellido+"%");
 
 		} catch (Exception e) {
 			throw new Exception("No se encontraron afiliados");

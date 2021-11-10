@@ -22,6 +22,9 @@ public class NovedadServicio {
 
 		try {
 			validarDatosNovedad(titulo, descripcion);
+			if (destacado == null) {
+				destacado = false;
+			}
 			Novedad novedad = new Novedad();
 			novedad.setDescripcion(descripcion);
 			novedad.setTitulo(titulo);
@@ -89,7 +92,7 @@ public class NovedadServicio {
 			return novedades;
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarAltaNovedades() throws Exception {
 		List<Novedad> novedades = novedadRepo.novedadesAlta();
@@ -99,7 +102,7 @@ public class NovedadServicio {
 			return novedades;
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarBajaNovedades() throws Exception {
 		List<Novedad> novedades = novedadRepo.novedadesAlta();
@@ -109,10 +112,10 @@ public class NovedadServicio {
 			return novedades;
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Novedad> mostrarNovedadesPorFecha(Date fecha) throws Exception {
-		List<Novedad> novedades = novedadRepo.novedadesPorFecha(fecha);
+	public List<Novedad> mostrarNovedadesPorFechaActual(Date fecha) throws Exception {
+		List<Novedad> novedades = novedadRepo.novedadesPorFechaNueva(fecha);
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias con esa fecha");
 		} else {
@@ -121,25 +124,35 @@ public class NovedadServicio {
 	}
 	
 	@Transactional(readOnly = true)
+	public List<Novedad> mostrarNovedadesPorFechaVieja(Date fecha) throws Exception {
+		List<Novedad> novedades = novedadRepo.novedadesPorFechaVieja(fecha);
+		if (novedades.isEmpty()) {
+			throw new Exception("No hay noticias con esa fecha");
+		} else {
+			return novedades;
+		}
+	}
+
+	@Transactional(readOnly = true)
 	public List<Novedad> mostrarNovedadesPorTitulo(String titulo) throws Exception {
-		List<Novedad> novedades = novedadRepo.novedadesPorTitulo(titulo);
+		List<Novedad> novedades = novedadRepo.novedadesPorTitulo("%"+titulo+"%");
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias con ese título");
 		} else {
 			return novedades;
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarNovedadesPorDescripcion(String descripcion) throws Exception {
-		List<Novedad> novedades = novedadRepo.novedadesPorDescripcion(descripcion);
+		List<Novedad> novedades = novedadRepo.novedadesPorDescripcion("%"+descripcion+"%");
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias dadas de baja");
 		} else {
 			return novedades;
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarNovedadesDestacadas(Boolean destacado) throws Exception {
 		List<Novedad> novedades = novedadRepo.novedadesPorDestacado(destacado);
