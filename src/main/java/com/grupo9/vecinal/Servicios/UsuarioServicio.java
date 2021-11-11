@@ -191,6 +191,9 @@ public class UsuarioServicio implements UserDetailsService {
 		try {
 			Usuario usuario = buscarUsuario(idUsuario);
 			Actividad actividad = actividadServ.buscarActividad(idActividad);
+			if (actividad.getCupo()<=actividad.getUsuarios().size()) {
+				throw new Exception("No hay cupos disponibles para esta actividad");
+			}
 			for (Actividad act : usuario.getActividades()) {
 				if (act.getIdActividades().equals(actividad.getIdActividades())) {
 					throw new Exception("Ya estas anotado");
