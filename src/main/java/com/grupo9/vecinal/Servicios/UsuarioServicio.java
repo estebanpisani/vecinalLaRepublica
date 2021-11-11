@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Usuario;
@@ -32,9 +33,12 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Autowired
 	private ActividadServicio actividadServ;
+	
+	@Autowired
+	private FotoServicio fotoServ;
 
 	@Transactional
-	public void crearUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
+	public void crearUsuario(MultipartFile foto ,String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
 			String nombre, String apellido, Integer telefono) throws Exception {
 		try {
 
@@ -52,6 +56,7 @@ public class UsuarioServicio implements UserDetailsService {
 			usuario.setCuotaAlDia(false);
 			usuario.setAdmin(false);
 			usuario.setAlta(true);
+			usuario.setFoto(fotoServ.guardar(foto));
 
 			usuarioRepo.save(usuario);
 
@@ -62,7 +67,7 @@ public class UsuarioServicio implements UserDetailsService {
 	}
 
 	@Transactional
-	public void modificarUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido,
+	public void modificarUsuario(MultipartFile foto, String nombreUsuario, String emailUsuario, String nombre, String apellido,
 			Integer telefono, Integer id) throws Exception {
 		try {
 
@@ -76,7 +81,8 @@ public class UsuarioServicio implements UserDetailsService {
 				usuario.setNombre(nombre);
 				usuario.setApellido(apellido);
 				usuario.setTelefono(telefono);
-
+				usuario.setFoto(fotoServ.guardar(foto));
+				
 				usuarioRepo.save(usuario);
 
 			} else {
