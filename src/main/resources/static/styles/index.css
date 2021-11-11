@@ -27,7 +27,7 @@ body {
 }
 
 h1{
-    color: #ccc;
+    color: var(--blancoBackground);
     font-weight: 300;
     letter-spacing: 3px;
     padding-left: 10px;
@@ -35,13 +35,13 @@ h1{
 }
 
 #vecino {
-    border: 1px solid #ccc;
+    border: 1px solid var(--blancoBackground);
     border-radius: 50px;
     padding: 5px;
 }
 
 #vecino:hover {
-    background-color: #ccc;
+    background-color: var(--blancoBackground);
     color: #222;
 }
 #registro {
@@ -83,7 +83,7 @@ h1{
 
 .stuck .navbar.sticky-top {
     background-color: rgba(0, 0, 0, 0.479) !important;
-    padding-top: .8rem !important;
+    padding-top: .100rem !important;
     padding-bottom: .8rem !important;
 }
 
@@ -271,7 +271,7 @@ h1{
 }
 
 .heading > a:hover {
-    color: #ccc;
+    color: var(--blancoBackground);
 }
 
 .card {
@@ -282,7 +282,7 @@ h1{
 
 .card:hover {
     background-color: #444;
-    color: #ccc;
+    color: var(--blancoBackground);
     transition: .5s;
 }
 
@@ -361,7 +361,8 @@ h1{
 }
 
 .btn.btn-primary:hover {
-    background-color: #ccc;
+    background-color: var(--blancoBackground);
+    
     color: #222;
     transition: .5s;
 }
@@ -371,8 +372,6 @@ h1{
     font-weight: 300;
     letter-spacing: 3px;
     text-align: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
 
 .seccion-mapa {
@@ -383,4 +382,27 @@ h1{
 .mapa {
      border: 1px solid #222;
      border-radius: 20px;
+}
+
+/* Footer */
+
+.tel {
+    padding-top: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content:space-between;
+}
+
+.copyright {
+    background-color: #111;
+    width: 100%;
+    color: #ccc;
+    text-align: center;
+}
+.copyright > p {
+    letter-spacing: 2px;
+    font-weight: 300;
+    font-size: 15px;
 }
