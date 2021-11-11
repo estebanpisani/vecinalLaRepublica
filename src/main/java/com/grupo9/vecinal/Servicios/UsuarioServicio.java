@@ -7,10 +7,10 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,7 +37,7 @@ public class UsuarioServicio implements UserDetailsService {
 	public void crearUsuario(String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
 			String nombre, String apellido, Integer telefono) throws Exception {
 		try {
-			
+
 			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido, null);
 			validarContrasenia(contrasenia, contrasenia2);
 
@@ -65,7 +65,7 @@ public class UsuarioServicio implements UserDetailsService {
 	public void modificarUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido,
 			Integer telefono, Integer id) throws Exception {
 		try {
-			
+
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
 
 			if (respuesta.isPresent()) {
@@ -84,7 +84,7 @@ public class UsuarioServicio implements UserDetailsService {
 			}
 
 		} catch (Exception e) {
-			
+
 			throw new Exception(e.getMessage());
 		}
 
@@ -127,7 +127,7 @@ public class UsuarioServicio implements UserDetailsService {
 			if (respuesta.isPresent()) {
 				Usuario usuario = respuesta.get();
 				usuario.setAlta(false);
-
+				usuario.getActividades().clear();
 				usuarioRepo.save(usuario);
 
 			} else {
@@ -168,7 +168,7 @@ public class UsuarioServicio implements UserDetailsService {
 		}
 
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Usuario buscarUsuarioNobreUsuario(String nombreUsuario) throws Exception {
 		try {
@@ -199,6 +199,27 @@ public class UsuarioServicio implements UserDetailsService {
 			}
 			usuario.getActividades().add(actividad);
 			usuarioRepo.save(usuario);
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+
+	@Transactional
+	public void desinscripcionActividad(Integer idUsuario, Integer idActividad) throws Exception {
+		try {
+			Usuario usuario = buscarUsuario(idUsuario);
+			Actividad actividad = actividadServ.buscarActividad(idActividad);
+			for (Actividad act : usuario.getActividades()) {
+				if (act.getIdActividades().equals(actividad.getIdActividades())) {
+					usuario.getActividades().remove(actividad);
+					usuarioRepo.save(usuario);
+					return;
+				}
+
+			}
+
+			throw new Exception("No estaba anotado a este curso");
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -270,7 +291,7 @@ public class UsuarioServicio implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public List<Usuario> mostrarUsuariosApellido(String apellido) throws Exception {
 		try {
-			return usuarioRepo.usuariosApellido("%"+apellido+"%");
+			return usuarioRepo.usuariosApellido("%" + apellido + "%");
 
 		} catch (Exception e) {
 			throw new Exception("No se encontraron afiliados");
@@ -278,8 +299,8 @@ public class UsuarioServicio implements UserDetailsService {
 
 	}
 
-	public void validarDatosUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido,Usuario usuario)
-			throws Exception {
+	public void validarDatosUsuario(String nombreUsuario, String emailUsuario, String nombre, String apellido,
+			Usuario usuario) throws Exception {
 
 		if (nombreUsuario == null || nombreUsuario.isEmpty())
 
@@ -287,18 +308,19 @@ public class UsuarioServicio implements UserDetailsService {
 			throw new Exception("El campo no puede estar vacio.");
 
 		}
-		
-			List<Usuario> usuario1 =usuarioRepo.findAll();
-			for (Usuario usuario2 : usuario1) {
-				if (usuario2.getNombreUsuario().equals(nombreUsuario) && (usuario==null || !usuario.getNombreUsuario().equals(nombreUsuario))) {
-					throw new Exception("El nombre de usuario: "+nombreUsuario+" ya existe, por favor ingrese uno distinto");
-				}
-				if (usuario2.getEmailUsuario().equals(emailUsuario)  && (usuario==null || !usuario.getEmailUsuario().equals(emailUsuario))) {
-					throw new Exception("El mail: "+emailUsuario+" ya existe, por favor ingrese uno distinto");
-				}
+
+		List<Usuario> usuario1 = usuarioRepo.findAll();
+		for (Usuario usuario2 : usuario1) {
+			if (usuario2.getNombreUsuario().equals(nombreUsuario)
+					&& (usuario == null || !usuario.getNombreUsuario().equals(nombreUsuario))) {
+				throw new Exception(
+						"El nombre de usuario: " + nombreUsuario + " ya existe, por favor ingrese uno distinto");
 			}
-		
-		
+			if (usuario2.getEmailUsuario().equals(emailUsuario)
+					&& (usuario == null || !usuario.getEmailUsuario().equals(emailUsuario))) {
+				throw new Exception("El mail: " + emailUsuario + " ya existe, por favor ingrese uno distinto");
+			}
+		}
 
 		if (emailUsuario == null || emailUsuario.isEmpty())
 

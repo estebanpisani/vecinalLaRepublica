@@ -23,7 +23,7 @@ public class IndexControlador {
 	public String login(HttpSession session,ModelMap modelo, @RequestParam(required = false) String error) {
 		
 		if (session.getAttribute("usuariologueado") != null) {
-			modelo.put("error", "El usuario ya se encuentra logueado");
+			return "redirect:/";
 		}
 		if (error != null) {
 			modelo.put("error", "Usuario o contraseña incorrectas");

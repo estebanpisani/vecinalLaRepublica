@@ -23,26 +23,23 @@
     <a href="" class="link">Comercios</a>
     <a href="" class="link">Actividades</a>
     <span class="right">
-      <a href="">Registrarse</a>
+      <a href="">Baja Usuario</a>
      <form th:action="@{/logout}"  method="POST"> <button th:type="submit" class="btn btn-primary">Salir</button></form>
     </span>
   </nav>
 
   <div class="main">
     <div class="left-r">
-      <form th:action="@{/usuarios/inscripcion}" method="POST">
+      <form th:action="@{/usuarios/bajaUsuario}" method="POST">
 
         <p style="color: red" th:if="${error != null}" th:text="${error}"></p><br>
 
         <div class="mb-3">
         <h2 th:if="${session.usuariologueado != null}" th:text="${session.usuariologueado.nombre} +' '+ ${session.usuariologueado.apellido}"></h2>
           <label for="exampleInputEmail1" class="form-label" ></label>
-          <input th:type="text" name="idUsuario" th:if="${session.usuariologueado != null}" th:value="${session.usuariologueado.getIdUsuario()}" required>
+          <input th:type="text" name="id" required>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Id Actividad</label>
-          <input th:type="text" name="idActividad" placeholder="id Actividad" required>
-        </div>
+        
        
           <button th:type="submit" class="btn btn-primary">Inscribirse</button>
         </form>
