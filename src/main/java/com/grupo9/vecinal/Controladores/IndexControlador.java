@@ -1,5 +1,7 @@
 package com.grupo9.vecinal.Controladores;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +20,15 @@ public class IndexControlador {
 	}
 	
 	@GetMapping("/login")
-	public String login(ModelMap modelo, @RequestParam(required = false) String error) {
+	public String login(HttpSession session,ModelMap modelo, @RequestParam(required = false) String error) {
+		
+		if (session.getAttribute("usuariologueado") != null) {
+			return "redirect:/";
+		}
 		if (error != null) {
 			modelo.put("error", "Usuario o contraseña incorrectas");
 		}
 		return "login.html";
 	}
+	
 }

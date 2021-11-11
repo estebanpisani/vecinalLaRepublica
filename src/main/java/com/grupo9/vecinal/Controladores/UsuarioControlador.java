@@ -1,5 +1,7 @@
 package com.grupo9.vecinal.Controladores;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,12 @@ public class UsuarioControlador {
 	private UsuarioServicio usuarioServ;
 
 	@GetMapping("/registro")
-	public String registro() {
+	public String registro(HttpSession session) {
+		
+		if (session.getAttribute("usuariologueado") != null) {
+			return "redirect:/";
+		}
+			
 		return "registro.html";
 	}
 
@@ -32,7 +39,7 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.crearUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
-			return "redirect:/";
+			return "redirect:/login";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreUsuario", nombreUsuario);
@@ -48,6 +55,7 @@ public class UsuarioControlador {
 
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/modificar")
 	public String modificarUsuario(ModelMap modelo) {
 		try {
@@ -81,16 +89,51 @@ public class UsuarioControlador {
 		return "inscripcion_back.html";
 	}
 
-	@PostMapping("/inscribir")
+	@PostMapping("/inscripcion")
 	public String inscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {
 		try {
 			usuarioServ.inscripcionActividad(idUsuario, idActividad);
 
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
+			return "inscripcion_back.html";
 		}
 
-		return "inscripcion_back.html";
+		return "redirect:/usuarios/inscripcion";
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+	@GetMapping("/desinscripcion")
+	public String desinscripcion() {
+		return "desinscripcion_back.html";
+	}
+
+	@PostMapping("/desinscripcion")
+	public String desinscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {
+		try {
+			usuarioServ.desinscripcionActividad(idUsuario, idActividad);
+
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+			return "desinscripcion_back.html";
+		}
+
+		return "redirect:/usuarios/desinscripcion";
+	}
+
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_ADMIN')")
+	@GetMapping("/bajaUsuario")
+	public String bajaUsuario() {
+		return "bajaUsuario_back.html";
+	}
+
+	@PostMapping("/bajaUsuario")
+	public String bajarUsuario(@RequestParam Integer id, ModelMap modelo) {
+		try {
+			usuarioServ.bajaUsuario(id);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		return "bajaUsuario_back.html";
+	}
 }

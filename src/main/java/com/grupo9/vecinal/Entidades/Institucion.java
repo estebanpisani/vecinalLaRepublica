@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-//@Table(name = "actividades")        //Verificar si corresponde (tipo dato telefono)
 public class Institucion {
 	
 	@Id
@@ -15,10 +15,18 @@ public class Institucion {
 	private String nombre;
 	private String descripcion;
 	private String direccion;
-	private Long telefono;        //Verificar si corresponde Integer
+	private Long telefono;
 	private Boolean alta;
+	@OneToOne
+	private Foto foto;
 	
 	
+	public Foto getFoto() {
+		return foto;
+	}
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 	public String getNombre() {
 		return nombre;
 	}
