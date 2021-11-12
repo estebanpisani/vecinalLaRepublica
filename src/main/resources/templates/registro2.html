@@ -15,8 +15,13 @@
   <div class="login">
       <div class="title">Iniciar Sesión</div>
 
-      <form th:action="@{/usuarios/registro}" method="POST">
+      <form th:action="@{/usuarios/registro}" method="POST" enctype="multipart/form-data">
         <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
+        
+         <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
+          <input th:type="file" name="foto" class="form-control">
+        </div>
 
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>

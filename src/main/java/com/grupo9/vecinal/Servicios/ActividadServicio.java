@@ -1,6 +1,6 @@
 package com.grupo9.vecinal.Servicios;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class ActividadServicio {
 	private ActividadRepositorio actividadRepo;
 	
 	@Transactional	
-	public void validarActividad(String nombreActividad, String descripcionActividad, Date fecha, Integer cupo)
+	public void validarActividad(String nombreActividad, String descripcionActividad, Integer cupo)
 			throws Exception {
 
 		if (nombreActividad == null || nombreActividad.isEmpty())
@@ -36,12 +36,7 @@ public class ActividadServicio {
 			throw new Exception("El campo no puede estar vacio.");
 
 		}
-		if (fecha == null || ((CharSequence) fecha).isEmpty())
-
-		{
-			throw new Exception("El campo no puede estar vacio.");
-
-		}
+		
 		if (cupo == null)
 
 		{
@@ -52,14 +47,24 @@ public class ActividadServicio {
 	}
 	
 	@Transactional
-	public void crearActividad(String nombreActividad, String descripcionActividad, Date fecha, Integer cupo) throws Exception {
-		try {
-			validarActividad(nombreActividad, descripcionActividad, fecha, cupo);
+	public void crearActividad(String nombreActividad, String descripcionActividad, String fecha, Integer cupo) throws Exception {
 
+		try {
+			validarActividad(nombreActividad, descripcionActividad, cupo);
+			
+			//SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");
+			//DateFormat formatter = new SimpleDateFormat("dd-mm-YYYY", Locale.ENGLISH);
+			//Date date = formatter.parse(fecha);
+			//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			
+			LocalDate localDate = LocalDate.parse(fecha);
+
+			
+			
 			Actividad actividad = new Actividad();
 			actividad.setNombreActividad(nombreActividad);
 			actividad.setDescripcionActividad(descripcionActividad);
-			actividad.setFecha(fecha);
+			actividad.setFecha(localDate);
 			actividad.setCupo(cupo);
 			actividad.setAlta(true);
 
@@ -67,22 +72,26 @@ public class ActividadServicio {
 
 		} catch (Exception e) {
 			e.getMessage();
-			throw new Exception("Error en uno de los campos");
+			throw new Exception(e.getMessage());
 		}
 
 	}
 	
 	@Transactional
-	public void modificarActividad(String nombreActividad, String descripcionActividad, Date fecha, Integer cupo, Integer id) throws Exception {
+	public void modificarActividad(String nombreActividad, String descripcionActividad, String fecha, Integer cupo, Integer id) throws Exception {
 		try {
-			validarActividad(nombreActividad, descripcionActividad, fecha, cupo);
+			validarActividad(nombreActividad, descripcionActividad, cupo);
+			
+			LocalDate localDate = LocalDate.parse(fecha);
+			
+			
 			Optional<Actividad> respuesta = actividadRepo.findById(id);
 
 			if (respuesta.isPresent()) {
 				Actividad actividad = respuesta.get();
 				actividad.setNombreActividad(nombreActividad);
 				actividad.setDescripcionActividad(descripcionActividad);
-				actividad.setFecha(fecha);
+				actividad.setFecha(localDate);
 				actividad.setCupo(cupo);
 
 				actividadRepo.save(actividad);
@@ -94,8 +103,9 @@ public class ActividadServicio {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-
 	}
+
+	
 	
 	@Transactional
 	public void bajaActividad(Integer id) throws Exception {
@@ -169,6 +179,41 @@ public class ActividadServicio {
 		}
 
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Actividad> mostrarActividadNombre(String nombre) throws Exception {
+		
+			List<Actividad> actividades = actividadRepo.actividadNombre("%"+nombre+"%");
+			if (actividades.isEmpty()) {
+				throw new Exception("No se encontraron actividades con ese título");
+			} else {
+				return actividades;
+			}
+	}	
+	
+	@Transactional(readOnly = true)
+	public List<Actividad> mostrarActividadFechaReciente(LocalDate fecha) throws Exception {
+		
+			List<Actividad> actividades = actividadRepo.actividadesFechaReciente(fecha);
+			if (actividades.isEmpty()) {
+				throw new Exception("No se encontraron actividades en esa fecha");
+			} else {
+				return actividades;
+			}
+	}		
+	
+	@Transactional(readOnly = true)
+	public List<Actividad> mostrarActividadFechaAntigua(LocalDate fecha) throws Exception {
+		
+			List<Actividad> actividades = actividadRepo.actividadesFechaAntigua(fecha);
+			if (actividades.isEmpty()) {
+				throw new Exception("No se encontraron actividades en esa fecha");
+			} else {
+				return actividades;
+			}
+	}	
+	
+	
 	
 	public Set<Usuario> usuariosAnotados(Integer id) throws Exception{
 		 

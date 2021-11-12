@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+
+:root {
+    --turquesa: #b4f0cd;
+    --grisOscuro: #262626;
+    --grisClaro: #2e2e2e;
+    --grisMasClaro: #4a4a4a;
+    --blancoBackground: #F8F9FA;
+}
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+	font-family: 'Ubuntu',sans-serif;
+    background-color: var(--blancoBackground);
+}
+
+/* Header */
+.header {
+  width: 100%;
+  margin: auto;
+}
+
+h1{
+  color: #ccc;
+  font-weight: 300;
+  letter-spacing: 3px;
+  padding-left: 10px;
+}
+
+.navbar.navbar-expand-sm.sticky-top.navbar-dark.bg-dark.py-4 {
+  padding: 50px;
+  height: 120px;
+}
+
+.collapse.navbar-collapse {
+display: flex;
+justify-content: space-between;
+font-weight: 300;
+font-size: 15px;
+}
+
+.navbar-nav.ml-auto {
+  float: right;
+  font-size: 20px;
+}
+
+
+.sticky-top {
+  transition: all 0.25s ease-in;
+}
+
+/* style for when sitcky is applied */
+.stuck .navbar.sticky-top {
+  background-color: rgba(0, 0, 0, 0.479) !important;
+  padding-top: .8rem !important;
+  padding-bottom: .8rem !important;
+}
+
+
+
+/* Main */
+.main {
+    width: 100%;
+    height: 800px;
+    border-radius: 2%;
+}
+
+
+/* Deportes */
+
+.main > .deportes {   
+  width: 100%;
+  margin: auto;
+}
+
+
+.deportes-titulo {
+  display: inline-block;
+  margin: 40px auto 30px auto;
+  padding-left: 60px;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+.titulo-btn-deportes {
+  height: 100px;
+}
+
+
+.accordion {
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  
+  
+}
+
+.accordion-header,
+.accordion-body {
+  background: white;
+  
+}
+
+
+.accordion-header {
+  padding: 1.5em 1.5em;
+  background: #222; /*Color panel*/
+  color: white; /*Color letra*/
+  cursor: pointer;
+  font-size: .7em;
+  letter-spacing: .1em;
+  transition: all .3s;
+  text-transform: uppercase;   
+}
+
+.accordion__item {
+    border-bottom: 1px solid #222; /*Color borde*/
+}
+
+.accordion__item .accordion__item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+}
+
+.accordion-header:hover {
+  background: rgb(53, 53, 53); /*Color cuando esta posicionado arriba*/
+  position: relative;
+  z-index: 5;
+}
+
+.accordion-body {
+ /*Color de fondo del texto*/
+  background: rgb(53, 53, 53);
+  color: #fcfcfc;
+  display: none;
+  
+}
+
+.accordion-body__contents { /*Contenido de acordeon*/
+  padding: 1.5em 1.5em;
+  font-size: .85em;
+
+}
+
+.accordion__item.active:last-child .accordion-header {
+  border-radius: none;
+  
+}
+
+.accordion:first-child > .accordion__item > .accordion-header { /*Borde de acordeon*/
+  border-bottom: 1px solid transparent;
+}
+
+.accordion__item > .accordion-header:after { /*Flecha desplegable*/
+  content: "\f3d0";
+  font-family: IonIcons;
+  font-size: 1.2em;
+  float: right;
+  position: relative;
+  top: -2px;
+  transition: .3s all;
+  transform: rotate(0deg);
+  
+}
+
+.accordion__item.active > .accordion-header:after {
+  transform: rotate(-180deg);
+}
+
+.accordion__item.active .accordion-header {  /*Color cuando esta abierto*/
+  background: rgb(53, 53, 53);
+  
+}
+
+.accordion__item .accordion__item .accordion-header {
+/*Color sub panel*/
+  background: rgb(77, 76, 76);
+  color: #fcfcfc;
+}
+
+@media screen and (max-width: 1000px) {
+  body {
+    padding: 1em;
+  }
+  
+  .accordion {
+    width: 100%;
+  }
+}
+
+/*Actividades*/
+
+.main > .actividades {   
+  width: 100%;
+  margin: auto;
+}
+
+
+.actividades-titulo {
+  display: inline-block;
+  margin: 40px auto 30px auto;
+  padding-left: 60px;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+.titulo-btn-actividades {
+  height: 100px;
+}
+
+
+/* Form Mensaje */
+
+form{
+	margin: auto;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	margin-top: 20px;
+	border-radius: 7px;
+}
+
+@media (max-width:480px){
+	form{
+		width: 100%;
+	}
+}
+
+.btn-secondary{
+  width: fit-content;
+  font-size: .85em;
+  float: right;
+}
+
+.img-responsive{
+  margin-left: 37%;
+}
+
+.contenedor{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/*Nosotros*/
+/* .carousel.slide {
+    width:50%;
+    height:400px;
+    margin: auto;
+}
+
+.carousel-inner > h5 > p {
+    text-align: center; */

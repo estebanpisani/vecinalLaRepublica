@@ -9,35 +9,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.grupo9.vecinal.Entidades.Institucion;
-import com.grupo9.vecinal.Repositorios.InstitucionRepositorio;
-import com.grupo9.vecinal.Servicios.InstitucionServicio;
+import com.grupo9.vecinal.Entidades.Comercio;
+import com.grupo9.vecinal.Repositorios.ComercioRepositorio;
+import com.grupo9.vecinal.Servicios.ComercioServicio;
 
 @Controller
-@RequestMapping("/instituciones")
-public class InstitucionControlador {
+@RequestMapping("/comercios")
+public class ComercioControlador {
 	
 	@Autowired
-	private InstitucionRepositorio institucionRepo;
+	private ComercioRepositorio comercioRepo;
 	
 	@Autowired
-	private InstitucionServicio institucionServ;
+	private ComercioServicio comercioServ;
 	
 	@GetMapping("/mostrar")
-	public String mostrarInstituciones(ModelMap modelo) {
-		List<Institucion> instituciones = institucionRepo.findAll();
-		modelo.put("instituciones", instituciones);
-		return "instituciones.html";
+	public String mostrarComercios(ModelMap modelo) {
+		List<Comercio> comercios = comercioRepo.findAll();
+		modelo.put("comercios", comercios);
+		return "comercios.html";
 	}
 	
 	@PostMapping("/registrar")
-	public String registrarInstitucion(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre, @RequestParam String descripcion,
+	public String registrarComercio(ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		try {
-			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
-			return "instituciones.html";
+			comercioServ.crearComercio(nombre, descripcion, direccion, telefono);
+			return "comercios.html";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,18 +46,18 @@ public class InstitucionControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/instituciones/registrar";
+			return "redirect:/comercios/registrar";
 		}
 
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarInstitucion(ModelMap modelo, MultipartFile archivo, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
+	public String modificarComercio(ModelMap modelo, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		
 		try {
-			institucionServ.modificarInstitucion(archivo, id, nombre, descripcion, direccion, telefono);
-			return "instituciones.html";
+			comercioServ.modificarComercio(id, nombre, descripcion, direccion, telefono);
+			return "comercios.html";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +67,7 @@ public class InstitucionControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/instituciones/modificar";
+			return "redirect:/comercios/modificar";
 		}
 
 	}

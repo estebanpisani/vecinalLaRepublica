@@ -21,7 +21,7 @@ class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(usuarioServ).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(usuarioServ).passwordEncoder(new BCryptPasswordEncoder(4));
 
 	}
 
@@ -30,7 +30,7 @@ class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 
 		http.headers().frameOptions().sameOrigin().and().authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*")
 				.permitAll().and().formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
-				.usernameParameter("nombreUsuario").passwordParameter("contrasenia").defaultSuccessUrl("/").permitAll()
+				.usernameParameter("nombreUsuario").passwordParameter("contrasenia").defaultSuccessUrl("/default").permitAll()
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
 
 	}

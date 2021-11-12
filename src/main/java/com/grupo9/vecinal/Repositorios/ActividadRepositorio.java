@@ -1,6 +1,7 @@
 package com.grupo9.vecinal.Repositorios;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,12 +17,19 @@ public interface ActividadRepositorio  extends JpaRepository<Actividad, Integer>
 	@Query("SELECT a FROM Actividad a WHERE a.alta = true ORDER BY a.nombreActividad ASC")
 	public List<Actividad> actividadAlta();
 	
-	@Query("SELECT a FROM Actividad a WHERE a.alta = true ORDER BY a.nombreActividad ASC")
+	@Query("SELECT a FROM Actividad a WHERE a.alta = false ORDER BY a.nombreActividad ASC")
 	public List<Actividad> actividadBaja();
-	
-	@Query("SELECT a FROM Actividad a WHERE a.nombreActividad LIKE '%nombre%' ORDER BY a.nombreActividad ASC")
-	public List<Actividad> actividadNombre(@Param("nombre") String nombre);
 
+	@Query("SELECT a FROM Actividad a WHERE a.nombreActividad LIKE :nombre ORDER BY a.fecha DESC")
+	public List<Actividad> actividadNombre(@Param("nombre") String nombre);
+	
+	@Query("SELECT a FROM Actividad a WHERE a.fecha = fecha ORDER BY a.fecha DESC")
+	public List<Actividad> actividadesFechaReciente(@Param("fecha") LocalDate fecha);
+	
+	@Query("SELECT a FROM Actividad a WHERE a.fecha = fecha ORDER BY a.fecha ASC")
+	public List<Actividad> actividadesFechaAntigua(@Param("fecha") LocalDate fecha);
+	
+	
 	
 }
 
