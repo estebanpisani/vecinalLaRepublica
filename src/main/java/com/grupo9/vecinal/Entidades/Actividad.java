@@ -32,7 +32,6 @@ public class Actividad {
 	
 	private Boolean alta;
 	private Integer cupo;
-	private Integer inscriptos;
 
 	@ManyToMany(mappedBy = "actividades")
 	private Set<Usuario> usuarios;
@@ -96,25 +95,12 @@ public class Actividad {
 		this.cupo = cupo;
 	}
 
-	public Integer getInscriptos() {
-		return inscriptos;
-	}
-
-	public void setInscriptos(Integer inscriptos) {
-		this.inscriptos = inscriptos;
-	}
-
-	/*
-	 * public Set<Usuario> getUsuarios() { return usuarios; }
-	 * 
-	 * public void setUsuarios(Set<Usuario> usuarios) { this.usuarios = usuarios; }
-	 */
 
 	@Override
 	public String toString() {
 		return "Actividad [idActividades=" + idActividades + ", nombreActividad=" + nombreActividad
 				+ ", descripcionActividad=" + descripcionActividad + ", fecha=" + fecha + ", alta=" + alta + ", cupo="
-				+ cupo + ", inscriptos=" + inscriptos + "]";
+				+ cupo+"]";
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +29,16 @@ public class Usuario {
 	private Boolean cuotaAlDia;
 	@ManyToMany	
 	private Set<Actividad> actividades;
+	@OneToOne
+	private Foto foto;
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 
 	public Integer getIdUsuario() {
 		return idUsuario;

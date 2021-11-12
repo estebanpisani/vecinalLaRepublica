@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Servicios.UsuarioServicio;
@@ -23,21 +24,22 @@ public class UsuarioControlador {
 
 	@GetMapping("/registro")
 	public String registro(HttpSession session) {
-		
+
 		if (session.getAttribute("usuariologueado") != null) {
 			return "redirect:/";
 		}
-			
-		return "registro.html";
+
+		return "registro2.html";
 	}
 
 	@PostMapping("/registro")
-	public String registro(ModelMap modelo, @RequestParam String nombreUsuario, @RequestParam String contrasenia,
-			@RequestParam String contrasenia2, @RequestParam String emailUsuario, @RequestParam String nombre,
-			@RequestParam String apellido, @RequestParam(required = false) Integer telefono) {
+	public String registro(MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
+			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String emailUsuario,
+			@RequestParam String nombre, @RequestParam String apellido,
+			@RequestParam(required = false) Integer telefono) {
 
 		try {
-			usuarioServ.crearUsuario(nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
+			usuarioServ.crearUsuario(foto, nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
 			return "redirect:/login";
 		} catch (Exception e) {
@@ -50,7 +52,7 @@ public class UsuarioControlador {
 			modelo.put("apellido", apellido);
 			modelo.put("telefono", telefono);
 
-			return "registro.html";
+			return "registro2.html";
 		}
 
 	}
@@ -68,12 +70,12 @@ public class UsuarioControlador {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarUsuario(ModelMap modelo, @RequestParam String nombreUsuario,
+	public String modificarUsuario(MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam(required = false) Integer telefono, @RequestParam Integer idUsuario) throws Exception {
 
 		try {
-			usuarioServ.modificarUsuario(nombreUsuario, emailUsuario, nombre, apellido, telefono, idUsuario);
+			usuarioServ.modificarUsuario(foto, nombreUsuario, emailUsuario, nombre, apellido, telefono, idUsuario);
 			return "redirect:/usuarios/modificar";
 		} catch (Exception e) {
 			Usuario usuario = usuarioServ.buscarUsuario(idUsuario);
