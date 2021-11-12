@@ -1,13 +1,157 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
 :root {
-	--turquesa: #b4f0cd;
-    --grisOscuro: #262626;
-    --rosa: #f2d5f8;
-    --lavanda: #e4d9ff;
+        --turquesa: #b4f0cd;
+        --grisOscuro: #262626;
+        --grisClaro: #2e2e2e;
+        --grisMasClaro: #4a4a4a;
+        --blancoBackground: #F8F9FA;
+    
 }
 
-* {
-	margin: 0;
+body {
+    margin: 0;
+    font-family:'Ubuntu', sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+    line-height: 1.5;
+    color: #222;
+    background-color: #f7f7f7;
+}
+.navbar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: px;
+}
+
+/*
+headeer top
+*/
+h1 {
+    color: var(--blancoBackground);
+    font-weight: 300;
+    letter-spacing: 3px;
+    padding-left: 10px;
+    margin-bottom: 0;
+
+}
+.topbar{
+  background-color: #212529;
+  padding: 0;
+}
+
+.topbar .container .row {
+  margin:-7px;
+  padding:0;
+}
+
+.topbar .container .row .col-md-12 { 
+  padding:0;
+}
+
+.topbar p{
+  margin:0;
+  display:inline-block;
+  font-size: 50px;
+  color: #f1f6ff;
+}
+
+.topbar p > i{
+  margin-right:5px;
+}
+.topbar p:last-child{
+  text-align:right;
+} 
+
+header .navbar {
+    margin-bottom: 20;
+}
+
+.topbar li.topbar {
+    display: inline;
+    padding-right: 18px;
+    line-height: 52px;
+    transition: all .3s linear;
+}
+
+.topbar li.topbar:hover {
+    color: #262626;
+}
+
+.topbar ul.info i {
+    color: #131313;
+    font-style: 'Ubuntu',sans-serif;
+    margin-right: 8px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+}
+
+.topbar ul.info li {
+    float: right;
+    padding-left: 30px;
+    color: #ffffff;
+    font-size: 60px;
+    line-height: 44px;
+}
+
+.topbar ul.info i span {
+    color: #aaa;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 50px;
+    padding-left: 18px;
+}
+
+
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    will-change: opacity, transform;
+    transition: .3s ease-out;
+    color: #fff;
+}
+a {
+  color: #0a0a0a;
+  text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+.bg-image-full {
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.bg-dark {
+    background-color: #222!important;
+}
+
+.mx-background-top-linear {
+    background-color: #222;
+    
+}
+/*HASTA ACA*/
+
+	* { margin: 0;
 	box-sizing: border-box;
     padding: 0;
 }
@@ -17,32 +161,7 @@ body {
     background-color: #F8F9FA;
 }
 
-/* Header */
-header {
-    background: linear-gradient(90deg, rgba(180,240,205,1) 0%, rgba(180,240,205,1) 24%, rgba(175,232,198,1) 49%, rgba(162,212,182,1) 79%, rgba(162,203,178,1) 100%);
-    height: 80px;
-    width: 100%;
-}
 
-header > .title {
-    padding-left: 80px;
-    line-height: 80px;
-}
-
-header > .title > h1 {
-	font-size: 35px;
-	font-weight: 300;
-    letter-spacing: 5px;
-    line-height: 80px;
-}
-
-nav {
-    display:inline-block;
-	background:var(--grisOscuro);
-	height: 50px;
-    width: 100%;
-    padding-left: 30px;
-}
 
 nav > a { 
     color: #fff;
@@ -78,6 +197,7 @@ nav > a:focus, a:hover {
     line-height: 50px;
     margin-left: 40px;
     padding: 15px;
+    letter-spacing: 3px;
 }
 
 .right > a:hover {
@@ -89,7 +209,7 @@ nav > a:focus, a:hover {
 
 
 body{ 
-    margin-top: 20px;
+    margin-top: 0px;
     background-color: #eee;
 }
 
@@ -103,8 +223,6 @@ margin-left: 50px;
 
 
 }
-
-
 
 
 /* MAIN */
@@ -125,6 +243,7 @@ margin-left: 50px;
     font-weight: 300;
     letter-spacing: 3px;
 }
+
 .widget.single-news {
     margin-bottom: 20px;
     position: relative;
