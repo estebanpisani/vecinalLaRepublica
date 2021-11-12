@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Comercio {
@@ -16,8 +17,21 @@ public class Comercio {
 	private String direccion;
 	private Long telefono;
 	private Boolean alta;
+	@OneToOne
+	private Foto foto;
 	
-	
+	public Integer getIdComercio() {
+		return idComercio;
+	}
+	public void setIdComercio(Integer idComercio) {
+		this.idComercio = idComercio;
+	}
+	public Foto getFoto() {
+		return foto;
+	}
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 	public String getNombre() {
 		return nombre;
 	}

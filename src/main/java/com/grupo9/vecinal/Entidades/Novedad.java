@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +21,16 @@ public class Novedad {
 	private Boolean destacado;
 	private Boolean alta;
 	private LocalDateTime fecha;
+	@OneToOne
+	private Foto foto;
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 
 	public LocalDateTime getFecha() {
 		return fecha;
