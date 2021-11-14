@@ -39,7 +39,7 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Transactional
 	public void crearUsuario(MultipartFile foto ,String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
-			String nombre, String apellido, Integer telefono) throws Exception {
+			String nombre, String apellido, Long telefono) throws Exception {
 		try {
 
 			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido, null);
@@ -68,7 +68,7 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Transactional
 	public void modificarUsuario(MultipartFile foto, String nombreUsuario, String emailUsuario, String nombre, String apellido,
-			Integer telefono, Integer id) throws Exception {
+			Long telefono, Integer id) throws Exception {
 		try {
 
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
@@ -81,7 +81,10 @@ public class UsuarioServicio implements UserDetailsService {
 				usuario.setNombre(nombre);
 				usuario.setApellido(apellido);
 				usuario.setTelefono(telefono);
-				usuario.setFoto(fotoServ.guardar(foto));
+				if (!foto.isEmpty()) {
+					usuario.setFoto(fotoServ.actualizar(usuario.getFoto().getId(), foto));
+				}
+				
 				
 				usuarioRepo.save(usuario);
 

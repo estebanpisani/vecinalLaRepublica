@@ -33,36 +33,43 @@
 
 	<div class="main">
 		<div class="left-r">
-			<form th:action="@{/usuarios/modificar}" method="POST">
+			<form th:action="@{/usuarios/modificar}" method="POST" enctype="multipart/form-data">
 
 				<p style="color: red" th:if="${error != null}" th:text="${error}"></p><br>
 				<input th:type="text" th:value="${usuario !=null} ? ${usuario.idUsuario} : ''" name="idUsuario">
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
-					<input th:type="text" th:value="${usuario !=null} ? ${usuario.nombreUsuario} : ''" name="nombreUsuario" class="form-control"
-						id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriba su nombre de usuario"
-						required>
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.nombreUsuario} : ''"
+						name="nombreUsuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						placeholder="Escriba su nombre de usuario" required>
 				</div>
 
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Email</label>
-					<input th:type="email" th:value="${usuario !=null} ? ${usuario.emailUsuario} : ''" name="emailUsuario" class="form-control"
-						id="exampleInputPassword1" placeholder="petito@gmail.com" required>
+					<input th:type="email" th:value="${usuario !=null} ? ${usuario.emailUsuario} : ''"
+						name="emailUsuario" class="form-control" id="exampleInputPassword1"
+						placeholder="petito@gmail.com" required>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Nombre</label>
-					<input th:type="text" th:value="${usuario !=null} ? ${usuario.nombre} : ''" name="nombre" class="form-control"
-						id="exampleInputPassword1" placeholder="Escriba su nombre de pila" required>
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.nombre} : ''" name="nombre"
+						class="form-control" id="exampleInputPassword1" placeholder="Escriba su nombre de pila"
+						required>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Apellido</label>
-					<input th:type="text" th:value="${usuario !=null} ? ${usuario.apellido} : ''" name="apellido" class="form-control"
-						id="exampleInputPassword1" placeholder="Escriba su apellido" required>
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.apellido} : ''" name="apellido"
+						class="form-control" id="exampleInputPassword1" placeholder="Escriba su apellido" required>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Telefono</label>
-					<input th:type="text" th:value="${usuario !=null} ? ${usuario.telefono} : ''" name="telefono" class="form-control"
-						id="exampleInputPassword1" placeholder="Escriba su telefono">
+					<input th:type="text" th:value="${usuario !=null} ? ${usuario.telefono} : ''" name="telefono"
+						class="form-control" id="exampleInputPassword1" placeholder="Escriba su telefono">
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
+					<input th:type="file" name="foto" class="form-control">
+					<img th:if="${session.usuariologueado.getFoto() != null}" th:src="${'/foto/usuario/'}+${session.usuariologueado.idUsuario}" class="rounded-circle" width="150" height="150">
 				</div>
 				<button th:type="submit" class="btn btn-primary">Modificar</button>
 			</form>

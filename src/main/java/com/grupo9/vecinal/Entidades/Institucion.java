@@ -21,6 +21,12 @@ public class Institucion {
 	private Foto foto;
 	
 	
+	public Integer getIdInstitucion() {
+		return idInstitucion;
+	}
+	public void setIdInstitucion(Integer idInstitucion) {
+		this.idInstitucion = idInstitucion;
+	}
 	public Foto getFoto() {
 		return foto;
 	}

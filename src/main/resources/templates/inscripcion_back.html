@@ -35,7 +35,7 @@
         <p style="color: red" th:if="${error != null}" th:text="${error}"></p><br>
 
         <div class="mb-3">
-        <img th:if="${session.usuariologueado.foto != null}" th:src="${'/foto/usuario/'}+${session.usuariologueado.idUsuario}" class="rounded-circle" width="200" height="200"> 
+        <img th:if="${session.usuariologueado.getFoto() != null}" th:src="${'/foto/usuario/'}+${session.usuariologueado.idUsuario}" class="rounded-circle" width="200" height="200"> 
         <h2 th:if="${session.usuariologueado != null}" th:text="${session.usuariologueado.nombre} +' '+ ${session.usuariologueado.apellido}"></h2>
           <label for="exampleInputEmail1" class="form-label" ></label>
           <input th:type="text" name="idUsuario" th:if="${session.usuariologueado != null}" th:value="${session.usuariologueado.getIdUsuario()}" required>

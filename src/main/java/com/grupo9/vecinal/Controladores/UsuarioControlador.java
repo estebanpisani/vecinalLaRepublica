@@ -36,7 +36,7 @@ public class UsuarioControlador {
 	public String registro(MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String emailUsuario,
 			@RequestParam String nombre, @RequestParam String apellido,
-			@RequestParam(required = false) Integer telefono) {
+			@RequestParam(required = false) Long telefono) {
 
 		try {
 			usuarioServ.crearUsuario(foto, nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
@@ -59,9 +59,9 @@ public class UsuarioControlador {
 
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/modificar")
-	public String modificarUsuario(ModelMap modelo) {
+	public String modificarUsuario(HttpSession logueado, ModelMap modelo) {
 		try {
-			Usuario usuario = usuarioServ.buscarUsuario(1);
+			Usuario usuario = (Usuario) logueado.getAttribute("usuariologueado");
 			modelo.addAttribute("usuario", usuario);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
@@ -72,10 +72,11 @@ public class UsuarioControlador {
 	@PostMapping("/modificar")
 	public String modificarUsuario(MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
-			@RequestParam(required = false) Integer telefono, @RequestParam Integer idUsuario) throws Exception {
+			@RequestParam(required = false) Long telefono, @RequestParam Integer idUsuario, HttpSession session) throws Exception {
 
 		try {
 			usuarioServ.modificarUsuario(foto, nombreUsuario, emailUsuario, nombre, apellido, telefono, idUsuario);
+			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(idUsuario));
 			return "redirect:/usuarios/modificar";
 		} catch (Exception e) {
 			Usuario usuario = usuarioServ.buscarUsuario(idUsuario);
