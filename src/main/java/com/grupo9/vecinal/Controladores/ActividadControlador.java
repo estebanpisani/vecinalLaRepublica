@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Servicios.ActividadServicio;
 
 
@@ -37,15 +38,14 @@ public class ActividadControlador {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreActividad", nombreActividad);
 			modelo.put("descripcion", descripcion);
-			//modelo.put("fecha", fecha);
-			//modelo.put("cupo", cupo);
+			modelo.put("cupo", cupo);
 
 			return "registroact_back.html";
 		}
 
 	}
 	
-	/*
+
 
 	@GetMapping("/modificar-actividad")
 	public String modificarActividad(ModelMap modelo) {
@@ -59,20 +59,19 @@ public class ActividadControlador {
 	}
 
 	@PostMapping("/modificar-actividad")
-	public String modificarActividad(ModelMap modelo, @RequestParam String nombreUsuario,
-			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
-			@RequestParam(required = false) Integer telefono, @RequestParam Integer idUsuario) throws Exception {
+	public String modificarActividad(ModelMap modelo, @RequestParam String nombreActividad, @RequestParam String descripcion, @RequestParam String fecha, @RequestParam Integer cupo, @RequestParam Integer id) throws Exception {
 
 		try {
-			usuarioServ.modificarUsuario(nombreUsuario, emailUsuario, nombre, apellido, telefono, idUsuario);
+			
+			actividadServ.modificarActividad(nombreActividad, descripcion, fecha, cupo, id);
 			return "redirect:/usuarios/modificar";
 		} catch (Exception e) {
-			Usuario usuario = usuarioServ.buscarUsuario(idUsuario);
-			modelo.addAttribute("usuario", usuario);
+			Actividad actividad = actividadServ.buscarActividad(id);
+			modelo.addAttribute("actividad", actividad);
 			modelo.put("error", e.getMessage());
 			return "modificacion_back";
 		}
 	}
-*/
+
 
 }
