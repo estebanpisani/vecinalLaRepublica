@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,11 +30,11 @@ public class UsuarioControlador {
 			return "redirect:/";
 		}
 
-		return "registro2.html";
+		return "registro_back.html";
 	}
 
 	@PostMapping("/registro")
-	public String registro(MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
+	public String registro(@RequestParam(required = false) MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String emailUsuario,
 			@RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam(required = false) Long telefono) {
@@ -41,7 +42,7 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.crearUsuario(foto, nombreUsuario, contrasenia, contrasenia2, emailUsuario, nombre, apellido,
 					telefono);
-			return "redirect:/login";
+			return "esperar.html";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreUsuario", nombreUsuario);
@@ -52,9 +53,19 @@ public class UsuarioControlador {
 			modelo.put("apellido", apellido);
 			modelo.put("telefono", telefono);
 
-			return "registro2.html";
+			return "registro_back.html";
 		}
-
+	}
+	
+	@GetMapping("/verificacion/{code}")
+	public String usuarioValidado(@PathVariable("code") String verificacion, ModelMap modelo) {
+		try {
+			usuarioServ.altaUsuario(verificacion);
+			modelo.addAttribute("verificado",verificacion);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		return "esperar.html";
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
@@ -91,6 +102,44 @@ public class UsuarioControlador {
 	public String inscripcion() {
 		return "inscripcion_back.html";
 	}
+	
+	@GetMapping("/recuperar")
+	public String recuperar(ModelMap modelo) {
+		modelo.addAttribute("contrasenia", false);
+		return "recuperar_back.html";
+	}
+	
+	@PostMapping("/recuperar")
+	public String recuperando(ModelMap modelo,@RequestParam String mail, @RequestParam(required = false) String contrasenia, @RequestParam(required = false) String contrasenia2) {
+		try {
+			if (usuarioServ.recuperarUsuarioOContrasenia(mail, contrasenia, contrasenia2)) {
+				return "redirect:/login";
+			}else {
+				return "recuperar_back.html";
+			}
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+			return "recuperar_back.html";
+		}
+		
+		
+	}
+	
+	@GetMapping("/recuperar/{id}")
+	public String recuperando(@PathVariable Integer id,ModelMap modelo) {
+		try {
+			Usuario usuario = usuarioServ.buscarUsuario(id);
+			if (usuario != null) {
+				modelo.addAttribute("contrasenia", true);
+				modelo.addAttribute("mail", usuario.getEmailUsuario());
+			}
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		return "recuperar_back.html";
+	}
+
 
 	@PostMapping("/inscripcion")
 	public String inscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {

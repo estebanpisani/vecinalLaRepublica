@@ -46,7 +46,9 @@
 				<td th:text="${novedad.titulo}"></td>
 				<td th:text="${novedad.descripcion}"></td>
 				<td th:text="${novedad.destacado}"></td>
-				<td th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}"></td>
+				<td
+					th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}">
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -63,6 +65,10 @@
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Email</label>
 					<input th:type="text" name="descripcion" class="form-control" required>
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Email</label>
+					<input th:type="text" name="destacado" class="form-control" required>
 				</div>
 
 				<button th:type="submit" class="btn btn-primary">Agregar</button>
