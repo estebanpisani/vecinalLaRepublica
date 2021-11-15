@@ -24,7 +24,7 @@ public class Usuario {
 	private Boolean admin;
 	private String nombre;
 	private String apellido;
-	private Integer telefono;
+	private Long telefono;
 	private Boolean alta;
 	private Boolean cuotaAlDia;
 	@ManyToMany	
@@ -96,11 +96,11 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public Integer getTelefono() {
+	public Long getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(Long telefono) {
 		this.telefono = telefono;
 	}
 

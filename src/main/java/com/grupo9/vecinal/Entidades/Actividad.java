@@ -1,7 +1,6 @@
 package com.grupo9.vecinal.Entidades;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -9,12 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "actividades")
@@ -35,6 +30,17 @@ public class Actividad {
 
 	@ManyToMany(mappedBy = "actividades")
 	private Set<Usuario> usuarios;
+	
+	@OneToOne
+	private Foto foto;
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 
 	public Actividad() {
 	}
