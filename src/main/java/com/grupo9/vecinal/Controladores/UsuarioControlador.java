@@ -125,10 +125,10 @@ public class UsuarioControlador {
 		
 	}
 	
-	@GetMapping("/recuperar/{id}")
-	public String recuperando(@PathVariable Integer id,ModelMap modelo) {
+	@GetMapping("/recuperar/{codigo}")
+	public String recuperando(@PathVariable String codigo,ModelMap modelo) {
 		try {
-			Usuario usuario = usuarioServ.buscarUsuario(id);
+			Usuario usuario = usuarioServ.buscarUsuarioCodValidacion(codigo);
 			if (usuario != null) {
 				modelo.addAttribute("contrasenia", true);
 				modelo.addAttribute("mail", usuario.getEmailUsuario());

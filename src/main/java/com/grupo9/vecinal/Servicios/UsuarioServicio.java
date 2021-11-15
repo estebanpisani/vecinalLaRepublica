@@ -115,11 +115,13 @@ public class UsuarioServicio implements UserDetailsService {
 				String randomCode = RandomString.make(64);
 				usuario.setCodValidacion(randomCode);
 				enviarMails.sendRecuperarDatos(usuario);
+				usuarioRepo.save(usuario);
 				return false;
 			} else {
 				validarContrasenia(contrasenia, contrasenia2);
 				String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
 				usuario.setContrasenia(encriptada);
+				usuarioRepo.save(usuario);
 				return true;
 			}
 
@@ -194,7 +196,7 @@ public class UsuarioServicio implements UserDetailsService {
 	@Transactional
 	public Usuario altaUsuario(String codigoValidacion) throws Exception {
 		try {
-			Usuario usuario = usuarioRepo.usuarioPorCodigoValidacion(codigoValidacion);
+			Usuario usuario = buscarUsuarioCodValidacion(codigoValidacion);
 			if (usuario != null) {
 				usuario.setAlta(true);
 				usuario.setFechaDeBaja(null);
@@ -207,6 +209,17 @@ public class UsuarioServicio implements UserDetailsService {
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
+		}
+
+	}
+	
+	@Transactional(readOnly = true)
+	public Usuario buscarUsuarioCodValidacion(String codigo) throws Exception {
+		try {
+			return usuarioRepo.usuarioPorCodigoValidacion(codigo);
+
+		} catch (Exception e) {
+			throw new Exception("No se encontraron afiliados");
 		}
 
 	}
