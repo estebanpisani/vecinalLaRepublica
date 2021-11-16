@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
 
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
 :root {
     --turquesa: #b4f0cd;
     --grisOscuro: #262626;
@@ -33,7 +39,6 @@ h1 {
 /* Main */
 .main {
     width: 100%;
-    height: 800px;
     border-radius: 2%;
 }
 
@@ -176,8 +181,6 @@ h1 {
 .contenedor{
   margin-left: 5%;
   margin-right: 5%;
-  min-height: calc(100vh-);
-
 }
 
     .col-md-4 {
@@ -227,4 +230,19 @@ h1 {
 
 
   /* Footer */
+
+footer{
+  background-color: #222;
+  width: 100%;  
+  margin-top: 30px;
+}
+
+.tel {
+  padding-top: 20px;
+}
+
+  /* Footer */
+.row {
+  display: flex;
+  justify-content:space-between;
 

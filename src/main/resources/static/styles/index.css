@@ -401,14 +401,8 @@ form {
 }
 
 
-
-
 /* Footer */
 
-.table {
-    color: var(--blancoBackground);
-}
-
-.mb-1 {
-    
+.row {
+    justify-content: space-between;
 }

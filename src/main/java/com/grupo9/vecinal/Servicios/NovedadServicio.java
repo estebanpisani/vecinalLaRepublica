@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Novedad;
 import com.grupo9.vecinal.Repositorios.NovedadRepositorio;
@@ -16,9 +17,18 @@ public class NovedadServicio {
 
 	@Autowired
 	NovedadRepositorio novedadRepo;
+	
+	@Autowired
+	FotoServicio fotoServ;
+	
+	@Autowired
+	UsuarioServicio usuraioServ;
+	
+	@Autowired
+	private MailServicio enviarMails;
 
 	@Transactional
-	public void crearNovedad(String titulo, String descripcion, Boolean destacado) {
+	public void crearNovedad(MultipartFile foto,String titulo, String descripcion, Boolean destacado) {
 
 		try {
 			validarDatosNovedad(titulo, descripcion);
@@ -31,8 +41,11 @@ public class NovedadServicio {
 			novedad.setAlta(true);
 			novedad.setFecha(LocalDateTime.now().minusHours(3));
 			novedad.setDestacado(destacado);
+			novedad.setFoto(fotoServ.guardar(foto));
 			novedadRepo.save(novedad);
-
+			if (novedad.getDestacado()) {
+				enviarMails.sendEmailMasivos(titulo, descripcion);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,7 +53,7 @@ public class NovedadServicio {
 	}
 
 	@Transactional
-	public void modificarNovedad(String titulo, String descripcion, Boolean destacado, Integer id) throws Exception {
+	public void modificarNovedad(MultipartFile foto, String titulo, String descripcion, Boolean destacado, Integer id) throws Exception {
 
 		try {
 			validarDatosNovedad(titulo, descripcion);
@@ -51,8 +64,14 @@ public class NovedadServicio {
 				novedad.setTitulo(titulo);
 				novedad.setFecha(LocalDateTime.now().minusHours(3));
 				novedad.setDestacado(destacado);
-
+				if (!foto.isEmpty()) {
+					novedad.setFoto(fotoServ.actualizar(novedad.getFoto().getId(), foto));
+				}
 				novedadRepo.save(novedad);
+				
+				if (novedad.getDestacado()) {
+					enviarMails.sendEmailMasivos(titulo, descripcion);
+				}
 			} else {
 				throw new Exception("La noticia no fue modificada");
 			}

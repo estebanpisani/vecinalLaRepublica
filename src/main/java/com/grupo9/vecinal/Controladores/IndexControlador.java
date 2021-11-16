@@ -20,25 +20,41 @@ public class IndexControlador {
 	}
 
 	@GetMapping("/login")
-	public String login(HttpSession session, ModelMap modelo, @RequestParam(required = false) String error) {
+	public String login(HttpSession session, ModelMap modelo, @RequestParam(required = false) String error,
+			@RequestParam(required = false) String baja, @RequestParam(required = false) String logout) {
+		
+		if (error != null) {
+			modelo.put("error", "Usuario o contraseña incorrectas");
+			session.setAttribute("usuariologueado", null);
 
+		}
+		if (logout != null) {
+			modelo.put("error", "S");
+		}
+		if (baja != null) {
+			modelo.put("error", "Usuario dado de baja");
+			session.setAttribute("usuariologueado", null);
+		}
 		if (session.getAttribute("usuariologueado") != null) {
 			return "redirect:/";
 		}
-		if (error != null) {
-			modelo.put("error", "Usuario o contraseña incorrectas");
-		}
-		return "login.html";
+
+		return "login_back.html";
+
 	}
 
 	@GetMapping("/default")
 	public String roles(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
+		if (usuario.getAlta() == false) {
+			return "redirect:/login?baja";
+		}
 		if (usuario.getAdmin()) {
 			return "redirect:/usuarios/bajaUsuario";
 		} else {
 			return "redirect:/usuarios/inscripcion";
 		}
+
 	}
 
 }

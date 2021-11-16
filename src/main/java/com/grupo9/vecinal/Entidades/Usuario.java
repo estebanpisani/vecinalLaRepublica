@@ -1,5 +1,6 @@
 package com.grupo9.vecinal.Entidades;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -31,6 +32,25 @@ public class Usuario {
 	private Set<Actividad> actividades;
 	@OneToOne
 	private Foto foto;
+	private LocalDate fechaDeBaja;
+	private String codValidacion;
+
+	
+	public LocalDate getFechaDeBaja() {
+		return fechaDeBaja;
+	}
+
+	public void setFechaDeBaja(LocalDate fechaDeBaja) {
+		this.fechaDeBaja = fechaDeBaja;
+	}
+
+	public String getCodValidacion() {
+		return codValidacion;
+	}
+
+	public void setCodValidacion(String codValidacion) {
+		this.codValidacion = codValidacion;
+	}
 
 	public Foto getFoto() {
 		return foto;
@@ -137,7 +157,11 @@ public class Usuario {
 		return "Usuario [idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", contrasenia=" + contrasenia
 				+ ", emailUsuario=" + emailUsuario + ", admin=" + admin + ", nombre=" + nombre + ", apellido="
 				+ apellido + ", telefono=" + telefono + ", alta=" + alta + ", cuotaAlDia=" + cuotaAlDia
-				+ ", actividades=" + actividades + "]";
+				+ ", actividades=" + actividades + ", foto=" + foto + ", fechaDeBaja=" + fechaDeBaja
+				+ ", codValidacion=" + codValidacion + "]";
 	}
 
-}
+	
+	}
+
+
