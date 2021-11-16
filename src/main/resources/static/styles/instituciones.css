@@ -18,51 +18,6 @@ body {
     background-color: #f7f7f7;
 }
 
-/*
-headeer top
-*/
-.header {
-    width: 100%;
-    margin: auto;
-  }
-  
-  h1{
-    color: #ccc;
-    font-weight: 300;
-    letter-spacing: 3px;
-    padding-left: 10px;
-  }
-  
-  .navbar.navbar-expand-sm.sticky-top.navbar-dark.bg-dark.py-4 {
-    padding: 50px;
-    height: 120px;
-  }
-  
-  .collapse.navbar-collapse {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 300;
-  font-size: 15px;
-  }
-  
-  .navbar-nav.ml-auto {
-    float: right;
-    font-size: 20px;
-  }
-  
-  
-  .sticky-top {
-    transition: all 0.25s ease-in;
-  }
-  
-  /* style for when sitcky is applied */
-  .stuck .navbar.sticky-top {
-    background-color: rgba(0, 0, 0, 0.479) !important;
-    padding-top: .8rem !important;
-    padding-bottom: .8rem !important;
-  }
-
-/*seccion uno*/
 
 section {
     padding: 80px 0;
@@ -91,6 +46,7 @@ a{
   border-bottom:2px solid #0062cc;
 }
 .box{
+  border: 1px solid red;
     padding:60px 0px;
 }
 
