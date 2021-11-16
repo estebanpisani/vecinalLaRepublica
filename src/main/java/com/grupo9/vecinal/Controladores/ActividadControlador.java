@@ -1,6 +1,7 @@
 package com.grupo9.vecinal.Controladores;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,13 @@ public class ActividadControlador {
 
 	@Autowired
 	private ActividadServicio actividadServ;
+	
+	@GetMapping("/mostrar")
+	public String mostrarActividades(ModelMap modelo) throws Exception {
+		List<Actividad> actividades = actividadServ.mostrarActividades();
+		modelo.put("actividades", actividades);
+		return "actividad.html";
+	}
 
 	@GetMapping("/registro-actividad")
 	public String registroActividad() {
@@ -31,7 +39,7 @@ public class ActividadControlador {
 
 
 		try {
-			actividadServ.crearActividad(nombreActividad, descripcion, fecha, 5);
+			actividadServ.crearActividad(nombreActividad, descripcion, fecha, cupo);
 
 			return "redirect:/";
 		} catch (Exception e) {
