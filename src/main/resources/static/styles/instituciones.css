@@ -15,7 +15,7 @@ body {
     line-height: 1.5;
     color: #222;
     background-color: var(--blancoBackground);
-
+}
 /* Header */
 
 h1 {
@@ -53,10 +53,9 @@ span{
 a{
   text-decoration:none; 
   color: #0062cc;
-  border-bottom:2px solid #0062cc;
 }
+
 .box{
-  border: 1px solid red;
     padding:60px 0px;
 }
 
