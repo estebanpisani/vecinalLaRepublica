@@ -405,25 +405,10 @@ form {
 
 /* Footer */
 
-
-
-
-.copyright {
-    background-color: #111;
-    width: 100%;
-    color: #ccc;
-    text-align: center;
-}
-.copyright > p {
-    letter-spacing: 2px;
-    font-weight: 300;
-    font-size: 15px;
+.table {
+    color: var(--blancoBackground);
 }
 
-/* Formularios Martin */ 
-form{
-	margin: auto;
-	padding: 10px 20px;
-	box-sizing: border-box;
-	border-radius: 7px;
+.mb-1 {
+    
 }
