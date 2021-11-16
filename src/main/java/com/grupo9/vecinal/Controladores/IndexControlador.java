@@ -53,7 +53,7 @@ public class IndexControlador {
 
 		}
 		if (logout != null) {
-			modelo.put("error", "Se ha deslogueado correctamente");
+			modelo.put("ok", "Gracias por su visita.");
 		}
 		if (baja != null) {
 			modelo.put("error", "Usuario dado de baja");
@@ -63,7 +63,7 @@ public class IndexControlador {
 			return "redirect:/";
 		}
 
-		return "login_back.html";
+		return "login.html";
 
 	}
 
