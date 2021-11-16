@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Vecinal "La República" - Login</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles/index.css">
+	<link rel="stylesheet" type="text/css" href="styles/login.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+	</script>
+</head>
+
+<body th:if="${verificado == null}" >
+	<div class="container text-center">
+    <h3>Gracias por registrarse</h3>
+    <p>Por favor verifique su correo electronico para validar su cuenta</p>
+</div>
+</body>
+
+<body th:if="${verificado != null}" >
+	<div class="container text-center">
+    <h3>Usuario dado de alta</h3>
+    <p>Gracias</p>
+</div>
+</body>
+
+</html>

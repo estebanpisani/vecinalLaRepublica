@@ -30,7 +30,7 @@ public class UsuarioControlador {
 			return "redirect:/";
 		}
 
-		return "registro_back.html";
+		return "registro.html";
 	}
 
 	@PostMapping("/registro")
@@ -53,7 +53,7 @@ public class UsuarioControlador {
 			modelo.put("apellido", apellido);
 			modelo.put("telefono", telefono);
 
-			return "registro_back.html";
+			return "registro.html";
 		}
 	}
 	
@@ -131,7 +131,7 @@ public class UsuarioControlador {
 			Usuario usuario = usuarioServ.buscarUsuarioCodValidacion(codigo);
 			if (usuario != null) {
 				modelo.addAttribute("contrasenia", true);
-				modelo.addAttribute("mail", usuario.getEmailUsuario());
+				return "redirect:/login?logout";
 			}
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());

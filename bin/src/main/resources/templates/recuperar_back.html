@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="styles/index.css">
+  <link rel="stylesheet" type="text/css" href="styles/login.css">
+
+  <title>Registro de Usuario</title>
+</head>
+<body>
+
+  <div class="login">
+      <div class="title">Iniciar Sesión</div>
+
+      <form th:action="@{/usuarios/recuperar}" method="POST">
+        <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
+        
+         <div th:if="${contrasenia==false}" class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Mail</label>
+          <input th:type="mail" name="mail" class="form-control">
+        </div>
+        
+        <div th:if="${contrasenia}" class="mb-3">
+          <input th:type="mail" name="mail" th:value="${mail}" class="form-control" hidden=true>
+          <label for="exampleInputEmail1" class="form-label">Contraseña</label>
+          <input th:type="password" name="contrasenia" class="form-control">
+          <label for="exampleInputEmail1" class="form-label">Repetir contraseña</label>
+          <input th:type="password" name="contrasenia2" class="form-control">
+        </div>
+
+        <button th:if="${contrasenia==false}" th:type="submit" class="btn btn-primary">Enviar correo</button>
+        <button th:if="${contrasenia}" th:type="submit" class="btn btn-primary">Crear contraseña</button>
+      </form>
+    </div>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+  </html>
+
