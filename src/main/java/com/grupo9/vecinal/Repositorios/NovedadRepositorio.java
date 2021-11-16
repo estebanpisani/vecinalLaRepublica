@@ -31,6 +31,6 @@ public interface NovedadRepositorio extends JpaRepository<Novedad, Integer> {
 	@Query("SELECT n FROM Novedad n WHERE n.descripcion LIKE :descripcion ORDER BY n.fecha DESC")
 	public List<Novedad> novedadesPorDescripcion(@Param("descripcion") String descripcion);
 	
-	@Query("SELECT n FROM Novedad n WHERE n.destacado = true ORDER BY n.fecha DESC")
-	public List<Novedad> novedadesPorDestacado(@Param("destacado") Boolean destacado);
+	@Query("SELECT n FROM Novedad n WHERE n.alta = true and n.destacado = true ORDER BY n.fecha DESC")
+	public List<Novedad> novedadesPorDestacado();
 }
