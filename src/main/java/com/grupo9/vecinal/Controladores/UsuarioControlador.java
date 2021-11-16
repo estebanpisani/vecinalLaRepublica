@@ -30,7 +30,7 @@ public class UsuarioControlador {
 			return "redirect:/";
 		}
 
-		return "registro_back.html";
+		return "registro.html";
 	}
 
 	@PostMapping("/registro")
@@ -53,7 +53,7 @@ public class UsuarioControlador {
 			modelo.put("apellido", apellido);
 			modelo.put("telefono", telefono);
 
-			return "registro_back.html";
+			return "registro.html";
 		}
 	}
 	
