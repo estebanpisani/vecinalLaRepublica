@@ -11,8 +11,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css"
-		href="../static/styles/actividad.css">
+	<link rel="stylesheet" type="text/css" href="/styles/actividad.css">
 
 	<title>Vecinal "La Republica"</title>
 </head>
@@ -20,47 +19,32 @@
 <body>
 
 	<!-- HEADER -->
-    <header>
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    </header>
-    <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
-        <div class="container">
-            <h1>Vecinal "La República"</h1>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-
-
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="https://nusasatu.com">Inicio
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Actividades</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Comercios</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Soy Vecino</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Registrarse</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+		  <h1>Vecinal "La República"</h1>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="float-right">
+		  <div class="collapse navbar-collapse" id="navbarScroll" >			
+			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+			  <li class="nav-item">
+				<a class="nav-link active" aria-current="page" href="#">Actividades</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Inicio</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Instituciones</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Comercios</a>
+			  </li>
+			</ul>
+		</div>
+		</div>
+		</div>
+	  </nav>
 
 	<!-- MAIN -->
 
@@ -413,55 +397,42 @@
 	</div>
 
 	<!---FOOTER-->
-	<footer style="background-color: #eee6d3;">
+
+	<footer style="background-color: #222;">
 		<div class="container p-4">
 		  <div class="row">
 			<div class="col-lg-6 col-md-12 mb-4">
-			  <h5 class="mb-3 text-dark">Dirección:</h5>
-			  <p>
+			  <h5 class="mb-3 text-light">Dirección:</h5>
+			  <p class="text-light">
 				Paraná y 9 de Julio.
 			  </p>
-			  <h5 class="mb-3 text-dark">Teléfono:</h5>
-			  <p>
+			  <h5 class="mb-3 text-light">Teléfono:</h5>
+			  <p class="text-light">
 				341-666
 			  </p>
 			</div>
+			
 			<div class="col-lg-3 col-md-6 mb-4">
-			  <h5 class="mb-3 text-dark">Redes Sociales</h5>
-			  <ul class="list-unstyled mb-0">
-				<li class="mb-1">
-				  <a href="#!" style="color: rgba(32, 32, 32, 0.185);">Facebook</a>
-				</li>
-				<li class="mb-1">
-				  <a href="#!" style="color: #4f4f4f;">Instagram</a>
-				</li>
-				<li class="mb-1">
-				  <a href="#!" style="color: #4f4f4f;">WhatsApp</a>
-				</li>
-			  </ul>
-			</div>
-			<div class="col-lg-3 col-md-6 mb-4">
-			  <h5 class="mb-1 text-dark">Horarios</h5>
-			  <table class="table" style="border-color: #666;">
-				<tbody>
-				  <tr>
-					<td>Lun - Vie:</td>
-					<td>8hs - 22 hs</td>
-				  </tr>
-				  <tr>
-					<td>Sáb - Dom:</td>
-					<td>8 hs - 13 hs</td>
-				  </tr>
-				</tbody>
-			  </table>
+				<h5 class="mb-1 text-light">Horarios</h5>
+				<table class="table" style="border-color: #ccc;">
+				  <tbody>
+					<tr class="text-white">
+					  <td>Lun - Vie:</td>
+					  <td>8hs - 22 hs</td>
+					</tr>
+					<tr class="text-white">
+					  <td>Sáb - Dom:</td>
+					  <td>8 hs - 13 hs</td>
+					</tr>
+				  </tbody>
+				</table>
+			  </div>
 			</div>
 		  </div>
-		</div>
-		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-		  © 2020 Copyright:
-		  <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-		</div>
-		<!-- Copyright -->
+		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:#ccc;">
+			© 2021 Familia Lategano
+		  </div>
+		  <!-- Copyright -->
 	  </footer>
 </body>
 

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
 :root { /*inicio*/
-        --turquesa: #b4f0cd;
         --grisOscuro: #262626;
         --grisClaro: #2e2e2e;
         --grisMasClaro: #4a4a4a;
@@ -15,8 +14,19 @@ body {
     font-weight: 100;
     line-height: 1.5;
     color: #222;
-    background-color: #f7f7f7;
+    background-color: var(--blancoBackground);
 }
+/* Header */
+
+h1 {
+  letter-spacing: 3px;
+  font-weight: 300;
+  font-size: 25px;
+  margin: 0;
+  color: var(--blancoBackground);
+}
+
+
 
 
 section {
@@ -43,10 +53,9 @@ span{
 a{
   text-decoration:none; 
   color: #0062cc;
-  border-bottom:2px solid #0062cc;
 }
+
 .box{
-  border: 1px solid red;
     padding:60px 0px;
 }
 
