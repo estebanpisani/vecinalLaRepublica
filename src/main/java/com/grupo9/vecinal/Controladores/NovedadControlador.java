@@ -3,6 +3,7 @@ package com.grupo9.vecinal.Controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,12 @@ public class NovedadControlador {
 	@Autowired
 	public NovedadServicio novedadServ;
 
-	@GetMapping("/crear")
-	public String crearNovedad(ModelMap modelo) {
+	@GetMapping("/mostrar")
+	public String mostrarNovedad(ModelMap modelo) {
 
 		try {
 			List<Novedad> novedades = novedadServ.mostrarAltaNovedades();
-			modelo.addAttribute("novedades",novedades);
+			modelo.addAttribute("novedades", novedades);
 
 		} catch (Exception e) {
 			modelo.put("errorLista", e.getMessage());
@@ -35,8 +36,15 @@ public class NovedadControlador {
 		return "crearNovedades.html";
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_ADMIN')")
+	@GetMapping("/crear")
+	public String crearNovedad(ModelMap modelo) {
+		return "crearNovedades.html";
+	}
+
 	@PostMapping("/crear")
-	public String crearNovedades(ModelMap modelo, @RequestParam(required = false) MultipartFile foto, @RequestParam String titulo, @RequestParam String descripcion,
+	public String crearNovedades(ModelMap modelo, @RequestParam(required = false) MultipartFile foto,
+			@RequestParam String titulo, @RequestParam String descripcion,
 			@RequestParam(required = false) Boolean destacado) {
 
 		novedadServ.crearNovedad(foto, titulo, descripcion, destacado);

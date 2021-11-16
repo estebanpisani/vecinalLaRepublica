@@ -172,8 +172,8 @@ public class NovedadServicio {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Novedad> mostrarNovedadesDestacadas(Boolean destacado) throws Exception {
-		List<Novedad> novedades = novedadRepo.novedadesPorDestacado(destacado);
+	public List<Novedad> mostrarNovedadesDestacadas() throws Exception {
+		List<Novedad> novedades = novedadRepo.novedadesPorDestacado();
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias destacadas");
 		} else {
