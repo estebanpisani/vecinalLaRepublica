@@ -114,24 +114,32 @@ h1{
     letter-spacing: 3px;
 }
 
+.btn-nvd {
+    width: 100%;
+    text-align: center;
+}
+
+.btn-nvd > .ver-mas {
+    margin-top: 25px;
+}
+
+
 
 .btn-novedades > svg {
-    background-color: rgba(127, 127, 127, 0.068); 
     color: #222; 
     width: 50px;
     height: 50px;
 }
 
 .btn-novedades > svg:hover {
-    fill: #222;
+    color: #474747;
     transition: .5s;
 }
 
 
 .container.bootstrap.snippets.bootdey {
     display: flex;
-    margin-left: 30px;
-    margin-top: 40px;
+    margin: auto;
 }
 
 
@@ -315,10 +323,12 @@ h1{
 
 
 .btn-actividades > svg {
-    background-color: rgba(127, 127, 127, 0.068); 
     color: #222; 
     width: 50px;
     height: 50px;
+}
+.btn-actividades > svg:hover {
+    color: #474747;
 }
 
 .ver-mas {
@@ -332,20 +342,35 @@ h1{
 /* Form y Mapa */
 
 .form-mapa {
+    margin-bottom: 50px;
+}
+
+.form-map {
     display: flex;
-    width: 90%;
-    margin: 50px auto 100px auto;
+    margin: auto;
+    justify-content: space-around;
+
 }
 
 
+
 /* Form */
+
+form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+}
+
 .contact-form {
     height: 280px;
+
 }
 
 .contact-form > form > h3 {
     font-weight: 300;
     letter-spacing: 3px;
+    padding-bottom: 10px;
 }
 
 .btn.btn-primary {
@@ -361,31 +386,27 @@ h1{
 }
 
 /* Mapa */
+
+.seccion-mapa {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+}
+
 .seccion-mapa > h3 {
+    padding-bottom: 10px;
     font-weight: 300;
     letter-spacing: 3px;
     text-align: center;
 }
 
-.seccion-mapa {
-    margin: auto;
-}
 
-.mapa {
-     border: 1px solid #222;
-     border-radius: 20px;
-}
+
 
 /* Footer */
 
-.tel {
-    padding-top: 20px;
-}
 
-.row {
-    display: flex;
-    justify-content:space-between;
-}
+
 
 .copyright {
     background-color: #111;

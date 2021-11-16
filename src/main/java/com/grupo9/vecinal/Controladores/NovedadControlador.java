@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Novedad;
 import com.grupo9.vecinal.Servicios.NovedadServicio;
@@ -35,10 +36,10 @@ public class NovedadControlador {
 	}
 
 	@PostMapping("/crear")
-	public String crearNovedades(ModelMap modelo, @RequestParam String titulo, @RequestParam String descripcion,
+	public String crearNovedades(ModelMap modelo, @RequestParam(required = false) MultipartFile foto, @RequestParam String titulo, @RequestParam String descripcion,
 			@RequestParam(required = false) Boolean destacado) {
 
-		novedadServ.crearNovedad(titulo, descripcion, destacado);
+		novedadServ.crearNovedad(foto, titulo, descripcion, destacado);
 
 		return "redirect:/novedades/crear";
 	}

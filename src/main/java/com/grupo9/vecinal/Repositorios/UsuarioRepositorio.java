@@ -29,6 +29,11 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
 	
 	@Query("SELECT u FROM Usuario u WHERE u.nombreUsuario LIKE :nombreUsuario")
 	public Usuario usuarioPorNombreUsuario(@Param("nombreUsuario") String nombreUsuario);
+	
+	@Query("SELECT u FROM Usuario u WHERE u.codValidacion LIKE :codValidacion")
+	public Usuario usuarioPorCodigoValidacion(@Param("codValidacion") String codValidacion);
 
+	@Query("SELECT u FROM Usuario u WHERE u.emailUsuario LIKE :mail")
+	public Usuario usuarioPorMail(@Param("mail") String mail);
 
 }

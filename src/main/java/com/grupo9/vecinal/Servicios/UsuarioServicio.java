@@ -1,5 +1,6 @@
 package com.grupo9.vecinal.Servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,8 @@ import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Repositorios.UsuarioRepositorio;
 
+import net.bytebuddy.utility.RandomString;
+
 @Service
 public class UsuarioServicio implements UserDetailsService {
 
@@ -33,13 +36,16 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Autowired
 	private ActividadServicio actividadServ;
-	
+
 	@Autowired
 	private FotoServicio fotoServ;
 
+	@Autowired
+	private MailServicio enviarMails;
+
 	@Transactional
-	public void crearUsuario(MultipartFile foto ,String nombreUsuario, String contrasenia, String contrasenia2, String emailUsuario,
-			String nombre, String apellido, Long telefono) throws Exception {
+	public void crearUsuario(MultipartFile foto, String nombreUsuario, String contrasenia, String contrasenia2,
+			String emailUsuario, String nombre, String apellido, Long telefono) throws Exception {
 		try {
 
 			validarDatosUsuario(nombreUsuario, emailUsuario, nombre, apellido, null);
@@ -55,10 +61,14 @@ public class UsuarioServicio implements UserDetailsService {
 			usuario.setTelefono(telefono);
 			usuario.setCuotaAlDia(false);
 			usuario.setAdmin(false);
-			usuario.setAlta(true);
+			usuario.setAlta(false);
+			usuario.setFechaDeBaja(LocalDate.now());
 			usuario.setFoto(fotoServ.guardar(foto));
+			String randomCode = RandomString.make(64);
+			usuario.setCodValidacion(randomCode);
 
 			usuarioRepo.save(usuario);
+			enviarMails.sendVerificacionEmail(usuario);
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -67,8 +77,8 @@ public class UsuarioServicio implements UserDetailsService {
 	}
 
 	@Transactional
-	public void modificarUsuario(MultipartFile foto, String nombreUsuario, String emailUsuario, String nombre, String apellido,
-			Long telefono, Integer id) throws Exception {
+	public void modificarUsuario(MultipartFile foto, String nombreUsuario, String emailUsuario, String nombre,
+			String apellido, Long telefono, Integer id) throws Exception {
 		try {
 
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
@@ -84,8 +94,7 @@ public class UsuarioServicio implements UserDetailsService {
 				if (!foto.isEmpty()) {
 					usuario.setFoto(fotoServ.actualizar(usuario.getFoto().getId(), foto));
 				}
-				
-				
+
 				usuarioRepo.save(usuario);
 
 			} else {
@@ -97,6 +106,38 @@ public class UsuarioServicio implements UserDetailsService {
 			throw new Exception(e.getMessage());
 		}
 
+	}
+
+	public Boolean recuperarUsuarioOContrasenia(String mail, String contrasenia, String contrasenia2) throws Exception {
+		try {
+			Usuario usuario = buscarUsuarioMail(mail);
+			if (contrasenia == null || contrasenia.isEmpty()) {
+				String randomCode = RandomString.make(64);
+				usuario.setCodValidacion(randomCode);
+				enviarMails.sendRecuperarDatos(usuario);
+				usuarioRepo.save(usuario);
+				return false;
+			} else {
+				validarContrasenia(contrasenia, contrasenia2);
+				String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
+				usuario.setContrasenia(encriptada);
+				usuarioRepo.save(usuario);
+				return true;
+			}
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+
+	@Transactional(readOnly = true)
+	public Usuario buscarUsuarioMail(String mail) throws Exception {
+		Usuario usuario = usuarioRepo.usuarioPorMail(mail);
+		if (usuario != null) {
+			return usuario;
+		} else {
+			throw new Exception("El mail ingresado no corresponde a ningun usuario registrado");
+		}
 	}
 
 	@Transactional
@@ -137,6 +178,9 @@ public class UsuarioServicio implements UserDetailsService {
 				Usuario usuario = respuesta.get();
 				usuario.setAlta(false);
 				usuario.getActividades().clear();
+				usuario.setFechaDeBaja(LocalDate.now());
+				String randomCode = RandomString.make(64);
+				usuario.setCodValidacion(randomCode);
 				usuarioRepo.save(usuario);
 
 			} else {
@@ -145,6 +189,37 @@ public class UsuarioServicio implements UserDetailsService {
 
 		} catch (Exception e) {
 			e.getMessage();
+		}
+
+	}
+
+	@Transactional
+	public Usuario altaUsuario(String codigoValidacion) throws Exception {
+		try {
+			Usuario usuario = buscarUsuarioCodValidacion(codigoValidacion);
+			if (usuario != null) {
+				usuario.setAlta(true);
+				usuario.setFechaDeBaja(null);
+				usuario.setCodValidacion(null);
+				usuarioRepo.save(usuario);
+				return usuario;
+			} else {
+				throw new Exception("Usuario no encontrado");
+			}
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+
+	}
+	
+	@Transactional(readOnly = true)
+	public Usuario buscarUsuarioCodValidacion(String codigo) throws Exception {
+		try {
+			return usuarioRepo.usuarioPorCodigoValidacion(codigo);
+
+		} catch (Exception e) {
+			throw new Exception("No se encontraron afiliados");
 		}
 
 	}
@@ -200,7 +275,7 @@ public class UsuarioServicio implements UserDetailsService {
 		try {
 			Usuario usuario = buscarUsuario(idUsuario);
 			Actividad actividad = actividadServ.buscarActividad(idActividad);
-			if (actividad.getCupo()<=actividad.getUsuarios().size()) {
+			if (actividad.getCupo() <= actividad.getUsuarios().size()) {
 				throw new Exception("No hay cupos disponibles para esta actividad");
 			}
 			for (Actividad act : usuario.getActividades()) {
