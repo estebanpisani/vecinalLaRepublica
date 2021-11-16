@@ -23,29 +23,30 @@ public class IndexControlador {
 	public String login(HttpSession session, ModelMap modelo, @RequestParam(required = false) String error,
 			@RequestParam(required = false) String baja, @RequestParam(required = false) String logout) {
 		
-		if (logout!=null) {
-			modelo.put("error", "Se a deslogueado correctamente");
+		if (error != null) {
+			modelo.put("error", "Usuario o contraseña incorrectas");
+			session.setAttribute("usuariologueado", null);
+
 		}
-		if (baja !=null) {
+		if (logout != null) {
+			modelo.put("error", "S");
+		}
+		if (baja != null) {
 			modelo.put("error", "Usuario dado de baja");
-			session.setAttribute("usuariologueado",null);
+			session.setAttribute("usuariologueado", null);
 		}
 		if (session.getAttribute("usuariologueado") != null) {
 			return "redirect:/";
 		}
-		if (error != null) {
-			modelo.put("error", "Usuario o contraseña incorrectas");
-			
-		}
 
 		return "login_back.html";
-		
+
 	}
 
 	@GetMapping("/default")
 	public String roles(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
-		if (usuario.getAlta()==false) {
+		if (usuario.getAlta() == false) {
 			return "redirect:/login?baja";
 		}
 		if (usuario.getAdmin()) {
