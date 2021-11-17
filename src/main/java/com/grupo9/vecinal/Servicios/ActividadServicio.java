@@ -58,14 +58,18 @@ public class ActividadServicio {
 			//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			
 			LocalDate localDate = LocalDate.parse(fecha);
-
-			
 			
 			Actividad actividad = new Actividad();
 			actividad.setNombreActividad(nombreActividad);
 			actividad.setDescripcionActividad(descripcionActividad);
 			actividad.setFecha(localDate);
 			actividad.setCupo(cupo);
+			if(actividad.getUsuarios().isEmpty()) {
+				actividad.setInscriptos(actividad.getUsuarios().size());				
+			} else {
+				actividad.setInscriptos(0);
+			}
+
 			actividad.setAlta(true);
 
 			actividadRepo.save(actividad);
