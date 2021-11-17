@@ -28,8 +28,11 @@ public class Actividad {
 	private Boolean alta;
 	private Integer cupo;
 
+
 	@ManyToMany(mappedBy = "actividades")
 	private Set<Usuario> usuarios;
+	
+	private Integer inscriptos;
 	
 	@OneToOne
 	private Foto foto;
@@ -100,7 +103,14 @@ public class Actividad {
 	public void setCupo(Integer cupo) {
 		this.cupo = cupo;
 	}
-
+	
+	public Integer getInscriptos() {
+		return this.inscriptos;
+	}	
+	
+	public void setInscriptos(Integer inscriptos) {
+		this.inscriptos = inscriptos;
+	}
 
 	@Override
 	public String toString() {
