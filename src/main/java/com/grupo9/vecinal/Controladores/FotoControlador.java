@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.grupo9.vecinal.Entidades.Novedad;
 import com.grupo9.vecinal.Entidades.Usuario;
+import com.grupo9.vecinal.Servicios.NovedadServicio;
 import com.grupo9.vecinal.Servicios.UsuarioServicio;
 
 @Controller
@@ -21,6 +23,9 @@ public class FotoControlador {
 
 	@Autowired
 	private UsuarioServicio usuarioServ;
+	
+	@Autowired
+	private NovedadServicio novedadServ;
 
 	@GetMapping("/usuario/{id}")
 	public ResponseEntity<byte[]> FotoUsuario(@PathVariable Integer id) {
@@ -30,6 +35,23 @@ public class FotoControlador {
 				throw new Exception("El usuario no posee foto");
 			}
 			byte[] foto = usuario.getFoto().getContenido();
+			HttpHeaders cabecera = new HttpHeaders();
+			cabecera.setContentType(MediaType.IMAGE_JPEG);
+			return new ResponseEntity(foto, cabecera, HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/novedad/{id}")
+	public ResponseEntity<byte[]> FotoNovedades(@PathVariable Integer id) {
+		try {
+			Novedad novedad = novedadServ.mostrarNovedad(id);
+			if (novedad.getFoto()==null) {
+				throw new Exception("El usuario no posee foto");
+			}
+			byte[] foto = novedad.getFoto().getContenido();
 			HttpHeaders cabecera = new HttpHeaders();
 			cabecera.setContentType(MediaType.IMAGE_JPEG);
 			return new ResponseEntity(foto, cabecera, HttpStatus.OK);
