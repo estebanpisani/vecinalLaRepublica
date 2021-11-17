@@ -29,9 +29,15 @@ public class IndexControlador {
 	@GetMapping("/")
 	public String index(ModelMap modelo, HttpSession session) {
 		try {
-			List<Novedad> novedadesDestacadas = novedadServ.mostrarNovedadesDestacadas().subList(0, 2);
+			List<Novedad> novedadesDestacadas = novedadServ.mostrarNovedadesDestacadas();
+			if (novedadesDestacadas.size()>3) {
+				novedadesDestacadas = novedadServ.mostrarNovedadesDestacadas().subList(0, 3);
+			}
 			modelo.addAttribute("novedades", novedadesDestacadas);
-			List<Actividad> actividades = actividadServ.mostrarActividadAlta().subList(0, 2);
+			List<Actividad> actividades = actividadServ.mostrarActividadAlta();
+			if (actividades.size()>4) {
+				actividades = actividadServ.mostrarActividadAlta().subList(0, 3);
+			}			 
 			modelo.addAttribute("actividades", actividades);
 			if (session.getAttribute("usuariologueado")!=null) {
 				Usuario usuario =(Usuario) session.getAttribute("usuariologueado");
