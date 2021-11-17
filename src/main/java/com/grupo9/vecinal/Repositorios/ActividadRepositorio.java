@@ -20,6 +20,9 @@ public interface ActividadRepositorio  extends JpaRepository<Actividad, Integer>
 	@Query("SELECT a FROM Actividad a WHERE a.alta = false ORDER BY a.nombreActividad ASC")
 	public List<Actividad> actividadBaja();
 
+	@Query("SELECT a FROM Actividad a WHERE a.alta = true ORDER BY a.inscriptos DESC")
+	public List<Actividad> actividadAltaInscriptos();	
+	
 	@Query("SELECT a FROM Actividad a WHERE a.nombreActividad LIKE :nombre ORDER BY a.fecha DESC")
 	public List<Actividad> actividadNombre(@Param("nombre") String nombre);
 	
@@ -29,7 +32,7 @@ public interface ActividadRepositorio  extends JpaRepository<Actividad, Integer>
 	@Query("SELECT a FROM Actividad a WHERE a.fecha = fecha ORDER BY a.fecha ASC")
 	public List<Actividad> actividadesFechaAntigua(@Param("fecha") LocalDate fecha);
 	
-	
+
 	
 }
 

@@ -17,18 +17,18 @@ public class NovedadServicio {
 
 	@Autowired
 	NovedadRepositorio novedadRepo;
-	
+
 	@Autowired
 	FotoServicio fotoServ;
-	
+
 	@Autowired
 	UsuarioServicio usuraioServ;
-	
+
 	@Autowired
 	private MailServicio enviarMails;
 
 	@Transactional
-	public void crearNovedad(MultipartFile foto,String titulo, String descripcion, Boolean destacado) {
+	public void crearNovedad(MultipartFile foto, String titulo, String descripcion, Boolean destacado) {
 
 		try {
 			validarDatosNovedad(titulo, descripcion);
@@ -53,7 +53,8 @@ public class NovedadServicio {
 	}
 
 	@Transactional
-	public void modificarNovedad(MultipartFile foto, String titulo, String descripcion, Boolean destacado, Integer id) throws Exception {
+	public void modificarNovedad(MultipartFile foto, String titulo, String descripcion, Boolean destacado, Integer id)
+			throws Exception {
 
 		try {
 			validarDatosNovedad(titulo, descripcion);
@@ -68,7 +69,7 @@ public class NovedadServicio {
 					novedad.setFoto(fotoServ.actualizar(novedad.getFoto().getId(), foto));
 				}
 				novedadRepo.save(novedad);
-				
+
 				if (novedad.getDestacado()) {
 					enviarMails.sendEmailMasivos(titulo, descripcion);
 				}
@@ -132,6 +133,16 @@ public class NovedadServicio {
 	}
 
 	@Transactional(readOnly = true)
+	public Novedad mostrarNovedad(Integer id) throws Exception {
+		Novedad novedad = novedadRepo.findById(id).get();
+		if (novedad == null) {
+			throw new Exception("No hay noticias con esa fecha");
+		} else {
+			return novedad;
+		}
+	}
+
+	@Transactional(readOnly = true)
 	public List<Novedad> mostrarNovedadesPorFechaActual(LocalDateTime fecha) throws Exception {
 		List<Novedad> novedades = novedadRepo.novedadesPorFechaNueva(fecha);
 		if (novedades.isEmpty()) {
@@ -140,7 +151,7 @@ public class NovedadServicio {
 			return novedades;
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarNovedadesPorFechaVieja(LocalDateTime fecha) throws Exception {
 		List<Novedad> novedades = novedadRepo.novedadesPorFechaVieja(fecha);
@@ -153,7 +164,7 @@ public class NovedadServicio {
 
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarNovedadesPorTitulo(String titulo) throws Exception {
-		List<Novedad> novedades = novedadRepo.novedadesPorTitulo("%"+titulo+"%");
+		List<Novedad> novedades = novedadRepo.novedadesPorTitulo("%" + titulo + "%");
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias con ese título");
 		} else {
@@ -163,7 +174,7 @@ public class NovedadServicio {
 
 	@Transactional(readOnly = true)
 	public List<Novedad> mostrarNovedadesPorDescripcion(String descripcion) throws Exception {
-		List<Novedad> novedades = novedadRepo.novedadesPorDescripcion("%"+descripcion+"%");
+		List<Novedad> novedades = novedadRepo.novedadesPorDescripcion("%" + descripcion + "%");
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias dadas de baja");
 		} else {

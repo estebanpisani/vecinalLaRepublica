@@ -35,18 +35,18 @@ public class ActividadControlador {
 	}
 
 	@PostMapping("/registro-actividad")
-	public String registroActividad(ModelMap modelo, @RequestParam String nombreActividad, @RequestParam String descripcion, @RequestParam String fecha, @RequestParam Integer cupo) throws ParseException {
+	public String registroActividad(ModelMap modelo, @RequestParam String nombreActividad, @RequestParam String descripcion, @RequestParam String fecha) throws ParseException {
 
 
 		try {
-			actividadServ.crearActividad(nombreActividad, descripcion, fecha, cupo);
+			actividadServ.crearActividad(nombreActividad, descripcion, fecha, 100);
 
 			return "redirect:/";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreActividad", nombreActividad);
 			modelo.put("descripcion", descripcion);
-			modelo.put("cupo", cupo);
+			modelo.put("cupo", 100);
 
 			return "registroact_back.html";
 		}
