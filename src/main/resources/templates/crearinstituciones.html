@@ -14,7 +14,7 @@
         <div class="login">
             <div class="title">Crear Institucion</div>
     
-            <form th:action="@{/instituciones/registro}" method="POST" enctype="multipart/form-data">
+            <form th:action="@{/instituciones/registrar}" method="POST" enctype="multipart/form-data">
             
                 <div class="alert alert-danger" role="alert" th:if="${error != null}">
                     <div th:text="${error}"></div>
@@ -22,36 +22,33 @@
                 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre de la Institucion</label>
-                    <input th:type="text" th:value="${nombreUsuario}" name="nombreUsuario" class="form-control"
+                    <input th:type="text" th:value="${nombre}" name="nombreInstitucion" class="form-control"
                         placeholder="Escriba su nombre de usuario" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Direccion</label>
-                    <input th:type="text" th:value="${apellido}" name="apellido" class="form-control"
+                    <input th:type="text" th:value="${direccion}" name="direccion" class="form-control"
                         placeholder="Introduzca la direccion" required>
                 </div>
                  <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Telefono</label>
-                    <input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
+                    <input th:type="text" th:value="${telefono}" name="telefono" class="form-control"
                         placeholder="Introduzca su telefono" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Email</label>
-                    <input th:type="email" th:value="${emailUsuario}" name="emailUsuario" class="form-control"
-                        placeholder="pepito@gmail.com" required>
+                    <label for="exampleInputPassword1" class="form-label">Descripcion</label>
+                    <input th:type="email" th:value="${descripcion}" name="emailUsuario" class="form-control"
+                        placeholder="Area de dicha Institucion" required>
                 </div>
-
-                </div>
-    
                  <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                     <input th:type="password" th:value="${contrasenia}" name="contrasenia" class="form-control"
                         placeholder="Ingrese su contraseña" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Confirmar Contraseña</label>
-                    <input th:type="password" th:value="${contrasenia2}" name="contrasenia2" class="form-control"
-                        placeholder="Vuelva a escribir su contraseña anterior" required>
+                    <label for="exampleInputEmail1" class="form-label">Insertar Foto</label>
+                    <input th:type="archivo" name="foto" class="form-control">
+                </div>
                 <button th:type="submit" class="btn btn-primary btn-color">Crear Cuenta</button>
             </form>
         </div>
