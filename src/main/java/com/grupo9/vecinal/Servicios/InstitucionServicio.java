@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Foto;
 import com.grupo9.vecinal.Entidades.Institucion;
+import com.grupo9.vecinal.Entidades.Novedad;
 import com.grupo9.vecinal.Repositorios.InstitucionRepositorio;
 
 @Service
@@ -160,5 +161,17 @@ public class InstitucionServicio {
 
 		}
 	}
+	
+	@Transactional(readOnly = true)
+	public Institucion mostrarInstitucion(Integer id) throws Exception {
+		Institucion institucion = institucionRepo.findById(id).get();
+		if (institucion == null) {
+			throw new Exception("No hay institucion con ese Id");
+		} else {
+			return institucion;
+		}
+	}
+	
+	
 
 }

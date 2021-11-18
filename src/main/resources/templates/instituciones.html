@@ -60,7 +60,8 @@
 
                         <div class="box-part">
                             <div class="fondo">
-                                <img src="https://www.rosario3.com/__export/1631499889050/sites/rosario3/img/2021/08/10/omar_perotti.jpg_668620678.jpg">
+        <!--                        <img src="https://www.rosario3.com/__export/1631499889050/sites/rosario3/img/2021/08/10/omar_perotti.jpg_668620678.jpg">	-->
+                                <img th:if="${institucion.getFoto() != null}" th:src="${'/foto/institucion/'}+${institucion.getIdInstitucion()}" width="100%" height="100%"> 
                             </div>
 
                             <div class="opacity">
