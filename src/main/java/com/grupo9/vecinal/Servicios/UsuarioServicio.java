@@ -92,7 +92,11 @@ public class UsuarioServicio implements UserDetailsService {
 				usuario.setApellido(apellido);
 				usuario.setTelefono(telefono);
 				if (!foto.isEmpty()) {
-					usuario.setFoto(fotoServ.actualizar(usuario.getFoto().getId(), foto));
+					if (usuario.getFoto()!=null) {
+						 usuario.setFoto(fotoServ.actualizar(usuario.getFoto().getId(), foto));
+					}else {
+						usuario.setFoto(fotoServ.guardar(foto));
+					}
 				}
 
 				usuarioRepo.save(usuario);
@@ -152,7 +156,7 @@ public class UsuarioServicio implements UserDetailsService {
 				Usuario usuario = respuesta.get();
 				if (usuario.getContrasenia().equals(encriptada)) {
 					validarContrasenia(contrasenia1, contrasenia2);
-					String encriptada1 = new BCryptPasswordEncoder().encode(contrasenia1);
+					String encriptada1 = new BCryptPasswordEncoder(4).encode(contrasenia1);
 					usuario.setContrasenia(encriptada1);
 					usuarioRepo.save(usuario);
 				} else {

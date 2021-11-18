@@ -13,7 +13,7 @@
 <body>
 	<div class="main-panel">
 		<div class="title">
-			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b th:text="${usuario.getNombre()} + ' ' + ${usuario.apellido}"></b> :)		
+			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :)		
 
 			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
 				<button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button></a>
@@ -29,7 +29,7 @@
 						<a class="nav-link" href="/usuarios/panel-actividades">Actividades</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="/usuarios/panel-cambiarcontraseña">Cambiar Contraseña</a>
+						<a class="nav-link active" href="/usuarios/panel-cambiarcontrasena">Cambiar Contraseña</a>
 					</li>
 				</ul>
 			</div>
@@ -45,9 +45,9 @@
 
 			<div class="badge bg-primary text-wrap title">Cambiar Contraseña</div>
 
-			<form th:action="@{/usuarios/panel-cambiarcontraseña}" method="POST" enctype="multipart/form-data" style="float: right;width: 80%;">
+			<form th:action="@{/usuarios/panel-cambiarcontrasena}" method="POST" style="float: right;width: 80%;">
 
-			<input th:type="text" th:value="${usuario.idUsuario}" name="id" hidden>
+			<input th:type="text" th:value="${session.usuariologueado.idUsuario}" name="id" hidden>
 
 			<div class="mb-3">
 				<label for="exampleInputEmail1" class="form-label">Contraseña Actual</label>

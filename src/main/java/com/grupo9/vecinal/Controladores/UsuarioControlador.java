@@ -68,18 +68,6 @@ public class UsuarioControlador {
 		return "esperar.html";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
-	@GetMapping("/modificar")
-	public String modificarUsuario(HttpSession logueado, ModelMap modelo) {
-		try {
-			Usuario usuario = (Usuario) logueado.getAttribute("usuariologueado");
-			modelo.addAttribute("usuario", usuario);
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-		}
-		return "modificacion_back.html";
-	}
-
 	@PostMapping("/modificar")
 	public String modificarUsuario(MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
@@ -100,6 +88,7 @@ public class UsuarioControlador {
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/inscripcion")
 	public String inscripcion() {
+		
 		return "inscripcion_back.html";
 	}
 	
@@ -142,9 +131,10 @@ public class UsuarioControlador {
 
 
 	@PostMapping("/inscripcion")
-	public String inscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {
+	public String inscribir(HttpSession session,@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {
 		try {
 			usuarioServ.inscripcionActividad(idUsuario, idActividad);
+			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(idUsuario));
 
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
@@ -155,39 +145,22 @@ public class UsuarioControlador {
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
-	@GetMapping("/desinscripcion")
-	public String desinscripcion() {
-		return "desinscripcion_back.html";
-	}
-
-	@PostMapping("/desinscripcion")
-	public String desinscribir(@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {
+	@GetMapping("/desinscripcion/{idActividad}")
+	public String desinscribir(HttpSession session, @PathVariable("idActividad") Integer idActividad, ModelMap modelo) {
 		try {
-			usuarioServ.desinscripcionActividad(idUsuario, idActividad);
+			Usuario usuario=(Usuario)session.getAttribute("usuariologueado");
+			usuarioServ.desinscripcionActividad(usuario.getIdUsuario(), idActividad);
+			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(usuario.getIdUsuario()));
 
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			return "desinscripcion_back.html";
 		}
 
-		return "redirect:/usuarios/desinscripcion";
+		return "redirect:/usuarios/panel-actividades";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USUARIO_ADMIN')")
-	@GetMapping("/bajaUsuario")
-	public String bajaUsuario() {
-		return "bajaUsuario_back.html";
-	}
-
-	@PostMapping("/bajaUsuario")
-	public String bajarUsuario(@RequestParam Integer id, ModelMap modelo) {
-		try {
-			usuarioServ.bajaUsuario(id);
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-		}
-		return "bajaUsuario_back.html";
-	}
+	
 
 	// Panel
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
@@ -201,33 +174,31 @@ public class UsuarioControlador {
 	
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/panel-actividades")
-	public String panelUsuarioActividades(HttpSession session, ModelMap modelo) {
+	public String panelUsuarioActividades(HttpSession session, ModelMap modelo) throws Exception {
 		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
 		modelo.addAttribute("usuario", usuario);
-		
 		return "panel_actividades_usuario.html";
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/panel-cambiarcontrasena")
-	public String panelCambiarContrasena(HttpSession session, ModelMap modelo) {
-		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
-		modelo.addAttribute("usuario", usuario);
+	public String panelCambiarContrasena() {
 		
 		return "panel_cambiarcontrasena";
 	}
 	
 	@PostMapping("/panel-cambiarcontrasena")
-	public String panelContraseniaCambiada(ModelMap modelo, @RequestParam Integer id, @RequestParam String contraseniaActual, @RequestParam String contraseniaNueva, @RequestParam String contraseniaNueva2) {
+	public String panelContraseniaCambiada(HttpSession session,ModelMap modelo, @RequestParam Integer id, @RequestParam String contraseniaActual, @RequestParam String contraseniaNueva, @RequestParam String contraseniaNueva2) {
 		try {
 			usuarioServ.modificarContrasenia(contraseniaActual, contraseniaNueva, contraseniaNueva2, id);
-			modelo.put("ok", "¡Contraseña cambiada con éxito!");
+			
+			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(id));
 			
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
-			return "panel_cambiarcontraseña";
+			return "panel_cambiarcontrasena";
 		}
-		
-		return "redirect:/usuarios/panel_cambiarcontrasena";
+		modelo.put("ok", "¡Contraseña cambiada con éxito!");
+		return "panel_cambiarcontrasena";
 	}
 }
