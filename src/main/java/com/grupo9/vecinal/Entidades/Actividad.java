@@ -2,6 +2,7 @@ package com.grupo9.vecinal.Entidades;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Actividad {
 
 
 	@ManyToMany(mappedBy = "actividades")
-	private Set<Usuario> usuarios;
+	private Set<Usuario> usuarios = new TreeSet<Usuario>();
 	
 	private Integer inscriptos;
 	
@@ -54,6 +55,7 @@ public class Actividad {
 
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
+		setInscriptos();
 	}
 
 	public Integer getIdActividades() {
@@ -108,8 +110,8 @@ public class Actividad {
 		return this.inscriptos;
 	}	
 	
-	public void setInscriptos(Integer inscriptos) {
-		this.inscriptos = inscriptos;
+	public void setInscriptos() {
+		this.inscriptos = usuarios.size();
 	}
 
 	@Override
