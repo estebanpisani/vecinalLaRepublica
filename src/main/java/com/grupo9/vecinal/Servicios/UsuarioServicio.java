@@ -92,9 +92,9 @@ public class UsuarioServicio implements UserDetailsService {
 				usuario.setApellido(apellido);
 				usuario.setTelefono(telefono);
 				if (!foto.isEmpty()) {
-					if (usuario.getFoto()!=null) {
-						 usuario.setFoto(fotoServ.actualizar(usuario.getFoto().getId(), foto));
-					}else {
+					if (usuario.getFoto() != null) {
+						usuario.setFoto(fotoServ.actualizar(usuario.getFoto().getId(), foto));
+					} else {
 						usuario.setFoto(fotoServ.guardar(foto));
 					}
 				}
@@ -151,9 +151,12 @@ public class UsuarioServicio implements UserDetailsService {
 
 			String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
-
+			
+			
 			if (respuesta.isPresent()) {
 				Usuario usuario = respuesta.get();
+				System.out.println(encriptada);
+				System.out.println(usuario.getContrasenia());
 				if (usuario.getContrasenia().equals(encriptada)) {
 					validarContrasenia(contrasenia1, contrasenia2);
 					String encriptada1 = new BCryptPasswordEncoder(4).encode(contrasenia1);
@@ -168,7 +171,7 @@ public class UsuarioServicio implements UserDetailsService {
 			}
 
 		} catch (Exception e) {
-			e.getMessage();
+			throw new Exception(e.getMessage());
 		}
 
 	}
@@ -216,7 +219,7 @@ public class UsuarioServicio implements UserDetailsService {
 		}
 
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Usuario buscarUsuarioCodValidacion(String codigo) throws Exception {
 		try {

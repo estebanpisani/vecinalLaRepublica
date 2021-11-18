@@ -190,15 +190,18 @@ public class UsuarioControlador {
 	@PostMapping("/panel-cambiarcontrasena")
 	public String panelContraseniaCambiada(HttpSession session,ModelMap modelo, @RequestParam Integer id, @RequestParam String contraseniaActual, @RequestParam String contraseniaNueva, @RequestParam String contraseniaNueva2) {
 		try {
+			Usuario usuario = (Usuario)session.getAttribute("usuariologueado");
+			System.out.println(usuario.getNombreUsuario());
 			usuarioServ.modificarContrasenia(contraseniaActual, contraseniaNueva, contraseniaNueva2, id);
-			
+			System.out.println(usuario.getNombreUsuario());
 			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(id));
+			modelo.put("ok", "¡Contraseña cambiada con éxito!");
+			return "panel_cambiarcontrasena";
 			
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			return "panel_cambiarcontrasena";
 		}
-		modelo.put("ok", "¡Contraseña cambiada con éxito!");
-		return "panel_cambiarcontrasena";
+		
 	}
 }
