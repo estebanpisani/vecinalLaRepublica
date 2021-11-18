@@ -51,12 +51,12 @@ public class AdminControlador {
 		return "bajaUsuario_back.html";
 	}
 	
-	@GetMapping("/crear")
+	@GetMapping("/crear-novedades")
 	public String crearNovedad(ModelMap modelo) {
 		return "crearNovedades.html";
 	}
 
-	@PostMapping("/crear")
+	@PostMapping("/crear-novedades")
 	public String crearNovedades(ModelMap modelo, @RequestParam(required = false) MultipartFile foto,
 			@RequestParam String titulo, @RequestParam String descripcion,
 			@RequestParam(required = false) Boolean destacado) {
