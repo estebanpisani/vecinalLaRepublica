@@ -183,10 +183,11 @@ h1 {
   margin-right: 5%;
 }
 
-    .col-md-4 {
-      min-height: 280px;
-      margin-left: 33%;
-  }
+ .col-md-4 {
+    min-height: 150px;
+    margin-left: 33%;
+    padding: 50px;
+}
   
   .heading > a {
       text-decoration: none;
@@ -197,11 +198,7 @@ h1 {
       color: #ccc;
   }
   
-  .card:hover {
-      background-color: #444;
-      color: #ccc;
-      transition: .5s;
-  }
+
   
   
   .progress {
@@ -228,6 +225,9 @@ h1 {
       
   }
 
+  .mt-3 {
+  	  text-align:center;
+  }
 
   /* Footer */
 

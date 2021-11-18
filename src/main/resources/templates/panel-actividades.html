@@ -32,6 +32,37 @@
 				</ul>
 			</div>
 			<div class="card-body">
+			
+			<form th:action="@{/actividades/registro-actividad}" method="POST">
+        <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
+          <input th:type="text" th:value="${nombreActividad}" name="nombreActividad" class="form-control" placeholder="Escriba el nombre de la actividad." required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Descripción de Actividad</label>
+          <textarea th:type="text" th:value="${descripcion}" name="descripcion" class="form-control" placeholder="Describa la actividad." required></textarea>
+        </div>
+        
+        
+
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Cupo</label>
+          <input th:type="number" maxlength="500" th:value="${cupo}" name="cupo" class="form-control" required>
+        </div>        
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Fecha</label>
+          <input type="date" th:value="${fecha}" name="fecha" class="form-control" required>
+        </div>     
+        
+
+          <button th:type="submit" class="btn btn-primary">Crear actividad</button>
+      </form>
+			
 
                 <table class="table">
                     <thead>
@@ -46,11 +77,11 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">1</th>
+                        <th scope="row" >1</th>
                         <td>Martin</td>
                         <td>Oroná</td>
                         <td>15/11/21</td>
-                        <td><button type="button" class="btn btn-success">Editar</button></td>
+                        <td><button type="button" class="btn btn-success"> <a href="/actividades/modificar-actividad">Editar</a></button></td>
                         <td><button type="button" class="btn btn-danger">Eliminar</button></td>
                       </tr>
 

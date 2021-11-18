@@ -13,6 +13,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/styles/actividad.css">
 
+
 	<title>Vecinal "La Republica"</title>
 </head>
 
@@ -64,28 +65,18 @@
 						</div>
 						<div class="accordion-body js-accordion-body" >
 							<div class="col-md-4">
-								<div class="card p-3 mb-2">
-									<div class="d-flex justify-content-between">
-										<div class="d-flex flex-row align-items-center"></div>
-										<div class="badge"> <span>Deporte</span> </div>
-									</div>
-									<div class="mt-5">
-										<h3 class="heading" ><a href="#" th:text="${actividad.nombreActividad}"></a></h3>
-										<div class="mt-5">
-											<div class="progress">
+									<div class="progress">
 												<div class="progress-bar" role="progressbar" style="width: 50%"
 													aria-valuenow="70" aria-valuemin="0" aria-valuemax="90"></div>
 											</div>
 											<div class="mt-3"><span class="text1" th:text="${actividad.inscriptos}+' inscriptos de '"></span><span class="text1"th:text="${actividad.cupo}+' cupos disponibles.'"></span></div>
-										</div>
-									</div>
-								</div>
+										
 							</div>
 							<div th:text="'Fecha de inicio: '+${actividad.fecha}"></div>
 							<div th:text="${actividad.descripcionActividad}"></div>
 							
 							<div class="accordion-body__contents">
-								<a href="/usuarios/inscripcion" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Inscribirse</a> <br>
+								<a href="/usuarios/inscripcion" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades}">Inscribirse</a> <br>
 							</div>
 						</div><!-- end of accordion body -->
 					</div><!-- end of accordion item -->

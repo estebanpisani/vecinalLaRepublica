@@ -79,3 +79,10 @@ footer {
 form {
 	padding: 15px 15px;
 }
+
+textarea{
+	font-family: 'Ubuntu',sans-serif;
+	min-height: 700px;
+	max-height: 1500px;
+	max-width: 100%;
+}

@@ -64,12 +64,7 @@ public class ActividadServicio {
 			actividad.setDescripcionActividad(descripcionActividad);
 			actividad.setFecha(localDate);
 			actividad.setCupo(cupo);
-			if(actividad.getUsuarios().isEmpty()) {
-				actividad.setInscriptos(actividad.getUsuarios().size());				
-			} else {
-				actividad.setInscriptos(0);
-			}
-
+			actividad.setInscriptos(0);				
 			actividad.setAlta(true);
 
 			actividadRepo.save(actividad);
@@ -196,22 +191,22 @@ public class ActividadServicio {
 	}	
 	
 	@Transactional(readOnly = true)
-	public List<Actividad> mostrarActividadFechaReciente(LocalDate fecha) throws Exception {
+	public List<Actividad> mostrarActividadFechaReciente() throws Exception {
 		
-			List<Actividad> actividades = actividadRepo.actividadesFechaReciente(fecha);
+			List<Actividad> actividades = actividadRepo.actividadesFechaReciente();
 			if (actividades.isEmpty()) {
-				throw new Exception("No se encontraron actividades en esa fecha");
+				throw new Exception("No se encontraron actividades.");
 			} else {
 				return actividades;
 			}
 	}		
 	
 	@Transactional(readOnly = true)
-	public List<Actividad> mostrarActividadFechaAntigua(LocalDate fecha) throws Exception {
+	public List<Actividad> mostrarActividadFechaAntigua() throws Exception {
 		
-			List<Actividad> actividades = actividadRepo.actividadesFechaAntigua(fecha);
+			List<Actividad> actividades = actividadRepo.actividadesFechaAntigua();
 			if (actividades.isEmpty()) {
-				throw new Exception("No se encontraron actividades en esa fecha");
+				throw new Exception("No se encontraron actividades.");
 			} else {
 				return actividades;
 			}
