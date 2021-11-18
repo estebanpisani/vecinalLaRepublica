@@ -88,12 +88,12 @@ public class UsuarioControlador {
 		try {
 			usuarioServ.modificarUsuario(foto, nombreUsuario, emailUsuario, nombre, apellido, telefono, idUsuario);
 			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(idUsuario));
-			return "redirect:/usuarios/modificar";
+			return "redirect:/usuarios/panel";
 		} catch (Exception e) {
 			Usuario usuario = usuarioServ.buscarUsuario(idUsuario);
 			modelo.addAttribute("usuario", usuario);
 			modelo.put("error", e.getMessage());
-			return "modificacion_back";
+			return "panel_usuario.html";
 		}
 	}
 
@@ -187,5 +187,47 @@ public class UsuarioControlador {
 			modelo.put("error", e.getMessage());
 		}
 		return "bajaUsuario_back.html";
+	}
+
+	// Panel
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+	@GetMapping("/panel")
+	public String panelUsuario(HttpSession session, ModelMap modelo) {
+		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
+		modelo.addAttribute("usuario", usuario);
+		
+		return "panel_usuario.html";
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+	@GetMapping("/panel-actividades")
+	public String panelUsuarioActividades(HttpSession session, ModelMap modelo) {
+		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
+		modelo.addAttribute("usuario", usuario);
+		
+		return "panel_actividades_usuario.html";
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+	@GetMapping("/panel-cambiarcontrasena")
+	public String panelCambiarContrasena(HttpSession session, ModelMap modelo) {
+		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
+		modelo.addAttribute("usuario", usuario);
+		
+		return "panel_cambiarcontrasena";
+	}
+	
+	@PostMapping("/panel-cambiarcontrasena")
+	public String panelContraseniaCambiada(ModelMap modelo, @RequestParam Integer id, @RequestParam String contraseniaActual, @RequestParam String contraseniaNueva, @RequestParam String contraseniaNueva2) {
+		try {
+			usuarioServ.modificarContrasenia(contraseniaActual, contraseniaNueva, contraseniaNueva2, id);
+			modelo.put("ok", "¡Contraseña cambiada con éxito!");
+			
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+			return "panel_cambiarcontraseña";
+		}
+		
+		return "redirect:/usuarios/panel_cambiarcontrasena";
 	}
 }

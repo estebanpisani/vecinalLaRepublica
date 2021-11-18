@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,7 +46,6 @@
 					</li>
 				</ul>
 				<ul th:if="${session.usuariologueado != null}" class="navbar-nav ml-auto">
-
 					<li class="nav-item active">
 						<a class="nav-link" href="" id="vecino" th:text="${usuario.nombreUsuario}"></a>
 					</li>
