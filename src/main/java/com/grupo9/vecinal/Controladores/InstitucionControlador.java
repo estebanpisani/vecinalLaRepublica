@@ -32,12 +32,19 @@ public class InstitucionControlador {
 		return "instituciones.html";
 	}
 	
+	@GetMapping("/registrar")
+	public String registrarInstitucion(ModelMap modelo) {
+		//List<Institucion> instituciones = institucionRepo.findAll();
+		//modelo.put("instituciones", instituciones);
+		return "crearinstituciones.html";
+	}
+	
 	@PostMapping("/registrar")
 	public String registrarInstitucion(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre, @RequestParam String descripcion,
-			@RequestParam String direccion, @RequestParam Long telefono) {
+			@RequestParam String direccion, @RequestParam Long telefono, @RequestParam(required = false) String contrasenia) {
 		try {
 			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
-			return "instituciones.html";
+			return "redirect:/instituciones/mostrar";
 			
 		} catch (Exception e) {
 			e.printStackTrace();

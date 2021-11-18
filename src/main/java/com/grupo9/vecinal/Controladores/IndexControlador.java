@@ -1,7 +1,9 @@
 package com.grupo9.vecinal.Controladores;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,36 +17,40 @@ import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Novedad;
 import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Servicios.ActividadServicio;
+import com.grupo9.vecinal.Servicios.MailServicio;
 import com.grupo9.vecinal.Servicios.NovedadServicio;
 
 @Controller
 @RequestMapping("/")
 public class IndexControlador {
-	
+
 	@Autowired
 	NovedadServicio novedadServ;
 	@Autowired
 	ActividadServicio actividadServ;
 
+	@Autowired
+	MailServicio enviarMails;
+
 	@GetMapping("/")
 	public String index(ModelMap modelo, HttpSession session) {
 		try {
 			List<Novedad> novedadesDestacadas = novedadServ.mostrarNovedadesDestacadas();
-			if (novedadesDestacadas.size()>3) {
+			if (novedadesDestacadas.size() > 3) {
 				novedadesDestacadas = novedadServ.mostrarNovedadesDestacadas().subList(0, 3);
 			}
 			modelo.addAttribute("novedades", novedadesDestacadas);
 			List<Actividad> actividades = actividadServ.mostrarActividadAlta();
-			if (actividades.size()>4) {
-				actividades = actividadServ.mostrarActividadAlta().subList(0, 3);
-			}			 
+			if (actividades.size() > 3) {
+				actividades = actividadServ.mostrarActividadAlta().subList(0, 6);
+			}
 			modelo.addAttribute("actividades", actividades);
-			if (session.getAttribute("usuariologueado")!=null) {
-				Usuario usuario =(Usuario) session.getAttribute("usuariologueado");
+			if (session.getAttribute("usuariologueado") != null) {
+				Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
 				modelo.addAttribute("usuario", usuario);
 			}
 		} catch (Exception e) {
-			
+
 		}
 		return "index.html";
 	}
@@ -52,7 +58,7 @@ public class IndexControlador {
 	@GetMapping("/login")
 	public String login(HttpSession session, ModelMap modelo, @RequestParam(required = false) String error,
 			@RequestParam(required = false) String baja, @RequestParam(required = false) String logout) {
-		
+		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
 		if (error != null) {
 			modelo.put("error", "Usuario o contraseña incorrectas");
 			session.setAttribute("usuariologueado", null);
@@ -62,8 +68,16 @@ public class IndexControlador {
 			modelo.put("ok", "Gracias por su visita.");
 		}
 		if (baja != null) {
-			modelo.put("error", "Usuario dado de baja");
+			modelo.put("error", "Usuario dado de baja, se envió un correo para dar de alta");
+			try {
+				enviarMails.sendVerificacionEmail(usuario);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
 			session.setAttribute("usuariologueado", null);
+
 		}
 		if (session.getAttribute("usuariologueado") != null) {
 			return "redirect:/";
@@ -83,7 +97,7 @@ public class IndexControlador {
 			return "redirect:/login?baja";
 		}
 		if (usuario.getAdmin()) {
-			return "redirect:/usuarios/bajaUsuario";
+			return "redirect:/admin/bajaUsuario";
 		} else {
 			return "redirect:/usuarios/inscripcion";
 		}
