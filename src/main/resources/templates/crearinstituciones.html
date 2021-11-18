@@ -22,7 +22,7 @@
                 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre de la Institucion</label>
-                    <input th:type="text" th:value="${nombre}" name="nombreInstitucion" class="form-control"
+                    <input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
                         placeholder="Escriba su nombre de usuario" required>
                 </div>
                 <div class="mb-3">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Descripcion</label>
-                    <input th:type="email" th:value="${descripcion}" name="emailUsuario" class="form-control"
+                    <input th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
                         placeholder="Area de dicha Institucion" required>
                 </div>
                  <div class="mb-3">
@@ -47,9 +47,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Insertar Foto</label>
-                    <input th:type="archivo" name="foto" class="form-control">
+                    <input th:type="archivo" name="archivo" class="form-control">
                 </div>
-                <button th:type="submit" class="btn btn-primary btn-color">Crear Cuenta</button>
+                <button th:type="submit" class="btn btn-primary btn-color">Crear</button>
             </form>
         </div>
     
