@@ -339,61 +339,37 @@ h1{
     margin-bottom: 10px;
 }
 
-/* Form y Mapa */
-
-.form-mapa {
-    margin-bottom: 50px;
-}
-
-.form-map {
-    display: flex;
-    margin: auto;
-    justify-content: space-around;
-
-}
-
-
-
-/* Form */
-
-form {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-}
-
-.contact-form {
-    height: 280px;
-
-}
-
-.contact-form > form > h3 {
-    font-weight: 300;
-    letter-spacing: 3px;
-    padding-bottom: 10px;
-}
-
-.btn.btn-primary {
-    background-color: #222;
-    border-color: #222;
-}
-
-.btn.btn-primary:hover {
-    background-color: var(--blancoBackground);
-    
-    color: #222;
-    transition: .5s;
-}
-
 /* Mapa */
 
-.seccion-mapa {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
+.nosotros-mapa {
+    display: flex;
 }
 
-.seccion-mapa > h3 {
+
+.mapa {
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.seccion-mapa , .seccion-nosotros {
+    padding: 20px;
+    border: .5px solid #ccc;
+    border-radius: 25px;
+    width: 50%;
+    margin: 30px;
+}
+
+.seccion-mapa:hover {
+    background-color: rgba(175, 171, 196, .1);
+    transition: .7s;
+} 
+
+.seccion-nosotros:hover {
+    background-color: rgba(175, 171, 196, .1);
+    transition: .7s;
+}
+
+.seccion-mapa > h3, .seccion-nosotros > h3 {
     padding-bottom: 10px;
     font-weight: 300;
     letter-spacing: 3px;
@@ -402,7 +378,9 @@ form {
 
 
 /* Footer */
+footer {
 
+}
 .row {
     justify-content: space-between;
 }
