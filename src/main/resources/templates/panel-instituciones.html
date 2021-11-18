@@ -43,25 +43,24 @@
         <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
 
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Nombre de la Institucion</label>
-          <input th:type="text" th:value="${nombre}" name="nombre" class="form-control" placeholder="Escriba el nombre de la actividad." required>
+            <label for="exampleInputnombre1" class="form-label">Nombre de la Institucion</label>
+            <input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
+                placeholder="Escriba el nombre de la institucion" required>
         </div>
-        
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Direccion</label>
-          <textarea th:type="text" th:value="${direccion}" name="direccion" class="form-control" placeholder="Describa la actividad." required></textarea>
+            <label for="exampleInputdireccion1" class="form-label">Direccion</label>
+            <input th:type="text" th:value="${direccion}" name="direccion" class="form-control"
+                placeholder="Introduzca la direccion" required>
         </div>
-        
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Telefono</label>
-          <input th:type="number" maxlength="500" th:value="${telefono}" name="telefono" class="form-control" required>
-        </div>        
-        
+            <label for="exampleInputtelefono1" class="form-label">Telefono</label>
+            <input th:type="text" th:value="${telefono}" name="telefono" class="form-control"
+                placeholder="Introduzca su telefono" required>
+        </div>      
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Ingrese contraseña</label>
-          <input type="date" th:value="${contrasenia}" name="contrasenia" class="form-control" required>
+          <input type="password" th:value="${contrasenia}" name="contrasenia" class="form-control" required>
         </div>     
-
         <div class="mb-3">
             <label for="exampleInputarchivo1" class="form-label">Insertar Foto</label>
             <input th:type="file" name="archivo" class="form-control">
