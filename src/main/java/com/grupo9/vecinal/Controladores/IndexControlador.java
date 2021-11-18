@@ -42,13 +42,9 @@ public class IndexControlador {
 			modelo.addAttribute("novedades", novedadesDestacadas);
 			List<Actividad> actividades = actividadServ.mostrarActividadAlta();
 			if (actividades.size() > 3) {
-				actividades = actividadServ.mostrarActividadAlta().subList(0, 6);
+				actividades = actividadServ.mostrarActividadAlta().subList(0, 3);
 			}
 			modelo.addAttribute("actividades", actividades);
-			if (session.getAttribute("usuariologueado") != null) {
-				Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
-				modelo.addAttribute("usuario", usuario);
-			}
 		} catch (Exception e) {
 
 		}
