@@ -55,7 +55,7 @@ public class Actividad {
 
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
-		setInscriptos();
+		//setInscriptos();
 	}
 
 	public Integer getIdActividades() {
