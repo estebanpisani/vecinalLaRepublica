@@ -24,31 +24,33 @@ public class ActividadControlador {
 	
 	@GetMapping("/mostrar")
 	public String mostrarActividades(ModelMap modelo) throws Exception {
-		List<Actividad> actividades = actividadServ.mostrarActividades();
+		List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
 		modelo.put("actividades", actividades);
 		return "actividad.html";
 	}
 
+	
+	
 	@GetMapping("/registro-actividad")
 	public String registroActividad() {
-		return "registroact_back.html";
+		return "panel-actividades.html";
 	}
 
 	@PostMapping("/registro-actividad")
-	public String registroActividad(ModelMap modelo, @RequestParam String nombreActividad, @RequestParam String descripcion, @RequestParam String fecha) throws ParseException {
+	public String registroActividad(ModelMap modelo, @RequestParam String nombreActividad, @RequestParam String descripcion, @RequestParam String fecha, @RequestParam Integer cupo) throws ParseException {
 
 
 		try {
-			actividadServ.crearActividad(nombreActividad, descripcion, fecha, 100);
+			actividadServ.crearActividad(nombreActividad, descripcion, fecha, cupo);
 
 			return "redirect:/";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreActividad", nombreActividad);
 			modelo.put("descripcion", descripcion);
-			modelo.put("cupo", 100);
+			modelo.put("cupo", cupo);
 
-			return "registroact_back.html";
+			return "panel-actividades.html";
 		}
 
 	}
@@ -72,7 +74,7 @@ public class ActividadControlador {
 		try {
 			
 			actividadServ.modificarActividad(nombreActividad, descripcion, fecha, cupo, id);
-			return "redirect:/usuarios/modificar";
+			return "redirect:/actividades/registro-actividad";
 		} catch (Exception e) {
 			Actividad actividad = actividadServ.buscarActividad(id);
 			modelo.addAttribute("actividad", actividad);
@@ -80,6 +82,12 @@ public class ActividadControlador {
 			return "modificacion_back";
 		}
 	}
+	
+	@PostMapping("/baja-actividad")
+	public String bajaActividad(@RequestParam Integer id) throws Exception {	
+			actividadServ.bajaActividad(id);
+			return "redirect:/actividades/registro-actividad";
+	}	
 
 
 }

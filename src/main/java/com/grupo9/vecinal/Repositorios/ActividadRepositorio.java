@@ -26,11 +26,11 @@ public interface ActividadRepositorio  extends JpaRepository<Actividad, Integer>
 	@Query("SELECT a FROM Actividad a WHERE a.nombreActividad LIKE :nombre ORDER BY a.fecha DESC")
 	public List<Actividad> actividadNombre(@Param("nombre") String nombre);
 	
-	@Query("SELECT a FROM Actividad a WHERE a.fecha = fecha ORDER BY a.fecha DESC")
-	public List<Actividad> actividadesFechaReciente(@Param("fecha") LocalDate fecha);
+	@Query("SELECT a FROM Actividad a WHERE a.alta = true ORDER BY a.fecha DESC")
+	public List<Actividad> actividadesFechaReciente();
 	
-	@Query("SELECT a FROM Actividad a WHERE a.fecha = fecha ORDER BY a.fecha ASC")
-	public List<Actividad> actividadesFechaAntigua(@Param("fecha") LocalDate fecha);
+	@Query("SELECT a FROM Actividad a WHERE a.alta = true ORDER BY a.fecha ASC")
+	public List<Actividad> actividadesFechaAntigua();
 	
 
 	
