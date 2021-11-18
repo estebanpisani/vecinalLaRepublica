@@ -47,7 +47,7 @@
 				</ul>
                             <ul th:if="${session.usuariologueado != null}" class="navbar-nav ml-auto">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="" id="vecino" th:text="${usuario.nombreUsuario}"></a>
+                                    <a class="nav-link" href="" id="vecino" th:text="${session.usuariologueado.nombreUsuario}"></a>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Dropdown button
