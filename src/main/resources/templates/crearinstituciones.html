@@ -21,34 +21,35 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre de la Institucion</label>
+                    <label for="exampleInputnombre1" class="form-label">Nombre de la Institucion</label>
                     <input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
-                        placeholder="Escriba su nombre de usuario" required>
+                        placeholder="Escriba el nombre de la institucion" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Direccion</label>
+                    <label for="exampleInputdireccion1" class="form-label">Direccion</label>
                     <input th:type="text" th:value="${direccion}" name="direccion" class="form-control"
                         placeholder="Introduzca la direccion" required>
                 </div>
                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Telefono</label>
+                    <label for="exampleInputtelefono1" class="form-label">Telefono</label>
                     <input th:type="text" th:value="${telefono}" name="telefono" class="form-control"
                         placeholder="Introduzca su telefono" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Descripcion</label>
+                    <label for="exampleInputdescripcion1" class="form-label">Descripcion</label>
                     <input th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
                         placeholder="Area de dicha Institucion" required>
                 </div>
                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <label for="exampleInputpassword1" class="form-label">Contraseña</label>
                     <input th:type="password" th:value="${contrasenia}" name="contrasenia" class="form-control"
                         placeholder="Ingrese su contraseña" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Insertar Foto</label>
-                    <input th:type="archivo" name="archivo" class="form-control">
+                    <label for="exampleInputarchivo1" class="form-label">Insertar Foto</label>
+                    <input th:type="file" name="archivo" class="form-control">
                 </div>
+
                 <button th:type="submit" class="btn btn-primary btn-color">Crear</button>
             </form>
         </div>
