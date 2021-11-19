@@ -39,7 +39,7 @@
     <form>
         <div class="card-body">
 			
-			<form th:action="@{/admin/registrar}" method="POST">
+			<form th:action="@{/admin/registrar-institucion}" method="POST">
         <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
 
         <div class="mb-3">
@@ -96,7 +96,7 @@
                         <td th:text="${get.Descripcion()}"></td>
                         </tr>
 
-                        <td><button type="button" class="btn btn-success"> <a href="/instituciones/modificar">Editar</a></button></td>
+                        <td><button type="button" class="btn btn-success"> <a href="/admin/modificar-institucion">Editar</a></button></td>
                         <td><button type="button" class="btn btn-danger">Eliminar</button></td>
                       </tr>
 

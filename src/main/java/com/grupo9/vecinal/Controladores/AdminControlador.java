@@ -127,7 +127,7 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/registrar";
+			return "redirect:/admin/registrar-comercio";
 		}
 
 	}
@@ -148,7 +148,7 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/modificar";
+			return "redirect:/admin/modificar-comercio";
 		}
 
 	}
@@ -165,7 +165,7 @@ public class AdminControlador {
 			@RequestParam String direccion, @RequestParam Long telefono, @RequestParam(required = false) String contrasenia) {
 		try {
 			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
-			return "redirect:/admin/mostrar";
+			return "redirect:/instituciones/mostrar";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,7 +175,7 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/registrar";
+			return "redirect:/admin/registrar-institucion";
 		}
 
 	}
@@ -196,7 +196,7 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/modificar";
+			return "redirect:/admin/modificar-institucion";
 		}
 
 	}
@@ -213,7 +213,7 @@ public class AdminControlador {
 
 		novedadServ.crearNovedad(foto, titulo, descripcion, destacado);
 
-		return "redirect:/admin/crear";
+		return "redirect:/admin/crear-novedades";
 	}
 
 }
