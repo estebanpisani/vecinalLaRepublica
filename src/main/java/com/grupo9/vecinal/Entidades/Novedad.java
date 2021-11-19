@@ -15,7 +15,7 @@ public class Novedad {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer actividadId;
+	private Integer novedadId;
 	private String titulo;
 	private String descripcion;
 	private Boolean destacado;
@@ -43,12 +43,14 @@ public class Novedad {
 	public Novedad() {
 	}
 
-	public Integer getActividadId() {
-		return actividadId;
+	
+
+	public Integer getNovedadId() {
+		return novedadId;
 	}
 
-	public void setActividadId(Integer actividadId) {
-		this.actividadId = actividadId;
+	public void setNovedadId(Integer novedadId) {
+		this.novedadId = novedadId;
 	}
 
 	public String getTitulo() {
@@ -85,7 +87,7 @@ public class Novedad {
 
 	@Override
 	public String toString() {
-		return "Novedad [actividadId=" + actividadId + ", titulo=" + titulo + ", descripcion=" + descripcion
+		return "Novedad [actividadId=" + novedadId + ", titulo=" + titulo + ", descripcion=" + descripcion
 				+ ", destacado=" + destacado + ", alta=" + alta + ", fecha=" + fecha + "]";
 	}
 

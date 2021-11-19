@@ -59,5 +59,13 @@ public class FotoServicio {
 		}
 
 	}
+	
+	@Transactional
+	public void eliminar(Integer id){
+		
+		Foto foto = fotoRepo.findById(id).get();
+		fotoRepo.delete(foto);
+
+	}
 
 }
