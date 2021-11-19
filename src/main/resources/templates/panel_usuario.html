@@ -20,6 +20,7 @@
 				th:text="${usuario.getNombre()} + ' ' + ${usuario.apellido}"></b> :)
 
 			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
+				<a class="btn btn-outline-dark" href="/"><ion-icon name="home"></ion-icon> Inicio</a>
 				<button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button></a>
 			</form>
 		</div>
@@ -27,7 +28,7 @@
 			<div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">
 					<li class="nav-item">
-						<a class="nav-link active" href="/usuarios/panel">Inicio</a>
+						<a class="nav-link active" href="/usuarios/panel">Perfil</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/usuarios/panel-actividades">Actividades</a>
@@ -56,7 +57,7 @@
 </div>
 				<form th:action="@{/usuarios/modificar}" method="POST" enctype="multipart/form-data"
 					style="float: right;width: 80%;">
-									<div class="badge bg-primary text-wrap title">Datos Personales</div>
+									<div class="badge bg-primary text-wrap title z">Mi Perfil</div>
 
 
 					<input th:type="text" th:value="${usuario.idUsuario}" name="idUsuario" hidden>

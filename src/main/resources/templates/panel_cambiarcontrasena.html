@@ -16,6 +16,7 @@
 			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :)		
 
 			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
+				<a class="btn btn-outline-dark" href="/"><ion-icon name="home"></ion-icon> Inicio</a>
 				<button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button></a>
 			</form>
 		</div>
@@ -23,7 +24,7 @@
 			<div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">
 					<li class="nav-item">
-						<a class="nav-link" href="/usuarios/panel">Inicio</a>
+						<a class="nav-link" href="/usuarios/panel">Perfil</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/usuarios/panel-actividades">Actividades</a>
@@ -43,7 +44,7 @@
 				<div th:text="${ok}"></div>
 			</div>
 
-			<div class="badge bg-primary text-wrap title">Cambiar Contraseña</div>
+			<div class="badge bg-primary text-wrap title z">Cambiar Contraseña</div>
 
 			<form th:action="@{/usuarios/panel-cambiarcontrasena}" method="POST" style="float: right;width: 100%;">
 
