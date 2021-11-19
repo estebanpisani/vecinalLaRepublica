@@ -185,7 +185,6 @@ public class UsuarioControlador {
 	@PostMapping("/panel-cambiarcontrasena")
 	public String panelContraseniaCambiada(HttpSession session,ModelMap modelo, @RequestParam Integer id, @RequestParam String contraseniaActual, @RequestParam String contraseniaNueva, @RequestParam String contraseniaNueva2) {
 		try {
-			Usuario usuario = (Usuario)session.getAttribute("usuariologueado");
 			usuarioServ.modificarContrasenia(contraseniaActual, contraseniaNueva, contraseniaNueva2, id);
 			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(id));
 			modelo.put("ok", "¡Contraseña cambiada con éxito!");
@@ -195,6 +194,27 @@ public class UsuarioControlador {
 			modelo.put("error", e.getMessage());
 			return "panel_cambiarcontrasena";
 		}
+		
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+	@GetMapping("/eliminar-foto/{idFoto}")
+	public String eliminarFoto(HttpSession session, ModelMap modelo,@PathVariable("idFoto") Integer idFoto) {
+		try {
+			Usuario usuario =(Usuario)session.getAttribute("usuariologueado");
+			if (usuario.getFoto()!=null) {
+				usuarioServ.eliminarFotoUsuario(usuario.getIdUsuario(),idFoto);
+				session.setAttribute("usuariologueado",usuarioServ.buscarUsuario(usuario.getIdUsuario()));
+				return "redirect:/usuarios/panel";
+			}else {
+				modelo.put("error", "No hay foto para eliminar");
+				return "panel_usuario.html";
+			}
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+			return "panel_usuario.html";
+		}
+		
 		
 	}
 }

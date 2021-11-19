@@ -44,19 +44,20 @@
 				</div>
 
 				<div style="float: left;width: 20%;">
-				<img th:if="${session.usuariologueado.getFoto() != null}"
-					th:src="${'/foto/usuario/'}+${session.usuariologueado.idUsuario}" class="rounded-circle" width="200"
-					height="200">
+					<img th:if="${session.usuariologueado.getFoto() != null}"
+						th:src="${'/foto/usuario/'}+${session.usuariologueado.idUsuario}" class="rounded-circle"
+						width="200" height="200">
 
-				<img th:if="${session.usuariologueado.getFoto() == null}"
-					th:src="@{'/Imagenes/sinFoto.jpeg'}" class="rounded-circle" width="200"
-					height="200">
+					<img th:if="${session.usuariologueado.getFoto() == null}" th:src="@{'/Imagenes/sinFoto.jpeg'}"
+						class="rounded-circle" width="200" height="200">
 
-				<button type="button" class="btn btn-danger" style="width: 100%;margin-top: 10px;">Eliminar Foto</button>
-</div>
-				<form th:action="@{/usuarios/modificar}" method="POST" enctype="multipart/form-data"
+					<a  th:if="${session.usuariologueado.getFoto() != null}" class="btn btn-danger" th:href="@{'/usuarios/eliminar-foto/'} + ${usuario.getFoto().getId()}"
+						style="width: 100%;margin-top: 10px;">Eliminar Foto</a>
+
+				</div>
+				<form th:action="@{/usuarios/modificar/}" method="POST" enctype="multipart/form-data"
 					style="float: right;width: 80%;">
-									<div class="badge bg-primary text-wrap title">Datos Personales</div>
+					<div class="badge bg-primary text-wrap title">Datos Personales</div>
 
 
 					<input th:type="text" th:value="${usuario.idUsuario}" name="idUsuario" hidden>
