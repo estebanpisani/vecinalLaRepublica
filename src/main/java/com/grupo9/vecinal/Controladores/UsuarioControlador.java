@@ -118,6 +118,7 @@ public class UsuarioControlador {
 			}
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
+			modelo.addAttribute("contrasenia", false);
 			return "recuperar_back.html";
 		}
 		
