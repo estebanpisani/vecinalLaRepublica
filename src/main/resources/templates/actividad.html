@@ -76,7 +76,7 @@
 							<div th:text="${actividad.descripcionActividad}"></div>
 							
 							<div class="accordion-body__contents">
-								<a href="/usuarios/inscripcion" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades}">Inscribirse</a> <br>
+								<a th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades} class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Inscribirse</a> <br>
 							</div>
 						</div><!-- end of accordion body -->
 					</div><!-- end of accordion item -->
