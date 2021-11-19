@@ -86,7 +86,7 @@ public class UsuarioControlador {
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
-	@GetMapping("/inscripcion")
+	@GetMapping("/inscripcion/{idActividad}")
 	public String inscripcion(HttpSession session, @PathVariable("idActividad") Integer idActividad, ModelMap modelo){
 
 			try {
@@ -96,10 +96,10 @@ public class UsuarioControlador {
 
 			} catch (Exception e) {
 				modelo.put("error", e.getMessage());
-				return "/actividades/mostrar";
+				return "redirect:/actividades/mostrar";
 			}
 
-			return "/actividades/mostrar";
+			return "redirect:/actividades/mostrar";
 	}
 	
 	@GetMapping("/recuperar")
@@ -149,7 +149,7 @@ public class UsuarioControlador {
 
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
-			return "desinscripcion_back.html";
+			return "panel_actividades_usuario.html";
 		}
 
 		return "redirect:/usuarios/panel-actividades";

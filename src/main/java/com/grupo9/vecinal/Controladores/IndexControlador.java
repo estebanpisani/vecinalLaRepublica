@@ -95,7 +95,7 @@ public class IndexControlador {
 		if (usuario.getAdmin()) {
 			return "redirect:/admin/bajaUsuario";
 		} else {
-			return "redirect:/usuarios/inscripcion";
+			return "redirect:/";
 		}
 
 	}
