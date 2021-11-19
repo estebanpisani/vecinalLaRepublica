@@ -39,7 +39,7 @@
 			</div>
 			<div class="card-body">
 
-				<div class="badge bg-primary text-wrap title">Actividades</div>
+				<div class="badge bg-primary text-wrap title">Mis Actividades</div>
 
 				<table class="table">
 					<thead>
@@ -47,6 +47,7 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Descripción</th>
 							<th scope="col">Fecha</th>
+							<th scope="col">Ver más</th>
 							<th scope="col">Darme de Baja</th>
 						</tr>
 					</thead>
@@ -56,6 +57,7 @@
 							<td th:text="${actividad.nombreActividad}"></td>
 							<td th:text="${actividad.descripcionActividad}"></td>
 							<td th:text="${actividad.fecha}"></td>
+							<td><a class="btn btn-success">Ver más</a></td>
 							<td><a class="btn btn-danger"
 									th:href="@{'/usuarios/desinscripcion/'}+${actividad.idActividades}">Darme
 									de Baja</a></td>

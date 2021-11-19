@@ -86,10 +86,20 @@ public class UsuarioControlador {
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
-	@GetMapping("/inscripcion")
-	public String inscripcion() {
-		
-		return "inscripcion_back.html";
+	@GetMapping("/inscripcion/{idActividad}")
+	public String inscripcion(HttpSession session, @PathVariable("idActividad") Integer idActividad, ModelMap modelo){
+
+			try {
+				Usuario usuario=(Usuario)session.getAttribute("usuariologueado");
+				usuarioServ.inscripcionActividad(usuario.getIdUsuario(), idActividad);
+				session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(usuario.getIdUsuario()));
+
+			} catch (Exception e) {
+				modelo.put("error", e.getMessage());
+				return "redirect:/actividades/mostrar";
+			}
+
+			return "redirect:/actividades/mostrar";
 	}
 	
 	@GetMapping("/recuperar")
@@ -129,21 +139,6 @@ public class UsuarioControlador {
 		return "recuperar_back.html";
 	}
 
-
-	@PostMapping("/inscripcion")
-	public String inscribir(HttpSession session,@RequestParam Integer idUsuario, @RequestParam Integer idActividad, ModelMap modelo) {
-		try {
-			usuarioServ.inscripcionActividad(idUsuario, idActividad);
-			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(idUsuario));
-
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-			return "inscripcion_back.html";
-		}
-
-		return "redirect:/usuarios/inscripcion";
-	}
-
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/desinscripcion/{idActividad}")
 	public String desinscribir(HttpSession session, @PathVariable("idActividad") Integer idActividad, ModelMap modelo) {
@@ -154,7 +149,7 @@ public class UsuarioControlador {
 
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
-			return "desinscripcion_back.html";
+			return "panel_actividades_usuario.html";
 		}
 
 		return "redirect:/usuarios/panel-actividades";

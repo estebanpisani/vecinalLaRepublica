@@ -20,32 +20,33 @@
 <body>
 
 	<!-- HEADER -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-		  <h1>Vecinal "La República"</h1>
-		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="float-right">
-		  <div class="collapse navbar-collapse" id="navbarScroll" >			
-			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-			  <li class="nav-item">
-				<a class="nav-link active" aria-current="page" href="#">Actividades</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="#">Inicio</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="#">Instituciones</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="#">Comercios</a>
-			  </li>
-			</ul>
+			<h1>Vecinal "La República"</h1>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+				aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="float-right">
+				<div class="collapse navbar-collapse" id="navbarScroll">
+					<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Actividades</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Instituciones</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Comercios</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
-		</div>
-		</div>
-	  </nav>
+	</nav>
 
 	<!-- MAIN -->
 
@@ -57,146 +58,162 @@
 					<h3 class="actividades-titulo">Actividades</h3>
 				</div>
 
+
+
+
 				<!--Actividad 1-->
 
-				<div class="accordion js-accordion" >
+				<div class="accordion js-accordion">
 					<div class="accordion__item js-accordion-item" th:each="actividad : ${actividades}">
-						<div class="accordion-header js-accordion-header" th:text="${actividad.nombreActividad}" >
+						<div class="accordion-header js-accordion-header" th:text="${actividad.nombreActividad}">
 						</div>
-						<div class="accordion-body js-accordion-body" >
+						<div class="accordion-body js-accordion-body">
 							<div class="col-md-4">
-									<div class="progress">
-												<div class="progress-bar" role="progressbar" style="width: 50%"
-													aria-valuenow="70" aria-valuemin="0" aria-valuemax="90"></div>
-											</div>
-											<div class="mt-3"><span class="text1" th:text="${actividad.inscriptos}+' inscriptos de '"></span><span class="text1"th:text="${actividad.cupo}+' cupos disponibles.'"></span></div>
-										
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="70"
+										aria-valuemin="0" aria-valuemax="90"></div>
+								</div>
+								<div class="mt-3"><span class="text1"
+										th:text="${actividad.inscriptos}+' inscriptos de '"></span><span class="text1"
+										th:text="${actividad.cupo}+' cupos disponibles.'"></span></div>
+
 							</div>
 							<div th:text="'Fecha de inicio: '+${actividad.fecha}"></div>
 							<div th:text="${actividad.descripcionActividad}"></div>
-							
+
+
 							<div class="accordion-body__contents">
+<<<<<<< HEAD
 								<a th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades} class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Inscribirse</a> <br>
+=======
+								<a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+									th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades}">Inscribirse</a>
+								<br>
+>>>>>>> e4bf016980e64d14681b049ff75d98107159611f
 							</div>
 						</div><!-- end of accordion body -->
 					</div><!-- end of accordion item -->
 
 
-			<!--Actividades-->
-				<!---Form envío mensaje-->
+					<!--Actividades-->
+					<!---Form envío mensaje-->
 
 
 
-				<script>
-					(new IntersectionObserver(function (e, o) {
-						if (e[0].intersectionRatio > 0) {
-							document.documentElement.removeAttribute('class');
-						} else {
-							document.documentElement.setAttribute('class', 'stuck');
-						};
-					})).observe(document.querySelector('.trigger'));
-				</script>
+					<script>
+						(new IntersectionObserver(function (e, o) {
+							if (e[0].intersectionRatio > 0) {
+								document.documentElement.removeAttribute('class');
+							} else {
+								document.documentElement.setAttribute('class', 'stuck');
+							};
+						})).observe(document.querySelector('.trigger'));
+					</script>
 
-				<script>
-					var accordion = (function () {
+					<script>
+						var accordion = (function () {
 
-						var $accordion = $('.js-accordion');
-						var $accordion_header = $accordion.find('.js-accordion-header');
-						var $accordion_item = $('.js-accordion-item');
+							var $accordion = $('.js-accordion');
+							var $accordion_header = $accordion.find('.js-accordion-header');
+							var $accordion_item = $('.js-accordion-item');
 
-						// default settings 
-						var settings = {
-							// animation speed
-							speed: 400,
+							// default settings 
+							var settings = {
+								// animation speed
+								speed: 400,
 
-							// close all other accordion items if true
-							oneOpen: false
-						};
+								// close all other accordion items if true
+								oneOpen: false
+							};
 
-						return {
-							// pass configurable object literal
-							init: function ($settings) {
-								$accordion_header.on('click', function () {
-									accordion.toggle($(this));
-								});
+							return {
+								// pass configurable object literal
+								init: function ($settings) {
+									$accordion_header.on('click', function () {
+										accordion.toggle($(this));
+									});
 
-								$.extend(settings, $settings);
+									$.extend(settings, $settings);
 
-								// ensure only one accordion is active if oneOpen is true
-								if (settings.oneOpen && $('.js-accordion-item.active').length > 1) {
-									$('.js-accordion-item.active:not(:first)').removeClass('active');
+									// ensure only one accordion is active if oneOpen is true
+									if (settings.oneOpen && $('.js-accordion-item.active').length > 1) {
+										$('.js-accordion-item.active:not(:first)').removeClass('active');
+									}
+
+									// reveal the active accordion bodies
+									$('.js-accordion-item.active').find('> .js-accordion-body').show();
+								},
+								toggle: function ($this) {
+
+									if (settings.oneOpen && $this[0] != $this.closest('.js-accordion').find('> .js-accordion-item.active > .js-accordion-header')[0]) {
+										$this.closest('.js-accordion')
+											.find('> .js-accordion-item')
+											.removeClass('active')
+											.find('.js-accordion-body')
+											.slideUp()
+									}
+
+									// show/hide the clicked accordion item
+									$this.closest('.js-accordion-item').toggleClass('active');
+									$this.next().stop().slideToggle(settings.speed);
 								}
-
-								// reveal the active accordion bodies
-								$('.js-accordion-item.active').find('> .js-accordion-body').show();
-							},
-							toggle: function ($this) {
-
-								if (settings.oneOpen && $this[0] != $this.closest('.js-accordion').find('> .js-accordion-item.active > .js-accordion-header')[0]) {
-									$this.closest('.js-accordion')
-										.find('> .js-accordion-item')
-										.removeClass('active')
-										.find('.js-accordion-body')
-										.slideUp()
-								}
-
-								// show/hide the clicked accordion item
-								$this.closest('.js-accordion-item').toggleClass('active');
-								$this.next().stop().slideToggle(settings.speed);
 							}
-						}
-					})();
+						})();
 
-					$(document).ready(function () {
-						accordion.init({ speed: 300, oneOpen: true });
-					});
-				</script>
+						$(document).ready(function () {
+							accordion.init({speed: 300, oneOpen: true});
+						});
+					</script>
 
+
+
+				</div>
 
 
 		</div>
 
+		<div class="alert alert-danger" role="alert" th:if="${error != null}">
+			<div th:text="${error}"></div>
+		</div>
 
-	</div>
+		<!---FOOTER-->
 
-	<!---FOOTER-->
+		<footer style="background-color: #222;">
+			<div class="container p-4">
+				<div class="row">
+					<div class="col-lg-6 col-md-12 mb-4">
+						<h5 class="mb-3 text-light">Dirección:</h5>
+						<p class="text-light">
+							Paraná y 9 de Julio.
+						</p>
+						<h5 class="mb-3 text-light">Teléfono:</h5>
+						<p class="text-light">
+							341-666
+						</p>
+					</div>
 
-	<footer style="background-color: #222;">
-		<div class="container p-4">
-		  <div class="row">
-			<div class="col-lg-6 col-md-12 mb-4">
-			  <h5 class="mb-3 text-light">Dirección:</h5>
-			  <p class="text-light">
-				Paraná y 9 de Julio.
-			  </p>
-			  <h5 class="mb-3 text-light">Teléfono:</h5>
-			  <p class="text-light">
-				341-666
-			  </p>
+					<div class="col-lg-3 col-md-6 mb-4">
+						<h5 class="mb-1 text-light">Horarios</h5>
+						<table class="table" style="border-color: #ccc;">
+							<tbody>
+								<tr class="text-white">
+									<td>Lun - Vie:</td>
+									<td>8hs - 22 hs</td>
+								</tr>
+								<tr class="text-white">
+									<td>Sáb - Dom:</td>
+									<td>8 hs - 13 hs</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
-			
-			<div class="col-lg-3 col-md-6 mb-4">
-				<h5 class="mb-1 text-light">Horarios</h5>
-				<table class="table" style="border-color: #ccc;">
-				  <tbody>
-					<tr class="text-white">
-					  <td>Lun - Vie:</td>
-					  <td>8hs - 22 hs</td>
-					</tr>
-					<tr class="text-white">
-					  <td>Sáb - Dom:</td>
-					  <td>8 hs - 13 hs</td>
-					</tr>
-				  </tbody>
-				</table>
-			  </div>
+			<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:#ccc;">
+				© 2021 Familia Lategano
 			</div>
-		  </div>
-		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:#ccc;">
-			© 2021 Familia Lategano
-		  </div>
-		  <!-- Copyright -->
-	  </footer>
+			<!-- Copyright -->
+		</footer>
 </body>
 
 </html>

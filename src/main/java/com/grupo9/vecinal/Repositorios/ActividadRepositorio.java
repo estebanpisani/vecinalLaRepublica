@@ -27,10 +27,10 @@ public interface ActividadRepositorio  extends JpaRepository<Actividad, Integer>
 	public List<Actividad> actividadNombre(@Param("nombre") String nombre);
 	
 	@Query("SELECT a FROM Actividad a WHERE a.alta = true ORDER BY a.fecha DESC")
-	public List<Actividad> actividadesFechaReciente();
+	public List<Actividad> actividadesFechaAntigua();
 	
 	@Query("SELECT a FROM Actividad a WHERE a.alta = true ORDER BY a.fecha ASC")
-	public List<Actividad> actividadesFechaAntigua();
+	public List<Actividad> actividadesFechaReciente();
 	
 
 	

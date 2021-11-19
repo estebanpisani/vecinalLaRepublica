@@ -64,7 +64,7 @@ public class ActividadServicio {
 			actividad.setDescripcionActividad(descripcionActividad);
 			actividad.setFecha(localDate);
 			actividad.setCupo(cupo);
-			actividad.setInscriptos(0);				
+			actividad.setInscriptos();				
 			actividad.setAlta(true);
 
 			actividadRepo.save(actividad);
