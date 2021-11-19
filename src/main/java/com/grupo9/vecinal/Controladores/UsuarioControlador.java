@@ -130,7 +130,8 @@ public class UsuarioControlador {
 			Usuario usuario = usuarioServ.buscarUsuarioCodValidacion(codigo);
 			if (usuario != null) {
 				modelo.addAttribute("contrasenia", true);
-				return "redirect:/login?logout";
+				modelo.addAttribute("mail",usuario.getEmailUsuario());
+				return "recuperar_back.html";
 			}
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
