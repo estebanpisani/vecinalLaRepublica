@@ -58,9 +58,9 @@
                 placeholder="Introduzca su telefono" required>
         </div>      
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Ingrese contraseña</label>
-          <input type="password" th:value="${contrasenia}" name="contrasenia" class="form-control" required>
-        </div>     
+            <label for="exampleInputdescripcion1" class="form-label">Descripcion</label>
+            <input th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
+                placeholder="Area de dicha Institucion" required>   
         <div class="mb-3">
             <label for="exampleInputarchivo1" class="form-label">Insertar Foto</label>
             <input th:type="file" name="archivo" class="form-control">
@@ -75,7 +75,7 @@
                         <th scope="col">Id</th>
                         <th scope="col">Institucion</th>
                         <th scope="col">Direccion</th>
-                        <th scope="col">descripcion</th>
+                        <th scope="col">Descripcion</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Dar Baja</th>
                       </tr>
@@ -83,10 +83,20 @@
                     <tbody>
                       <tr>
                         <th scope="row" >1</th>
-                        <td>Martin</td>
-                        <td>Oroná</td>
-                        <td>15/11/21</td>
-                        <td><button type="button" class="btn btn-success"> <a href="/instituciones/modificar-instituciones">Editar</a></button></td>
+                        <tr th:each="Institucion : ${nombre}">
+                        <td th:text="${get.Nombre()}"></td>
+                        </tr>
+                        <tr th:each="Direccion : ${direccion}">
+                        <td th:text="${get.Direccion()}"></td>
+                        </tr>
+                        <tr th:each="Telefono : ${telefono}">
+                        <td th:text="${get.Telefono()}"></td>
+                        </tr>
+                        <tr th:each="Descripcion : ${descripcion}">
+                        <td th:text="${get.Descripcion()}"></td>
+                        </tr>
+
+                        <td><button type="button" class="btn btn-success"> <a href="/instituciones/modificar">Editar</a></button></td>
                         <td><button type="button" class="btn btn-danger">Eliminar</button></td>
                       </tr>
 
