@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Usuario;
+import com.grupo9.vecinal.Repositorios.ActividadRepositorio;
 import com.grupo9.vecinal.Repositorios.UsuarioRepositorio;
 
 import net.bytebuddy.utility.RandomString;
@@ -42,6 +43,9 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Autowired
 	private MailServicio enviarMails;
+	
+	@Autowired
+	private ActividadRepositorio actividadRepo;
 
 	@Transactional
 	public void crearUsuario(MultipartFile foto, String nombreUsuario, String contrasenia, String contrasenia2,
@@ -292,6 +296,9 @@ public class UsuarioServicio implements UserDetailsService {
 
 			}
 			usuario.getActividades().add(actividad);
+			actividad.getUsuarios().add(usuario);
+			actividad.setInscriptos();
+			actividadRepo.save(actividad);
 			usuarioRepo.save(usuario);
 
 		} catch (Exception e) {

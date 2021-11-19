@@ -20,6 +20,7 @@
 				th:text="${usuario.getNombre()} + ' ' + ${usuario.apellido}"></b> :)
 
 			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
+				<a class="btn btn-outline-dark" href="/"><ion-icon name="home"></ion-icon> Inicio</a>
 				<button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button></a>
 			</form>
 		</div>
@@ -27,7 +28,7 @@
 			<div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">
 					<li class="nav-item">
-						<a class="nav-link" href="/usuarios/panel">Inicio</a>
+						<a class="nav-link" href="/usuarios/panel">Perfil</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link active" href="/usuarios/panel-actividades">Actividades</a>
@@ -39,7 +40,7 @@
 			</div>
 			<div class="card-body">
 
-				<div class="badge bg-primary text-wrap title">Actividades</div>
+				<div class="badge bg-primary text-wrap title z">Mis Actividades</div>
 
 				<table class="table">
 					<thead>
@@ -47,6 +48,7 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Descripción</th>
 							<th scope="col">Fecha</th>
+							<th scope="col">Ver más</th>
 							<th scope="col">Darme de Baja</th>
 						</tr>
 					</thead>
@@ -56,6 +58,7 @@
 							<td th:text="${actividad.nombreActividad}"></td>
 							<td th:text="${actividad.descripcionActividad}"></td>
 							<td th:text="${actividad.fecha}"></td>
+							<td><a class="btn btn-success">Ver más</a></td>
 							<td><a class="btn btn-danger"
 									th:href="@{'/usuarios/desinscripcion/'}+${actividad.idActividades}">Darme
 									de Baja</a></td>
