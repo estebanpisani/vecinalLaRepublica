@@ -91,6 +91,10 @@ public class AdminControlador {
 	@GetMapping("/modificar-actividad/{idActividad}")
 	public String modificarActividad(@PathVariable("idActividad") Integer idActividad, ModelMap modelo) {
 		try {
+			
+			List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
+			modelo.put("actividades", actividades);
+			
 			Actividad actividad = actividadServ.buscarActividad(idActividad);
 			modelo.addAttribute("actividad", actividad);
 		} catch (Exception e) {
