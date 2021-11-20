@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.grupo9.vecinal.Entidades.Actividad;
+import com.grupo9.vecinal.Entidades.Comercio;
 import com.grupo9.vecinal.Entidades.Institucion;
 import com.grupo9.vecinal.Entidades.Novedad;
 import com.grupo9.vecinal.Entidades.Usuario;
+import com.grupo9.vecinal.Servicios.ActividadServicio;
+import com.grupo9.vecinal.Servicios.ComercioServicio;
 import com.grupo9.vecinal.Servicios.InstitucionServicio;
 import com.grupo9.vecinal.Servicios.NovedadServicio;
 import com.grupo9.vecinal.Servicios.UsuarioServicio;
@@ -31,6 +35,12 @@ public class FotoControlador {
 
 	@Autowired
 	private InstitucionServicio institucionServ;
+	
+	@Autowired
+	private ComercioServicio comercioServ;
+	
+	@Autowired
+	private ActividadServicio actividadServ;
 	
 	@GetMapping("/usuario/{id}")
 	public ResponseEntity<byte[]> FotoUsuario(@PathVariable Integer id) {
@@ -74,6 +84,40 @@ public class FotoControlador {
 				throw new Exception("El usuario no posee foto");
 			}
 			byte[] foto = institucion.getFoto().getContenido();
+			HttpHeaders cabecera = new HttpHeaders();
+			cabecera.setContentType(MediaType.IMAGE_JPEG);
+			return new ResponseEntity(foto, cabecera, HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	/*@GetMapping("/comercio/{id}")
+	public ResponseEntity<byte[]> FotoComercio(@PathVariable Integer id) {
+		try {
+			Comercio comercio = comercioServ.altaInstitucion(id);
+			if (comercio.getFoto()==null) {
+				throw new Exception("El usuario no posee foto");
+			}
+			byte[] foto = comercio.getFoto().getContenido();
+			HttpHeaders cabecera = new HttpHeaders();
+			cabecera.setContentType(MediaType.IMAGE_JPEG);
+			return new ResponseEntity(foto, cabecera, HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+	}*/
+	
+	@GetMapping("/actividad/{id}")
+	public ResponseEntity<byte[]> FotoActividad(@PathVariable Integer id) {
+		try {
+			Actividad actividad = actividadServ.buscarActividad(id);
+			if (actividad.getFoto()==null) {
+				throw new Exception("El usuario no posee foto");
+			}
+			byte[] foto = actividad.getFoto().getContenido();
 			HttpHeaders cabecera = new HttpHeaders();
 			cabecera.setContentType(MediaType.IMAGE_JPEG);
 			return new ResponseEntity(foto, cabecera, HttpStatus.OK);

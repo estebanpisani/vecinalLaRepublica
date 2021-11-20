@@ -224,7 +224,28 @@ public class AdminControlador {
 
 		novedadServ.crearNovedad(foto, titulo, descripcion, destacado);
 
-		return "redirect:/admin/crear-novedades";
+		return "redirect:/admin/panel-novedades";
+	}
+	
+	@PostMapping("/modificar-novedades")
+	public String modificarNovedades(ModelMap modelo, @RequestParam(required = false) MultipartFile foto,
+			@RequestParam String titulo, @RequestParam String descripcion,
+			@RequestParam(required = false) Boolean destacado, @RequestParam Integer id) {
+
+		try {
+			novedadServ.modificarNovedad(foto, titulo, descripcion, destacado, id);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+			return "pnel-novedades.html";
+		}
+
+		return "redirect:/admin/panel-novedades";
+	}
+	
+	@GetMapping("/baja-novedad/{id}")
+	public String bajaNovedad(@PathVariable("id") Integer id) throws Exception {	
+			novedadServ.bajaNovedad(id);
+			return "redirect:/admin/panel-novedad";
 	}
 	
 	@GetMapping("/panel")
@@ -285,7 +306,7 @@ public class AdminControlador {
 		}
 		
 		
-		return "panel-usuarios.html";
+		return "panel-novedades.html";
 	}
 	
 	@GetMapping("/panel-instituciones")
@@ -299,10 +320,10 @@ public class AdminControlador {
 		}
 		
 		
-		return "panel-usuarios.html";
+		return "panel-instituciones.html";
 	}
 
-	@GetMapping("/panel-camercios")
+	@GetMapping("/panel-comercios")
 	public String panelAdminComercios(ModelMap modelo) {
 		try {
 			List<Comercio> comercios = comercioServ.mostrarComercios();
@@ -312,7 +333,7 @@ public class AdminControlador {
 		}
 		
 		
-		return "panel-usuarios.html";
+		return "panel-comercios.html";
 	}
 	
 
