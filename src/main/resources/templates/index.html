@@ -95,12 +95,12 @@
 											src="https://via.placeholder.com/300x200/FFB6C1/000000"
 											class="img-responsive">
 										<img th:if="${novedad.foto != null}"
-											th:src="${'/foto/novedad/'}+${novedad.actividadId}" width="300"
+											th:src="${'/foto/novedad/'}+${novedad.novedadId}" width="300"
 											height="200" "img-responsive">
 										<span class="gradient"></span>
 									</div>
 									<div class="details">
-										<h3><a th:href="${'/novedades/noticia/'} + ${novedad.actividadId}"
+										<h3><a th:href="${'/novedades/noticia/'} + ${novedad.novedadId}"
 												th:text="${novedad.titulo}"></a></h3>
 										<time>02 de Noviembre 2021</time>
 									</div>
