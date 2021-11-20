@@ -136,7 +136,7 @@ public class NovedadServicio {
 	public Novedad mostrarNovedad(Integer id) throws Exception {
 		Novedad novedad = novedadRepo.findById(id).get();
 		if (novedad == null) {
-			throw new Exception("No hay noticias con esa fecha");
+			throw new Exception("No se encontro la noticia solicitada");
 		} else {
 			return novedad;
 		}
@@ -187,6 +187,16 @@ public class NovedadServicio {
 		List<Novedad> novedades = novedadRepo.novedadesPorDestacado();
 		if (novedades.isEmpty()) {
 			throw new Exception("No hay noticias destacadas");
+		} else {
+			return novedades;
+		}
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Novedad> mostrarNovedadesNoDestacadas() throws Exception {
+		List<Novedad> novedades = novedadRepo.novedadesNoDestacadas();
+		if (novedades.isEmpty()) {
+			throw new Exception("No hay noticias para mostrar");
 		} else {
 			return novedades;
 		}

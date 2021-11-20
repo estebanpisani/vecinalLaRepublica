@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>Vecinal "La República" - Panel</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../static/styles/login.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 	</script>
 </head>
+
 <body>
 	<div class="main-panel">
-		<div class="title"><ion-icon name="person-circle-outline"></ion-icon> Hola, Martin Oroná :)		<button type="button" class="btn btn-outline-danger" style="float: right;">Cerrar Sesión</button>
+		<div class="title">
+			<ion-icon name="person-circle-outline"></ion-icon> Hola, Administrador :) <button type="button"
+				class="btn btn-outline-danger" style="float: right;">Cerrar Sesión</button>
 		</div>
 		<div class="card text-center">
 			<div class="card-header">
@@ -32,61 +37,117 @@
 				</ul>
 			</div>
 			<div class="card-body">
-			
-			<form th:action="@{/admin/registro-actividad}" method="POST">
-        <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
 
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
-          <input th:type="text" th:value="${nombreActividad}" name="nombreActividad" class="form-control" placeholder="Escriba el nombre de la actividad." required>
-        </div>
-        
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Descripción de Actividad</label>
-          <textarea th:type="text" th:value="${descripcion}" name="descripcion" class="form-control" placeholder="Describa la actividad." required></textarea>
-        </div>
-        
-        
 
-        
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Cupo</label>
-          <input th:type="number" maxlength="500" th:value="${cupo}" name="cupo" class="form-control" required>
-        </div>        
-        
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Fecha</label>
-          <input type="date" th:value="${fecha}" name="fecha" class="form-control" required>
-        </div>     
-        
+				<!--CREAR-->
 
-          <button th:type="submit" class="btn btn-primary">Crear actividad</button>
-      </form>
-			
+				<form th:if="${actividades!=null}" th:action="@{/admin/registro-actividad}" method="POST">
+					<p style=" color: red" th:if="${error != null}" th:text="${error}">
+					</p>
 
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Fecha Registro</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Dar Baja</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row" >1</th>
-                        <td>Martin</td>
-                        <td>Oroná</td>
-                        <td>15/11/21</td>
-                        <td><button type="button" class="btn btn-success"> <a href="/admin/modificar-actividad">Editar</a></button></td>
-                        <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-                      </tr>
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
+						<input th:type="text" th:value="${nombreActividad}" name="nombreActividad" class="form-control"
+							placeholder="Escriba el nombre de la actividad." required>
+					</div>
 
-                    </tbody>
-                  </table>
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Descripción de Actividad</label>
+						<textarea th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
+							placeholder="Describa la actividad." required></textarea>
+					</div>
+
+
+
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cupo</label>
+						<input th:type="number" maxlength="500" th:value="${cupo}" name="cupo" class="form-control"
+							required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Fecha</label>
+						<input type="date" th:value="${fecha}" name="fecha" class="form-control" required>
+					</div>
+
+
+					<button th:type="submit" class="btn btn-primary">Crear actividad</button>
+				</form>
+
+
+				<!--MODIFICAR-->
+
+				<form th:if="${actividad!=null}" th:action="@{/admin/modificar-actividad}" method="POST"
+					th:each="act : ${actividad}">
+					<p style=" color: red" th:if="${error != null}" th:text="${error}">
+					</p>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
+						<input th:type="text" th:value="${act.nombreActividad}" name="nombreActividad"
+							class="form-control" placeholder="Escriba el nombre de la actividad." required>
+						<input th:type="hidden" th:value="${act.idActividades}" name="id" class="form-control" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Descripción de Actividad</label>
+						<textarea th:type="text" th:text="${act.descripcionActividad}" name="descripcion"
+							class="form-control" required></textarea>
+					</div>
+
+
+
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cupo</label>
+						<input th:type="number" maxlength="500" th:value="${act.cupo}" name="cupo" class="form-control"
+							required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Fecha</label>
+						<input type="date" th:value="${act.fecha}" name="fecha" class="form-control" required>
+					</div>
+
+
+					<button th:type="submit" class="btn btn-primary">Editar actividad</button>
+				</form>
+
+
+
+				<!--Lista-->
+
+
+				<table class="table" th:if="${actividades!=null}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Descripción</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Cupo</th>
+							<th scope="col">Inscriptos</th>
+							<th scope="col">Editar</th>
+							<th scope="col">Dar Baja</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="actividad : ${actividades}">
+							<td th:text="${actividad.nombreActividad}"></td>
+							<td th:text="${actividad.descripcionActividad}"></td>
+							<td th:text="${actividad.fecha}"></td>
+							<td th:text="${actividad.cupo}"></td>
+							<td th:text="${actividad.inscriptos}"></td>
+							<td><button type="button" class="btn btn-success"> <a
+										th:href="@{'/admin/modificar-actividad/'}+${actividad.idActividades}"> Editar
+									</a> </button></td>
+							<td><button type="button" class="btn btn-danger"> <a
+										th:href="@{'/admin/baja-actividad/'}+${actividad.idActividades}"> Eliminar
+									</a></button></td>
+						</tr>
+
+					</tbody>
+				</table>
 			</div>
 		</div>
 
@@ -95,4 +156,5 @@
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

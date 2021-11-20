@@ -59,12 +59,13 @@
 				</div>
 
 
-
-
 				<!--Actividad 1-->
 
 				<div class="accordion js-accordion">
+
+
 					<div class="accordion__item js-accordion-item" th:each="actividad : ${actividades}">
+
 						<div class="accordion-header js-accordion-header" th:text="${actividad.nombreActividad}">
 						</div>
 						<div class="accordion-body js-accordion-body">
@@ -74,12 +75,23 @@
 										aria-valuemin="0" aria-valuemax="${actividad.cupo}"></div><!-- Las propiedades "aria-valuemin" y "aria-valuemax" proporcionan los valores mínimo y máximo -->
 								</div>
 								<div class="mt-3"><span class="text1"
-										th:text="${actividad.getUsuarios().size()}+' inscriptos de '"></span><span class="text1"
+										th:text="${actividad.inscriptos}+' inscriptos de '"></span><span class="text1"
 										th:text="${actividad.cupo}+' cupos disponibles.'"></span></div>
 							</div>
 							<div th:text="'Fecha de inicio: '+${actividad.fecha}"></div>
 							<div th:text="${actividad.descripcionActividad}"></div>
 							<div class="accordion-body__contents">
+								<div th:if="${error != null}" th:text="${error}"></div>		
+								<br>
+							</div>
+							
+							<div class="accordion-body__contents" th:if="${error != null}" >
+								<a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+									th:href="#" th:text="${error}"></a>
+								<br>
+							</div>							
+
+							<div class="accordion-body__contents" th:unless="${error != null}">
 								<a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
 									th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades}">Inscribirse</a>
 								<br>
