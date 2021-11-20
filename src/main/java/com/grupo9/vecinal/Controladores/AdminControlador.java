@@ -1,12 +1,14 @@
 package com.grupo9.vecinal.Controladores;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,7 +57,9 @@ public class AdminControlador {
 	}
 	
 	@GetMapping("/registro-actividad")
-	public String registroActividad() {
+	public String registroActividad(ModelMap modelo) throws Exception{
+		List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
+		modelo.put("actividades", actividades);
 		return "panel-actividades.html";
 	}
 
@@ -66,7 +70,7 @@ public class AdminControlador {
 		try {
 			actividadServ.crearActividad(nombreActividad, descripcion, fecha, cupo);
 
-			return "redirect:/";
+			return "redirect:/admin/registro-actividad";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreActividad", nombreActividad);
@@ -80,15 +84,15 @@ public class AdminControlador {
 	
 
 
-	@GetMapping("/modificar-actividad")
-	public String modificarActividad(ModelMap modelo) {
+	@GetMapping("/modificar-actividad/{idActividad}")
+	public String modificarActividad(@PathVariable("idActividad") Integer idActividad, ModelMap modelo) {
 		try {
-			Actividad actividad = actividadServ.buscarActividad(1);
+			Actividad actividad = actividadServ.buscarActividad(idActividad);
 			modelo.addAttribute("actividad", actividad);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 		}
-		return "modificacion-act_back.html";
+		return "panel-actividades.html";
 	}
 
 	@PostMapping("/modificar-actividad")
@@ -102,7 +106,7 @@ public class AdminControlador {
 			Actividad actividad = actividadServ.buscarActividad(id);
 			modelo.addAttribute("actividad", actividad);
 			modelo.put("error", e.getMessage());
-			return "modificacion_back";
+			return "redirect:/admin/registro-actividad";
 		}
 	}
 	
