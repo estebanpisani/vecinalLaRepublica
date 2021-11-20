@@ -328,6 +328,7 @@ public class UsuarioServicio implements UserDetailsService {
 			for (Actividad act : usuario.getActividades()) {
 				if (act.getIdActividades().equals(actividad.getIdActividades())) {
 					usuario.getActividades().remove(actividad);
+					actividad.getUsuarios().remove(usuario);
 					actividad.setInscriptos();
 					actividadRepo.save(actividad);
 					usuarioRepo.save(usuario);					

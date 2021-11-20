@@ -21,8 +21,12 @@ public class ActividadControlador {
 	
 	@GetMapping("/mostrar")
 	public String mostrarActividades(ModelMap modelo) throws Exception {
-		List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
-		modelo.put("actividades", actividades);
+		try {
+			List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
+			modelo.put("actividades", actividades);						
+		} catch (Exception e) {			
+			modelo.put("error", e.getMessage());
+		}
 		return "actividad.html";
 	}
 

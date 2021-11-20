@@ -114,11 +114,14 @@ public class AdminControlador {
 		}
 	}
 	
-	@PostMapping("/baja-actividad")
-	public String bajaActividad(@RequestParam Integer id) throws Exception {	
+	
+	@GetMapping("/baja-actividad/{idActividad}")
+	public String bajaActividad(@PathVariable("idActividad") Integer id) throws Exception {	
 			actividadServ.bajaActividad(id);
 			return "redirect:/admin/registro-actividad";
 	}	
+	
+	
 
 	@PostMapping("/registrar-comercio")
 	public String registrarComercio(ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
@@ -259,15 +262,16 @@ public class AdminControlador {
 	
 	@GetMapping("/panel-actividades")
 	public String panelAdminActividades(ModelMap modelo) {
+
 		try {
-			List<Actividad> actividades = actividadServ.mostrarActividades();
-			modelo.addAttribute("actividades", actividades);
+			List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
+			modelo.put("actividades", actividades);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 		}
 		
 		
-		return "panel-usuarios.html";
+		return "panel-actividades.html";
 	}
 	
 	

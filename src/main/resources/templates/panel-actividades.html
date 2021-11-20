@@ -87,8 +87,7 @@
 						<label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
 						<input th:type="text" th:value="${act.nombreActividad}" name="nombreActividad"
 							class="form-control" placeholder="Escriba el nombre de la actividad." required>
-						<input th:type="hidden" th:value="${act.idActividades}" name="id"
-							class="form-control" required>
+						<input th:type="hidden" th:value="${act.idActividades}" name="id" class="form-control" required>
 					</div>
 
 					<div class="mb-3">
@@ -126,7 +125,8 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Descripción</th>
 							<th scope="col">Fecha</th>
-							<th scope="col">Cupo</th>							
+							<th scope="col">Cupo</th>
+							<th scope="col">Inscriptos</th>
 							<th scope="col">Editar</th>
 							<th scope="col">Dar Baja</th>
 						</tr>
@@ -136,11 +136,14 @@
 							<td th:text="${actividad.nombreActividad}"></td>
 							<td th:text="${actividad.descripcionActividad}"></td>
 							<td th:text="${actividad.fecha}"></td>
-							<td th:text="${actividad.cupo}"></td>							
+							<td th:text="${actividad.cupo}"></td>
+							<td th:text="${actividad.inscriptos}"></td>
 							<td><button type="button" class="btn btn-success"> <a
 										th:href="@{'/admin/modificar-actividad/'}+${actividad.idActividades}"> Editar
 									</a> </button></td>
-							<td><button type="button" class="btn btn-danger">Eliminar</button></td>
+							<td><button type="button" class="btn btn-danger"> <a
+										th:href="@{'/admin/baja-actividad/'}+${actividad.idActividades}"> Eliminar
+									</a></button></td>
 						</tr>
 
 					</tbody>
