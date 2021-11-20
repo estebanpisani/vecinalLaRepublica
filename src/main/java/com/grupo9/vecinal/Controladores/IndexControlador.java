@@ -93,7 +93,7 @@ public class IndexControlador {
 			return "redirect:/login?baja";
 		}
 		if (usuario.getAdmin()) {
-			return "redirect:/admin/bajaUsuario";
+			return "redirect:/admin/panel";
 		} else {
 			return "redirect:/";
 		}

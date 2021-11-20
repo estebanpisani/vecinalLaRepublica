@@ -60,27 +60,28 @@
 					<div th:text="${error}"></div>
 				</div>
 				<div class="row">
-					<div th:if="${novedadesDestacadas != null}" th:each="novedadDestacada : ${novedadesDestacadas}"
-						class="col-sm-4">
-						<div class="widget single-news">
-							<div class="image">
-								<img th:if="${novedadDestacada.foto != null}"
-									th:src="${'foto/novedad/'}+${novedadDestacada.novedadId}" class="img-responsive">
-								<img th:if="${novedadDestacada.foto == null}"
-									src="https://via.placeholder.com/300x200/FFB6C1/000000" class="img-responsive">
-								<span class="gradient"></span>
-							</div>
-							<div class="details">
-								<div class="category"><a>Noticias</a></div>
-								<h3><a th:text="${novedadDestacada.titulo}"
-										th:href="@{'/novedades/mostrar/'} + ${novedadDestacada.novedadId}"></a></h3>
-								<time th:if="novedad.fecha != null"
-									th:text="${novedadDestacada.fecha.getDayOfMonth()} + '/' + ${novedadDestacada.fecha.getMonthValue()} + '/' + ${novedadDestacada.fecha.getYear()}"></time>
+						<div th:if="${novedadesDestacadas != null}" th:each="novedadDestacada : ${novedadesDestacadas}"
+							class="col-sm-4">
+							<div class="widget single-news">
+								<div class="image">
+									<img th:if="${novedadDestacada.foto != null}"
+										th:src="${'/foto/novedad/mostrar/'}+${novedadDestacada.novedadId}"
+										class="img-responsive">
+									<img th:if="${novedadDestacada.foto == null}"
+										src="https://via.placeholder.com/300x200/FFB6C1/000000" class="img-responsive">
+									<span class="gradient"></span>
+								</div>
+								<div class="details">
+									<div class="category"><a>Noticias</a></div>
+									<h3><a th:text="${novedadDestacada.titulo}"
+											th:href="@{'/novedades/mostrar/'} + ${novedadDestacada.novedadId}"></a></h3>
+									<time th:if="novedad.fecha != null"
+										th:text="${novedadDestacada.fecha.getDayOfMonth()} + '/' + ${novedadDestacada.fecha.getMonthValue()} + '/' + ${novedadDestacada.fecha.getYear()}"></time>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 		</section>
 		<!--otras-noticias-->
 
@@ -97,7 +98,7 @@
 						<div class="widget single-news">
 							<div class="image">
 								<img th:if="${novedadNoDestacada.foto != null}"
-									th:src="${'foto/novedad/'}+${novedadNoDestacada.novedadId}" class="img-responsive">
+									th:src="${'/foto/novedad/mostrar/'}+${novedadNoDestacada.novedadId}" class="img-responsive">
 								<img th:if="${novedadNoDestacada.foto == null}"
 									src="https://via.placeholder.com/300x200/FFB6C1/000000" class="img-responsive">
 								<span class="gradient"></span>
@@ -116,26 +117,29 @@
 		</section>
 
 		<section th:if="${novedades == false}" class="otras-noticias">
-		<time th:if="novedad.fecha != null" th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}">></time>
-		<a href="/novedades/mostrar">Volver a todas las Noticias</a><br>						
+			<time th:if="novedad.fecha != null"
+				th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}">></time>
+			<a href="/novedades/mostrar">Volver a todas las Noticias</a><br>
 			<h2 class="otras-noticias-titulo" th:text="${novedad.titulo}"></h2>
-			
-				<div class="alert alert-danger" role="alert" th:if="${error != null}">
-					<div th:text="${error}"></div>
-				</div>
-						<div class="image">
-						
-							<img th:if="${novedad.foto != null}" th:src="${'foto/novedad/'}+${novedad.novedadId}" 
-								class="img-responsive">
-							<img th:if="${novedad.foto == null}" src="https://via.placeholder.com/300x200/FFB6C1/000000"
-								class="img-responsive">
-							<span class="gradient"></span>
-						</div>
-						<div class="details">
-							<h3><p th:text="${novedad.descripcion}"></p></h3>
-							
-						</div>
-			
+
+			<div class="alert alert-danger" role="alert" th:if="${error != null}">
+				<div th:text="${error}"></div>
+			</div>
+			<div class="image">
+
+				<img th:if="${novedad.foto != null}" th:src="${'/foto/novedad/'}+${novedad.novedadId}"
+					class="img-responsive">
+				<img th:if="${novedad.foto == null}" src="https://via.placeholder.com/300x200/FFB6C1/000000"
+					class="img-responsive">
+				<span class="gradient"></span>
+			</div>
+			<div class="details">
+				<h3>
+					<p th:text="${novedad.descripcion}"></p>
+				</h3>
+
+			</div>
+
 
 		</section>
 
