@@ -131,7 +131,10 @@ textarea{
 
 .olvideDatos:hover {
     color: #666;
-=======
->>>>>>> 12c9d54116dc354c0f705da843c7cfbb902f7881
->>>>>>> 90cfcbe43608e70b1c59c59408678850ee5c7947
 }
+
+.btn > a {
+    color: var(--blancoBackground)!important;
+    text-decoration: none!important;
+}
+
