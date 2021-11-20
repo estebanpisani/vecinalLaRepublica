@@ -1,6 +1,7 @@
 package com.grupo9.vecinal.Controladores;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Actividad;
+import com.grupo9.vecinal.Entidades.Comercio;
+import com.grupo9.vecinal.Entidades.Institucion;
+import com.grupo9.vecinal.Entidades.Novedad;
+import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Servicios.ActividadServicio;
 import com.grupo9.vecinal.Servicios.ComercioServicio;
 import com.grupo9.vecinal.Servicios.InstitucionServicio;
@@ -215,5 +220,95 @@ public class AdminControlador {
 
 		return "redirect:/admin/crear-novedades";
 	}
+	
+	@GetMapping("/panel")
+	public String panelAdministrador(ModelMap modelo) {
+		try {
+		List<Usuario> usuarios = usuarioServ.mostrarUsuarios();
+		List<Actividad> actividades = actividadServ.mostrarActividades();
+		List<Novedad> novedades = novedadServ.mostrarTodasNovedades();
+		List<Institucion> instituciones = institucionServ.mostrarInstituciones();
+		List<Comercio> comercios = comercioServ.mostrarComercios();
+		modelo.addAttribute("usuarios", usuarios.size());
+		modelo.addAttribute("actividades", actividades.size());
+		modelo.addAttribute("novedades", novedades.size());
+		modelo.addAttribute("instituciones", instituciones.size());
+		modelo.addAttribute("comercios", comercios.size());
+		}catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		return "panel-admin.html";
+	}
+	
+	@GetMapping("/panel-usuarios")
+	public String panelAdminUsuarios( ModelMap modelo) {
+		try {
+			List<Usuario> usuarios = usuarioServ.mostrarUsuarios();
+			modelo.addAttribute("usuarios", usuarios);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		
+		return "panel-usuarios.html";
+	}
+	
+	@GetMapping("/panel-actividades")
+	public String panelAdminActividades(ModelMap modelo) {
+		try {
+			List<Actividad> actividades = actividadServ.mostrarActividades();
+			modelo.addAttribute("actividades", actividades);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		
+		return "panel-usuarios.html";
+	}
+	
+	
+	@GetMapping("/panel-novedades")
+	public String panelAdminNovedades(ModelMap modelo) {
+		try {
+			List<Novedad> novedades = novedadServ.mostrarTodasNovedades();
+			modelo.addAttribute("novedades", novedades);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		
+		return "panel-usuarios.html";
+	}
+	
+	@GetMapping("/panel-instituciones")
+	public String panelAdminInstituciones(ModelMap modelo) {
+
+		try {
+			List<Institucion> instituciones = institucionServ.mostrarInstituciones();
+			modelo.addAttribute("instituciones", instituciones);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		
+		return "panel-usuarios.html";
+	}
+
+	@GetMapping("/panel-camercios")
+	public String panelAdminComercios(ModelMap modelo) {
+		try {
+			List<Comercio> comercios = comercioServ.mostrarComercios();
+			modelo.addAttribute("comercios", comercios);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		
+		return "panel-usuarios.html";
+	}
+	
+
+	
 
 }

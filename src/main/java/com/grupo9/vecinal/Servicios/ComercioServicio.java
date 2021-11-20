@@ -1,5 +1,6 @@
 package com.grupo9.vecinal.Servicios;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,6 +116,16 @@ public class ComercioServicio {
 			throw new Exception(e.getMessage());
 		}
 
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Comercio> mostrarComercios() throws Exception {
+		try {
+		return comercioRepo.findAll();
+		
+		}catch (Exception e) {
+			throw new Exception("No se encontraron comercios guardados");
+		} 
 	}
 	
 	
