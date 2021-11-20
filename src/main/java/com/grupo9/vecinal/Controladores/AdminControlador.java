@@ -45,20 +45,12 @@ public class AdminControlador {
 	@Autowired
 	InstitucionServicio institucionServ;
 	
-	@GetMapping("/bajaUsuario")
-	public String bajaUsuario() {
-		return "bajaUsuario_back.html";
+	@GetMapping("/bajaUsuario/{idUsuario}")
+	public String bajaUsuario(@PathVariable("idUsuario") Integer id) throws Exception {
+			usuarioServ.bajaUsuario(id);
+		return "redirect:/admin/panel-usuarios";
 	}
 
-	@PostMapping("/bajaUsuario")
-	public String bajarUsuario(@RequestParam Integer id, ModelMap modelo) {
-		try {
-			usuarioServ.bajaUsuario(id);
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-		}
-		return "bajaUsuario_back.html";
-	}
 	
 	@GetMapping("/registro-actividad")
 	public String registroActividad(ModelMap modelo) throws Exception{
@@ -256,11 +248,11 @@ public class AdminControlador {
 	public String panelAdministrador(ModelMap modelo) {
 		try {
 		List<Usuario> usuarios = usuarioServ.mostrarUsuarios();
-		List<Actividad> actividades = actividadServ.mostrarActividades();
+		List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
 		List<Novedad> novedades = novedadServ.mostrarTodasNovedades();
 		List<Institucion> instituciones = institucionServ.mostrarInstituciones();
 		List<Comercio> comercios = comercioServ.mostrarComercios();
-		modelo.addAttribute("usuarios", usuarios.size());
+		modelo.put("usuarios", 5);
 		modelo.addAttribute("actividades", actividades.size());
 		modelo.addAttribute("novedades", novedades.size());
 		modelo.addAttribute("instituciones", instituciones.size());
