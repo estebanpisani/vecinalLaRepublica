@@ -48,6 +48,31 @@ h1{
     margin-left: 8px;
 }
 
+.dropdown-menu {
+    border-radius: 5px;
+    background-color:  rgba(52, 58, 64, .9);
+}
+
+.dropdown-item {
+    color: var(--blancoBackground);
+    font-weight: 300;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(248, 249, 250,.8);
+    transition: .5s;
+}
+.dropdown-toggle::after {
+    margin: auto;
+}
+
+.btn.btn-secondary.dropdown-toggle {
+    background-color: transparent;
+    border: 0;
+    margin: auto;
+    outline: none !important;
+    box-shadow: none;
+}
 
 .navbar.navbar-expand-sm.sticky-top.navbar-dark.bg-dark.py-4 {
     padding: 50px;
@@ -90,15 +115,8 @@ h1{
     display: flex;
 }
 
-.btn.btn-secondary.dropdown-toggle {
-    background-color: transparent;
-    border: 0;
-    margin: auto;
-}
 
-.dropdown-toggle::after {
-    margin: auto;
-}
+
 
 
 
