@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.grupo9.vecinal.Entidades.Novedad;
@@ -19,17 +20,34 @@ public class NovedadControlador {
 	public NovedadServicio novedadServ;
 
 	@GetMapping("/mostrar")
-	public String mostrarNovedad(ModelMap modelo) {
+	public String mostrarNovedades(ModelMap modelo) {
 
 		try {
-			List<Novedad> novedades = novedadServ.mostrarAltaNovedades();
-			modelo.addAttribute("novedades", novedades);
-
+			List<Novedad> novedadesDestacadas = novedadServ.mostrarNovedadesDestacadas();
+			modelo.addAttribute("novedadesDestacadas", novedadesDestacadas);
+			List<Novedad> novedadesNoDestacadas = novedadServ.mostrarNovedadesNoDestacadas();
+			modelo.addAttribute("novedadesNoDestacadas", novedadesNoDestacadas);
+			modelo.put("novedades", true);
 		} catch (Exception e) {
-			modelo.put("errorLista", e.getMessage());
+			modelo.put("error", e.getMessage());
 		}
 
-		return "crearNovedades.html";
+		return "novedades.html";
+	}
+	
+	@GetMapping("/mostrar/{id}")
+	public String mostrarNovedad(ModelMap modelo, @PathVariable("id") Integer id) {
+
+		try {
+			Novedad novedad = novedadServ.mostrarNovedad(id);
+			modelo.addAttribute("novedad", novedad);
+			modelo.put("novedades", false);
+
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+
+		return "novedades.html";
 	}
 	
 }
