@@ -98,6 +98,10 @@ form {
 
 textarea{
 	font-family: 'Ubuntu',sans-serif;
+<<<<<<< HEAD
+	height: 150px;
+	width: 100%;
+=======
 	min-height: 700px;
 	max-height: 1500px;
 	max-width: 100%;
@@ -113,6 +117,7 @@ textarea{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+<<<<<<< HEAD
 }
 
 .olvidar {
@@ -126,4 +131,7 @@ textarea{
 
 .olvideDatos:hover {
     color: #666;
+=======
+>>>>>>> 12c9d54116dc354c0f705da843c7cfbb902f7881
+>>>>>>> 90cfcbe43608e70b1c59c59408678850ee5c7947
 }
