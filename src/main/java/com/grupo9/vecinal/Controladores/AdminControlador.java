@@ -248,11 +248,11 @@ public class AdminControlador {
 	public String panelAdministrador(ModelMap modelo) {
 		try {
 		List<Usuario> usuarios = usuarioServ.mostrarUsuarios();
-		List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
+		List<Actividad> actividades = actividadServ.mostrarActividades();
 		List<Novedad> novedades = novedadServ.mostrarTodasNovedades();
 		List<Institucion> instituciones = institucionServ.mostrarInstituciones();
 		List<Comercio> comercios = comercioServ.mostrarComercios();
-		modelo.put("usuarios", 5);
+		modelo.put("usuarios", usuarios.size());
 		modelo.addAttribute("actividades", actividades.size());
 		modelo.addAttribute("novedades", novedades.size());
 		modelo.addAttribute("instituciones", instituciones.size());
