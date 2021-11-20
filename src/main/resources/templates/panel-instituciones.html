@@ -31,7 +31,7 @@
 			<div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">
 					<li class="nav-item">
-						<a class="nav-link" href="/admin/panel">Perfil</a>
+						<a class="nav-link" href="/admin/panel">Inicio</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/admin/panel-usuarios">Usuarios</a>
@@ -88,6 +88,10 @@
 						placeholder="Teléfono de la institución." required>
 					</div>
 
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
+						<input th:type="file" name="foto" class="form-control">
+					</div>
 
 					<button th:type="submit" class="btn btn-primary btn-color">Crear institución</button>
 				</form>
@@ -131,6 +135,11 @@
 					<input th:type="hidden" th:value="${inst.telefonoInstituciones}" name="telefono" class="form-control" required>
 				</div>
 
+				<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
+						<input th:type="file" name="foto" class="form-control">
+				</div>
+
 
 				<button th:type="submit" class="btn btn-primary btn-color">Editar institución</button>
 			</form>
@@ -149,20 +158,20 @@
 							<th scope="col">Dirección</th>
 							<th scope="col">Teléfono</th>
 							<th scope="col">Editar</th>
-							<th scope="col">Dar Baja</th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="institucion : ${instituciones}">
-							<td th:text="${institucion.nombreInstitucion}"></td>
-							<td th:text="${institucion.descripcionInstitucion}"></td>
+							<td th:text="${institucion.nombre}"></td>
+							<td th:text="${institucion.descripcion}"></td>
 							<td th:text="${institucion.direccion}"></td>
 							<td th:text="${institucion.telefono}"></td>
 							<td><button type="button" class="btn btn-success"> <a
 								th:href="@{'/admin/modificar-institucion/'}+${institucion.idInstitucion}"> Editar
 							</a> </button></td>
 							<td><button type="button" class="btn btn-danger"> <a
-								th:href="@{'/admin/baja-institucion/'}+${institucion.idInstituciones}"> Eliminar
+								th:href="@{'/admin/baja-institucion/'}+${institucion.idInstitucion}"> Eliminar
 							</a></button></td>
 						</tr>
 

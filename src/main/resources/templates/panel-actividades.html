@@ -31,7 +31,7 @@
 			<div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">
 					<li class="nav-item">
-						<a class="nav-link" href="/admin/panel">Perfil</a>
+						<a class="nav-link" href="/admin/panel">Inicio</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/admin/panel-usuarios">Usuarios</a>
@@ -89,6 +89,10 @@
 						<input type="date" th:value="${fecha}" name="fecha" class="form-control" required>
 					</div>
 
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
+						<input th:type="file" name="foto" class="form-control">
+					</div>
 
 					<button th:type="submit" class="btn btn-primary btn-color">Crear actividad</button>
 				</form>
@@ -129,6 +133,10 @@
 					<input type="date" th:value="${act.fecha}" name="fecha" class="form-control" required>
 				</div>
 
+				<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
+						<input th:type="file" name="foto" class="form-control">
+				</div>
 
 				<button th:type="submit" class="btn btn-primary btn-color">Editar actividad</button>
 			</form>
