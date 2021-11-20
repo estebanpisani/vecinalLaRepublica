@@ -285,7 +285,7 @@ public class AdminControlador {
 		}
 		
 		
-		return "panel-usuarios.html";
+		return "panel-novedades.html";
 	}
 	
 	@GetMapping("/panel-instituciones")
@@ -299,10 +299,10 @@ public class AdminControlador {
 		}
 		
 		
-		return "panel-usuarios.html";
+		return "panel-instituciones.html";
 	}
 
-	@GetMapping("/panel-camercios")
+	@GetMapping("/panel-comercios")
 	public String panelAdminComercios(ModelMap modelo) {
 		try {
 			List<Comercio> comercios = comercioServ.mostrarComercios();
@@ -312,7 +312,7 @@ public class AdminControlador {
 		}
 		
 		
-		return "panel-usuarios.html";
+		return "panel-comercios.html";
 	}
 	
 
