@@ -65,7 +65,7 @@
 							<div class="widget single-news">
 								<div class="image">
 									<img th:if="${novedadDestacada.foto != null}"
-										th:src="${'/foto/novedad/mostrar/'}+${novedadDestacada.novedadId}" width="100%" height="100%"
+										th:src="${'/foto/novedad/'}+${novedadDestacada.novedadId}" width="100%" height="100%"
 										class="img-responsive">
 									<img th:if="${novedadDestacada.foto == null}"
 										src="https://via.placeholder.com/300x200/FFB6C1/000000" class="img-responsive">
@@ -98,7 +98,7 @@
 						<div class="widget single-news">
 							<div class="image">
 								<img th:if="${novedadNoDestacada.foto != null}"
-									th:src="${'/foto/novedad/mostrar/'}+${novedadNoDestacada.novedadId}" class="img-responsive">
+									th:src="${'/foto/novedad/'}+${novedadNoDestacada.novedadId}" width="100%" height="100%" class="img-responsive">
 								<img th:if="${novedadNoDestacada.foto == null}"
 									src="https://via.placeholder.com/300x200/FFB6C1/000000" class="img-responsive">
 								<span class="gradient"></span>
