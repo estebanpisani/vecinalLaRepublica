@@ -1,5 +1,6 @@
 package com.grupo9.vecinal.Servicios;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo9.vecinal.Entidades.Foto;
 import com.grupo9.vecinal.Entidades.Institucion;
-import com.grupo9.vecinal.Entidades.Novedad;
 import com.grupo9.vecinal.Repositorios.InstitucionRepositorio;
 
 @Service
@@ -170,6 +170,16 @@ public class InstitucionServicio {
 		} else {
 			return institucion;
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Institucion> mostrarInstituciones() throws Exception {
+		try {
+		return institucionRepo.findAll();
+		
+		}catch (Exception e) {
+			throw new Exception("No se encontraron instituciones guardadas");
+		} 
 	}
 	
 	

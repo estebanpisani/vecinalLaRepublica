@@ -31,6 +31,9 @@ import net.bytebuddy.utility.RandomString;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
+	
+
+	
 
 	@Autowired
 	private UsuarioRepositorio usuarioRepo;
@@ -43,9 +46,13 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Autowired
 	private MailServicio enviarMails;
-	
+
 	@Autowired
 	private ActividadRepositorio actividadRepo;
+	
+	public BCryptPasswordEncoder bcryptPasswordEncoder(){
+		return new BCryptPasswordEncoder();
+		}
 
 	@Transactional
 	public void crearUsuario(MultipartFile foto, String nombreUsuario, String contrasenia, String contrasenia2,
@@ -153,15 +160,14 @@ public class UsuarioServicio implements UserDetailsService {
 			throws Exception {
 		try {
 
-			String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
+			
 			Optional<Usuario> respuesta = usuarioRepo.findById(id);
-			
-			
+
 			if (respuesta.isPresent()) {
 				Usuario usuario = respuesta.get();
-				System.out.println(encriptada);
-				System.out.println(usuario.getContrasenia());
-				if (usuario.getContrasenia().equals(encriptada)) {
+				
+				
+				if (bcryptPasswordEncoder().matches(contrasenia, usuario.getContrasenia())) {
 					validarContrasenia(contrasenia1, contrasenia2);
 					String encriptada1 = new BCryptPasswordEncoder(4).encode(contrasenia1);
 					usuario.setContrasenia(encriptada1);
@@ -205,7 +211,7 @@ public class UsuarioServicio implements UserDetailsService {
 	}
 
 	@Transactional
-	public Usuario altaUsuario(String codigoValidacion) throws Exception {
+	public void altaUsuario(String codigoValidacion) throws Exception {
 		try {
 			Usuario usuario = buscarUsuarioCodValidacion(codigoValidacion);
 			if (usuario != null) {
@@ -213,7 +219,6 @@ public class UsuarioServicio implements UserDetailsService {
 				usuario.setFechaDeBaja(null);
 				usuario.setCodValidacion(null);
 				usuarioRepo.save(usuario);
-				return usuario;
 			} else {
 				throw new Exception("Usuario no encontrado");
 			}
@@ -222,6 +227,15 @@ public class UsuarioServicio implements UserDetailsService {
 			throw new Exception(e.getMessage());
 		}
 
+	}
+
+	@Transactional
+	public void eliminarFotoUsuario(Integer id, Integer idFoto) {
+
+		Usuario usuario = usuarioRepo.findById(id).get();
+		usuario.setFoto(null);
+		fotoServ.eliminar(idFoto);
+		usuarioRepo.save(usuario);
 	}
 
 	@Transactional(readOnly = true)
@@ -314,7 +328,10 @@ public class UsuarioServicio implements UserDetailsService {
 			for (Actividad act : usuario.getActividades()) {
 				if (act.getIdActividades().equals(actividad.getIdActividades())) {
 					usuario.getActividades().remove(actividad);
-					usuarioRepo.save(usuario);
+					actividad.getUsuarios().remove(usuario);
+					actividad.setInscriptos();
+					actividadRepo.save(actividad);
+					usuarioRepo.save(usuario);					
 					return;
 				}
 

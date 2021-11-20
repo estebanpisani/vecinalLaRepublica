@@ -118,6 +118,7 @@ public class UsuarioControlador {
 			}
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
+			modelo.addAttribute("contrasenia", false);
 			return "recuperar_back.html";
 		}
 		
@@ -130,7 +131,8 @@ public class UsuarioControlador {
 			Usuario usuario = usuarioServ.buscarUsuarioCodValidacion(codigo);
 			if (usuario != null) {
 				modelo.addAttribute("contrasenia", true);
-				return "redirect:/login?logout";
+				modelo.addAttribute("mail",usuario.getEmailUsuario());
+				return "recuperar_back.html";
 			}
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
@@ -185,7 +187,6 @@ public class UsuarioControlador {
 	@PostMapping("/panel-cambiarcontrasena")
 	public String panelContraseniaCambiada(HttpSession session,ModelMap modelo, @RequestParam Integer id, @RequestParam String contraseniaActual, @RequestParam String contraseniaNueva, @RequestParam String contraseniaNueva2) {
 		try {
-			Usuario usuario = (Usuario)session.getAttribute("usuariologueado");
 			usuarioServ.modificarContrasenia(contraseniaActual, contraseniaNueva, contraseniaNueva2, id);
 			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(id));
 			modelo.put("ok", "¡Contraseña cambiada con éxito!");
@@ -195,6 +196,27 @@ public class UsuarioControlador {
 			modelo.put("error", e.getMessage());
 			return "panel_cambiarcontrasena";
 		}
+		
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+	@GetMapping("/eliminar-foto/{idFoto}")
+	public String eliminarFoto(HttpSession session, ModelMap modelo,@PathVariable("idFoto") Integer idFoto) {
+		try {
+			Usuario usuario =(Usuario)session.getAttribute("usuariologueado");
+			if (usuario.getFoto()!=null) {
+				usuarioServ.eliminarFotoUsuario(usuario.getIdUsuario(),idFoto);
+				session.setAttribute("usuariologueado",usuarioServ.buscarUsuario(usuario.getIdUsuario()));
+				return "redirect:/usuarios/panel";
+			}else {
+				modelo.put("error", "No hay foto para eliminar");
+				return "panel_usuario.html";
+			}
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+			return "panel_usuario.html";
+		}
+		
 		
 	}
 }
