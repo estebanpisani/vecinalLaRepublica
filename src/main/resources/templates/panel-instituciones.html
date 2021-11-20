@@ -1,116 +1,181 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="/styles/login.css">
-        <title>Registro de Institución</title>
-    </head>
-        <!---->
-    	<div class="main-panel">
-            <div class="title"><ion-icon name="person-circle-outline"></ion-icon> Hola, Martin Oroná :)		<button type="button" class="btn btn-outline-danger" style="float: right;">Cerrar Sesión</button>
-            </div>
-            <div class="card text-center">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Novedades</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Actividades</a>
-                        </li>
-                		<li class="nav-item">
-							<a class="nav-link" href="/usuarios/panel-comercios">Comercios</a>
-						</li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Instituciones</a>
-                    </ul>
-                </div>
-                <div class="card-body">
-                </div>
-    <!--Inst, direc, telef-->
-    <form>
-        <div class="card-body">
-			
-			<form th:action="@{/admin/registrar-institucion}" method="POST">
-        <p style="color: red" th:if="${error != null}" th:text="${error}"></p>
+<head>
+	<meta charset="utf-8">
+	<title>Vecinal "La República" - Panel</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/styles/login.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+	</script>
+</head>
 
-        <div class="mb-3">
-            <label for="exampleInputnombre1" class="form-label">Nombre de la Institucion</label>
-            <input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
-                placeholder="Escriba el nombre de la institucion" required>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputdireccion1" class="form-label">Direccion</label>
-            <input th:type="text" th:value="${direccion}" name="direccion" class="form-control"
-                placeholder="Introduzca la direccion" required>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputtelefono1" class="form-label">Telefono</label>
-            <input th:type="text" th:value="${telefono}" name="telefono" class="form-control"
-                placeholder="Introduzca su telefono" required>
-        </div>      
-        <div class="mb-3">
-            <label for="exampleInputdescripcion1" class="form-label">Descripcion</label>
-            <input th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
-                placeholder="Area de dicha Institucion" required>   
-        <div class="mb-3">
-            <label for="exampleInputarchivo1" class="form-label">Insertar Foto</label>
-            <input th:type="file" name="archivo" class="form-control">
-        </div>
-          <button th:type="submit" class="btn btn-primary">Crear institucion</button>
-      </form>
-			
+<body>
+	<div class="main-panel">
+		<div class="title">
+			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b
+				th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :) 
 
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Institucion</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Dar Baja</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row" >1</th>
-                        <tr th:each="Institucion : ${nombre}">
-                        <td th:text="${get.Nombre()}"></td>
-                        </tr>
-                        <tr th:each="Direccion : ${direccion}">
-                        <td th:text="${get.Direccion()}"></td>
-                        </tr>
-                        <tr th:each="Telefono : ${telefono}">
-                        <td th:text="${get.Telefono()}"></td>
-                        </tr>
-                        <tr th:each="Descripcion : ${descripcion}">
-                        <td th:text="${get.Descripcion()}"></td>
-                        </tr>
+			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
+				<a class="btn btn-outline-dark" href="/">
+					<ion-icon name="home"></ion-icon> Inicio
+				</a>
+				<button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button></a>
+			</form>
 
-                        <td><button type="button" class="btn btn-success"> <a href="/admin/modificar-institucion">Editar</a></button></td>
-                        <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-                      </tr>
+		</div>
+		<div class="card text">
+			<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/panel">Perfil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/panel-usuarios">Usuarios</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/panel-novedades">Novedades</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/panel-actividades">Actividades</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/panel-comercios">Comercios</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/admin/panel-instituciones">Instituciones</a>
+					</li>
+				</ul>
+			</div>
+			<div class="card-body">
 
-                    </tbody>
-                  </table>
+
+				<!--CREAR-->
+
+				<form th:if="${institucion == null}" th:action="@{/admin/registro-institucion}" method="POST" style="float: left;width: 42%;">
+					
+					<div class="alert alert-danger" role="alert" th:if="${error != null}">
+						<div th:text="${error}"></div>
+					</div>
+
+					<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Crear Institución</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Nombre de la Institución</label>
+						<input th:type="text" th:value="${nombreInstitucion}" name="nombreInstitucion" class="form-control"
+						placeholder="Escriba el nombre de la institución." required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Descripción de la Institución</label>
+						<textarea th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
+						placeholder="Describa la institución." required></textarea>
+					</div>
+
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Dirección de la Institución</label>
+						<input th:type="text" th:value="${direccion}" name="direccion" class="form-control"
+						placeholder="Dirección de la institución." required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Teléfono de la Institución</label>
+						<input th:type="text" th:value="${telefono}" name="telefono" class="form-control"
+						placeholder="Teléfono de la institución." required>
+					</div>
+
+
+					<button th:type="submit" class="btn btn-primary btn-color">Crear institución</button>
+				</form>
+
+
+				<!--MODIFICAR-->
+
+				<form th:if="${institucion!=null}" th:action="@{/admin/modificar-institucion}" method="POST"
+				th:each="act : ${institucion}" style="float: left;width: 42%;">
+
+				<div class="alert alert-danger" role="alert" th:if="${error != null}">
+					<div th:text="${error}"></div>
+				</div>
+
+				<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Modificar Institución</div>
+
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Nombre de la Institución</label>
+					<input th:type="text" th:value="${inst.nombreInstitucion}" name="nombreInstitucion"
+					class="form-control" placeholder="Escriba el nombre de la institución." required>
+					<input th:type="hidden" th:value="${inst.idInstituciones}" name="id" class="form-control" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Descripción de la Institución</label>
+					<textarea th:type="text" th:text="${inst.descripcionInstitucion}" name="descripcion"
+					class="form-control" required></textarea>
+				</div>
+
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Dirección de la Institución</label>
+					<input th:type="text" th:value="${inst.direccionInstitucion}" name="direccionInstitucion"
+					class="form-control" placeholder="Escriba la dirección de la institución." required>
+					<input th:type="hidden" th:value="${inst.direccionInstituciones}" name="direccion" class="form-control" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Teléfono de la Institución</label>
+					<input th:type="text" th:value="${inst.telefonoInstitucion}" name="telefonoInstitucion"
+					class="form-control" placeholder="Escriba el teléfono de la institución." required>
+					<input th:type="hidden" th:value="${inst.telefonoInstituciones}" name="telefono" class="form-control" required>
+				</div>
+
+
+				<button th:type="submit" class="btn btn-primary btn-color">Editar institución</button>
+			</form>
+
+
+
+			<!--Lista-->
+
+			<div  style="float: right;width: 55%;">
+				<div class="badge bg-primary text-wrap title z">Lista de Instituciones</div>
+				<table class="table" th:if="${instituciones!=null}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Descripción</th>
+							<th scope="col">Dirección</th>
+							<th scope="col">Teléfono</th>
+							<th scope="col">Editar</th>
+							<th scope="col">Dar Baja</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="institucion : ${instituciones}">
+							<td th:text="${institucion.nombreInstitucion}"></td>
+							<td th:text="${institucion.descripcionInstitucion}"></td>
+							<td th:text="${institucion.direccion}"></td>
+							<td th:text="${institucion.telefono}"></td>
+							<td><button type="button" class="btn btn-success"> <a
+								th:href="@{'/admin/modificar-institucion/'}+${institucion.idInstitucion}"> Editar
+							</a> </button></td>
+							<td><button type="button" class="btn btn-danger"> <a
+								th:href="@{'/admin/baja-institucion/'}+${institucion.idInstituciones}"> Eliminar
+							</a></button></td>
+						</tr>
+
+					</tbody>
+				</table>
 			</div>
 		</div>
-
-		<footer>Todos los derechos reservados a la familia <b>Lategano</b></footer>
 	</div>
-	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+	<footer>Todos los derechos reservados a la familia <b>Lategano</b></footer>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

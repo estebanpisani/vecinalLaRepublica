@@ -38,7 +38,7 @@
 				<p style="color: red" th:if="${error != null}" th:text="${error}"></p><br>
 				
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Título Noticia</label>
+					<label for="exampleInputEmail1" class="form-label">Foto</label>
 					<input th:type="file" name="foto" class="form-control" required>
 				</div>
 				
@@ -48,11 +48,11 @@
 				</div>
 
 				<div class="mb-3">
-					<label for="exampleInputPassword1" class="form-label">Email</label>
+					<label for="exampleInputPassword1" class="form-label">Descripcion</label>
 					<input th:type="text" name="descripcion" class="form-control" required>
 				</div>
 				<div class="mb-3">
-					<label for="exampleInputPassword1" class="form-label">Email</label>
+					<label for="exampleInputPassword1" class="form-label">Destacado(true/false)</label>
 					<input th:type="text" name="destacado" class="form-control" required>
 				</div>
 
