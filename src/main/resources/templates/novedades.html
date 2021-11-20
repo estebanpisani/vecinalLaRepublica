@@ -116,29 +116,26 @@
 		</section>
 
 		<section th:if="${novedades == false}" class="otras-noticias">
+		<time th:if="novedad.fecha != null" th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}">></time>
+		<a href="/novedades/mostrar">Volver a todas las Noticias</a><br>						
 			<h2 class="otras-noticias-titulo" th:text="${novedad.titulo}"></h2>
-			<div class="container bootstrap snippets bootdey">
+			
 				<div class="alert alert-danger" role="alert" th:if="${error != null}">
 					<div th:text="${error}"></div>
 				</div>
-				<div th:if="${novedad != null}" class="col-sm-4">
-					<div class="widget single-news">
 						<div class="image">
-							<img th:if="${novedad.foto != null}" th:src="${'foto/novedad/'}+${novedad.novedadId}"
+						
+							<img th:if="${novedad.foto != null}" th:src="${'foto/novedad/'}+${novedad.novedadId}" 
 								class="img-responsive">
 							<img th:if="${novedad.foto == null}" src="https://via.placeholder.com/300x200/FFB6C1/000000"
 								class="img-responsive">
 							<span class="gradient"></span>
 						</div>
 						<div class="details">
-							<div class="category"><a>Noticias</a></div>
-							<h3><a th:text="${novedad.titulo}" href=""></a></h3>
-							<time th:if="novedad.fecha != null"
-								th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}">></time>
+							<h3><p th:text="${novedad.descripcion}"></p></h3>
+							
 						</div>
-					</div>
-				</div>
-			</div>
+			
 
 		</section>
 
