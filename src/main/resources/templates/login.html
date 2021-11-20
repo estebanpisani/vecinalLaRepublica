@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/styles/login.css?1">
+	<link rel="stylesheet" type="text/css" href="styles/login.css?1">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 	</script>
 </head>
@@ -42,9 +42,9 @@
 				</span>
 				<input type="password" name="contrasenia" class="form-control" placeholder="Contraseña">
 			</div>
-
-			<a href="/usuarios/recuperar" style="float: center;">Olvide mi contraseña o nombre</a>
-
+                        <div class="olvidar">
+			<a href="/usuarios/recuperar" class="olvideDatos">Olvidé mis datos</a>
+                        </div>
 			<button th:type="submit" class="btn btn-primary btn-color">Ingresar</button>
 			<a href="/usuarios/registro" class="btn btn-primary btn-color">Crear Cuenta</a>
 		</form>

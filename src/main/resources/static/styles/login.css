@@ -114,3 +114,16 @@ textarea{
     margin-right: auto;
     margin-bottom: 20px;
 }
+
+.olvidar {
+    margin: 5px 0px 5px 0px;
+}
+
+.olvideDatos {
+    text-decoration: none;
+    color: #444;
+}
+
+.olvideDatos:hover {
+    color: #666;
+}
