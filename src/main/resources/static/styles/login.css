@@ -117,5 +117,21 @@ textarea{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+<<<<<<< HEAD
+}
+
+.olvidar {
+    margin: 5px 0px 5px 0px;
+}
+
+.olvideDatos {
+    text-decoration: none;
+    color: #444;
+}
+
+.olvideDatos:hover {
+    color: #666;
+=======
 >>>>>>> 12c9d54116dc354c0f705da843c7cfbb902f7881
+>>>>>>> 90cfcbe43608e70b1c59c59408678850ee5c7947
 }
