@@ -9,7 +9,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="styles/instituciones.css">
+    <link rel="stylesheet" type="text/css" href="/styles/instituciones.css">
 
     <title>Vecinal "La Republica"</title>
 </head>
@@ -26,16 +26,16 @@
         <div class="collapse navbar-collapse" id="navbarScroll" >			
          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Instituciones</a>
+            <a class="nav-link active" aria-current="page" href="/instituciones/mostrar">Instituciones</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Inicio</a>
+            <a class="nav-link" href="/">Inicio</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Actividades</a>
+            <a class="nav-link" href="/actividades/mostrar">Actividades</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Comercios</a>
+            <a class="nav-link" href="/comercios/mostrar">Comercios</a>
         </li>
     </ul>
 </div>
@@ -48,6 +48,7 @@
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
+           <div class="recuperar"><ion-icon name="business-outline"></ion-icon></div>
             <h2>Nuestras Instituciones</h2>
             <p>Recorré los lugares más importantes de nuestro barrio.</p>
         </div>
@@ -60,8 +61,7 @@
 
                         <div class="box-part">
                             <div class="fondo">
-        <!--                        <img src="https://www.rosario3.com/__export/1631499889050/sites/rosario3/img/2021/08/10/omar_perotti.jpg_668620678.jpg">	-->
-                                <img th:if="${institucion.getFoto() != null}" th:src="${'/foto/institucion/'}+${institucion.getIdInstitucion()}" width="100%" height="100%"> 
+                              <img th:if="${institucion.getFoto() != null}" th:src="${'/foto/institucion/'}+${institucion.getIdInstitucion()}" width="100%" height="100%">
                             </div>
 
                             <div class="opacity">
@@ -122,5 +122,8 @@
 </div>
 <!-- Copyright -->
 </footer>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
