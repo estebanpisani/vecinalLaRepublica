@@ -53,7 +53,7 @@
 			<div class="card-body">
 				<!--CREAR-->
 
-				<form th:if="${comercios!=null}" th:action="@{/admin/registro-comercio}" method="POST" style="float: left;width: 42%;">
+				<form th:if="${comercio == null}" th:action="@{/admin/registrar-comercio}" method="POST" style="float: left;width: 42%;">
 					<p style=" color: red" th:if="${error != null}" th:text="${error}">
 					</p>
 					
@@ -61,7 +61,7 @@
 
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Nombre de Comercio</label>
-						<input th:type="text" th:value="${nombreComercio}" name="nombreComercio" class="form-control"
+						<input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
 							placeholder="Escriba el nombre del comercio." required>
 					</div>
 
@@ -73,13 +73,13 @@
 
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Dirección</label>
-						<input th:type="text" th:value="${direccionComercio}" name="direccionComercio" class="form-control"
+						<input th:type="text" th:value="${direccion}" name="direccion" class="form-control"
 							placeholder="Escriba la dirección del comercio." required>
 					</div>
 					
 										<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Teléfono</label>
-						<input th:type="text" th:value="${telefonoComercio}" name="telefonoComercio" class="form-control"
+						<input th:type="text" th:value="${telefono}" name="telefono" class="form-control"
 							placeholder="Escriba el telefono del comercio." required>
 					</div>
 
@@ -94,8 +94,8 @@
 
 				<!--MODIFICAR-->
 
-				<form th:if="${comercio!=null}" th:action="@{/admin/modificar-comercio}" method="POST"
-				th:each="act : ${comercio}" style="float: left;width: 42%;">
+				<form th:if="${comercio != null}" th:action="@{/admin/modificar-comercio}" method="POST"
+				 style="float: left;width: 42%;">
 
 				<div class="alert alert-danger" role="alert" th:if="${error != null}">
 					<div th:text="${error}"></div>
@@ -104,30 +104,28 @@
 				<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Modificar Comercio</div>
 
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Nombre de Comercio</label>
-					<input th:type="text" th:value="${comercio.nombreComercio}" name="nombreComercio"
+					<label for="exampleInputEmail1" class="form-label">Nombre del Comercio</label>
+					<input th:type="text" th:value="${comercio.nombre}" name="nombre"
 					class="form-control" placeholder="Escriba el nombre del comercio." required>
 					<input th:type="hidden" th:value="${comercio.idComercio}" name="id" class="form-control" required>
 				</div>
 
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Descripción del Comercio</label>
-					<textarea th:type="text" th:text="${comercio.descripcionComercio}" name="descripcion"
+					<textarea th:type="text" th:text="${comercio.descripcion}" name="descripcion"
 					class="form-control" required></textarea>
 				</div>
 
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Dirección del Comercio</label>
-					<input th:type="text" th:value="${comercio.direccionComercio}" name="direccionComercio"
+					<input th:type="text" th:value="${comercio.direccion}" name="direccion"
 					class="form-control" placeholder="Escriba la dirección del comercio." required>
-					<input th:type="hidden" th:value="${comercio.direccionComercios}" name="direccion" class="form-control" required>
 				</div>
 
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Teléfono del Comercio</label>
-					<input th:type="text" th:value="${comercio.telefonoComercio}" name="telefonoComercio"
+					<input th:type="text" th:value="${comercio.telefono}" name="telefono"
 					class="form-control" placeholder="Escriba el teléfono del comercio." required>
-					<input th:type="hidden" th:value="${comercio.telefonoComercios}" name="telefono" class="form-control" required>
 				</div>
 
 				<div class="mb-3">
@@ -158,15 +156,15 @@
 					</thead>
 					<tbody>
 						<tr th:each="comercio : ${comercios}">
-							<td th:text="${comercio.nombreComercio}"></td>
-							<td th:text="${comercio.descripcionComercio}"></td>
-							<td th:text="${comercio.direccionComercio}"></td>
-							<td th:text="${comercio.telefonoComercio}"></td>
+							<td th:text="${comercio.nombre}"></td>
+							<td th:text="${comercio.descripcion}"></td>
+							<td th:text="${comercio.direccion}"></td>
+							<td th:text="${comercio.telefono}"></td>
 							<td><button type="button" class="btn btn-success"> <a
-										th:href="@{'/admin/modificar-comercio/'}+${comercio.idComercios}"> Editar
+										th:href="@{'/admin/modificar-comercio/'}+${comercio.idComercio}"> Editar
 									</a> </button></td>
 							<td><button type="button" class="btn btn-danger"> <a
-										th:href="@{'/admin/baja-comercio/'}+${comercio.idComercios}"> Eliminar
+										th:href="@{'/admin/baja-comercio/'}+${comercio.idComercio}"> Eliminar
 									</a></button></td>
 						</tr>
 
