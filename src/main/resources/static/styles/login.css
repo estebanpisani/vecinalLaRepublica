@@ -135,8 +135,3 @@ textarea{
     text-decoration: none!important;
 }
 
-
-.form-check-input:checked {
-    background-color: #262626!important;
-    border-color: #181818!important;
-}
