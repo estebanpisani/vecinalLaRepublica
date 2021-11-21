@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<title>Vecinal "La República" - Panel</title>
@@ -12,20 +11,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 	</script>
 </head>
-
 <body>
 	<div class="main-panel">
 		<div class="title">
 			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b
 				th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :) 
-
 			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
 				<a class="btn btn-outline-dark" href="/">
 					<ion-icon name="home"></ion-icon> Inicio
 				</a>
 				<button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button></a>
 			</form>
-
 		</div>
 		<div class="card text">
 			<div class="card-header">
@@ -51,104 +47,81 @@
 				</ul>
 			</div>
 			<div class="card-body">
-
-
 				<!--CREAR-->
-
 				<form th:if="${institucion == null}" th:action="@{/admin/registrar-institucion}" method="POST" style="float: left;width: 42%;">
 					
 					<div class="alert alert-danger" role="alert" th:if="${error != null}">
 						<div th:text="${error}"></div>
 					</div>
-
 					<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Crear Institución</div>
-
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Nombre de la Institución</label>
 						<input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
 						placeholder="Escriba el nombre de la institución." required>
 					</div>
-
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Descripción de la Institución</label>
 						<textarea th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
 						placeholder="Describa la institución." required></textarea>
 					</div>
-
-
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Dirección de la Institución</label>
 						<input th:type="text" th:value="${direccion}" name="direccion" class="form-control"
 						placeholder="Dirección de la institución." required>
 					</div>
-
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Teléfono de la Institución</label>
 						<input th:type="text" th:value="${telefono}" name="telefono" class="form-control"
 						placeholder="Teléfono de la institución." required>
 					</div>
-
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
 						<input th:type="file" name="foto" class="form-control">
 					</div>
-
 					<button th:type="submit" class="btn btn-primary btn-color">Crear institución</button>
 				</form>
-
-
 				<!--MODIFICAR-->
-
 				<form th:if="${institucion!=null}" th:action="@{/admin/modificar-institucion}" method="POST"
 				th:each="inst : ${institucion}" style="float: left;width: 42%;">
-
 				<div class="alert alert-danger" role="alert" th:if="${error != null}">
 					<div th:text="${error}"></div>
 				</div>
-
 				<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Modificar Institución</div>
-
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Nombre de la Institución</label>
 					<input th:type="text" th:value="${inst.nombre}" name="nombre"
 					class="form-control" placeholder="Escriba el nombre de la institución." required>
 					<input th:type="hidden" th:value="${inst.idInstitucion}" name="id" class="form-control" required>
 				</div>
-
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Descripción de la Institución</label>
 					<textarea th:type="text" th:text="${inst.descripcion}" name="descripcion"
 					class="form-control" required></textarea>
 				</div>
-
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Dirección de la Institución</label>
 					<input th:type="text" th:value="${inst.direccion}" name="direccion"
 					class="form-control" placeholder="Escriba la dirección de la institución." required>
+					<input th:type="hidden" th:value="${inst.direccion}" name="direccion" class="form-control" required>
 				</div>
-
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Teléfono de la Institución</label>
-					<input th:type="text" th:value="${inst.telefono}" name="telefono"
+					<input th:type="text" th:value="${inst.telefonoInstitucion}" name="telefonoInstitucion"
 					class="form-control" placeholder="Escriba el teléfono de la institución." required>
+					<input th:type="hidden" th:value="${inst.telefonoInstituciones}" name="telefono" class="form-control" required>
 				</div>
-
 				<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
 						<input th:type="file" name="foto" class="form-control">
 				</div>
-
-
 				<button th:type="submit" class="btn btn-primary btn-color">Editar institución</button>
 			</form>
-
-
-
 			<!--Lista-->
 
 			<div  style="float: right;width: 55%;">
 				<div class="badge bg-primary text-wrap title z">Lista de Instituciones</div>
 				<table class="table" th:if="${instituciones!=null}">
+				<table class="table table-striped table-hover" th:if="${instituciones!=null}">
 					<thead>
 						<tr>
 							<th scope="col">Nombre</th>
@@ -172,17 +145,14 @@
 								th:href="@{'/admin/baja-institucion/'}+${institucion.idInstitucion}"> Eliminar
 							</a></button></td>
 						</tr>
-
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-
 	<footer>Todos los derechos reservados a la familia <b>Lategano</b></footer>
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
-
 </html>

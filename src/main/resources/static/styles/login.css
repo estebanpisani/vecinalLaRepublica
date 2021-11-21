@@ -1,23 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
-
 :root {
     --grisOscuro: #262626;
     --grisClaro: #2e2e2e;
     --grisMasClaro: #4a4a4a;
     --blancoBackground: #F8F9FA;
 }
-
 * {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
 }
-
 body {
     font-family: 'Ubuntu',sans-serif;
     background-color: var(--blancoBackground);
 }
-
 .login {
     margin-left: auto;
     margin-right: auto;
@@ -27,7 +23,6 @@ body {
     border-radius: 10px;
     box-shadow: 0px 0px 50px 0px #00000033;
 }
-
 .login > .title {
     background: var(--grisOscuro);
     border-top-left-radius: 10px;
@@ -38,7 +33,6 @@ body {
     line-height: 100px;
     color: white;
 }
-
 .btn-color {
     width: 100%;
     font-size: 20px;
@@ -46,12 +40,10 @@ body {
     border: 1px solid var(--grisClaro) !important;
     margin-bottom: 10px;
 }
-
 .btn-color:hover {
     background: var(--grisMasClaro) !important;
     border: 1px solid var(--grisClaro) !important;
 }
-
 .main-panel {
     width: 80%;
     border-radius: 2%;
@@ -59,16 +51,13 @@ body {
     margin-right: auto;
     margin-top: 40px;
 }
-
 .title {
     font-size: 25px;
     margin-bottom: 5px;
 }
-
 .z {
     background: #262626!important;
 }
-
 .nav-link {
     display: block;
     padding: 0.5rem 1rem;
@@ -76,35 +65,27 @@ body {
     text-decoration: none;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
-
 .nav-link:hover {
     color: #000;
 }
-
 .card {
     box-shadow: 0px 0px 50px 0px #00000033;
 }
-
 footer {
     text-align: center;
     margin-top: 10px;
     opacity: 0.5;
     margin-bottom: 30px;
 }
-
 form {
 	padding: 15px 15px;
 }
-
 textarea{
 	font-family: 'Ubuntu',sans-serif;
-	height: 150px;
-	width: 100%;
 	min-height: 700px;
 	max-height: 1500px;
 	max-width: 100%;
 }
-
 .recuperar {
     font-size: 50px;
     padding: 15px 23px;
@@ -116,22 +97,23 @@ textarea{
     margin-right: auto;
     margin-bottom: 20px;
 }
-
 .olvidar {
     margin: 5px 0px 5px 0px;
 }
-
 .olvideDatos {
     text-decoration: none;
     color: #444;
 }
-
 .olvideDatos:hover {
     color: #666;
 }
-
 .btn > a {
     color: var(--blancoBackground)!important;
     text-decoration: none!important;
 }
 
+
+.form-check-input:checked {
+    background-color: #262626!important;
+    border-color: #181818!important;
+} 
