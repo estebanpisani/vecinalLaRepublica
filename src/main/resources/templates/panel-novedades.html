@@ -17,7 +17,7 @@
 	<div class="main-panel">
 		<div class="title">
 			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b
-				th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :) 
+			th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :) 
 
 			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
 				<a class="btn btn-outline-dark" href="/">
@@ -54,29 +54,37 @@
 
 
 				<!--CREAR-->
+				<div class="alert alert-danger" role="alert" th:if="${error != null}">
+					<div th:text="${error}"></div>
+				</div>
 
-				<form th:if="${actividad == null}" th:action="@{/admin/registro-novedad}" method="POST" style="float: left;width: 42%;">
+				<form th:if="${novedad == null}" th:action="@{/admin/crear-novedades}" method="POST" style="float: left;width: 42%;">
 					
-					<div class="alert alert-danger" role="alert" th:if="${error != null}">
-						<div th:text="${error}"></div>
-					</div>
 
 					<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Crear Novedad</div>
 
 					<div class="mb-3">
-						<label for="exampleInputEmail1" class="form-label">Titulo de Novedad</label>
-						<input th:type="text" th:value="${tituloNovedad}" name="tituloNovedad" class="form-control"
-						placeholder="Escriba el titulo de la novedad." required>
+						<label for="exampleInputEmail1" class="form-label">Título Noticia</label>
+						<input th:type="text" name="titulo" class="form-control" required>
 					</div>
 
 					<div class="mb-3">
-						<label for="exampleInputEmail1" class="form-label">Descripción de Novedad</label>
-						<textarea th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
-						placeholder="Describa la novedad." required></textarea>
+						<label for="exampleInputPassword1" class="form-label">Descripcion</label>
+						<input th:type="text" name="descripcion" class="form-control" required>
 					</div>
 
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Foto</label>
+						<input th:type="file" name="foto" class="form-control">
+					</div>
 
-					<button th:type="submit" class="btn btn-primary btn-color">Crear actividad</button>
+					<div class="mb-3">
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" required>
+							<label class="form-check-label" for="flexSwitchCheckDefault">Destacar Novedad</label>
+						</div>
+					</div>
+					<button th:type="submit" class="btn btn-primary btn-color">Cargar nueva Novedad</button>
 				</form>
 
 
@@ -114,7 +122,7 @@
 
 			<div  style="float: right;width: 55%;">
 				<div class="badge bg-primary text-wrap title z">Lista de Novedades</div>
-				<table class="table" th:if="${novedades!=null}">
+				<table class="table table-striped table-hover" th:if="${novedades!=null}">
 					<thead>
 						<tr>
 							<th scope="col">Titulo</th>

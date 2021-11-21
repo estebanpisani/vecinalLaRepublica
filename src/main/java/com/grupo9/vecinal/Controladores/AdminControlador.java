@@ -117,21 +117,14 @@ public class AdminControlador {
 			return "redirect:/admin/registro-actividad";
 	}	
 	
-	////////////////////////////////////////////// COMERCIOS //////////////////////////////////////////////
 	
-	@GetMapping("/registrar-comercio")
-	public String registrarComercion(ModelMap modelo) throws Exception{
-		List<Comercio> comercios = comercioServ.mostrarComercios();
-		modelo.put("comercios", comercios);
-		return "panel-comercios.html";
-	}
 
 	@PostMapping("/registrar-comercio")
 	public String registrarComercio(ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		try {
 			comercioServ.crearComercio(nombre, descripcion, direccion, telefono);
-			return "redirect:/admin/registrar-comercio";
+			return "comercios.html";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,7 +145,7 @@ public class AdminControlador {
 		
 		try {
 			comercioServ.modificarComercio(id, nombre, descripcion, direccion, telefono);
-			return "redirect:/admin/registrar-comercio";
+			return "comercios.html";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -162,16 +155,16 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/registrar-comercio";
+			return "redirect:/admin/modificar-comercio";
 		}
 
 	}
 
 	@GetMapping("/registrar-institucion")
-	public String registrarInstitucion(ModelMap modelo) throws Exception{
-		List<Institucion> instituciones = institucionServ.mostrarInstituciones();
-		modelo.put("instituciones", instituciones);
-		return "panel-instituciones.html";
+	public String registrarInstitucion(ModelMap modelo) {
+		//List<Institucion> instituciones = institucionRepo.findAll();
+		//modelo.put("instituciones", instituciones);
+		return "crearinstituciones.html";
 	}
 	
 	@PostMapping("/registrar-institucion")
@@ -179,7 +172,7 @@ public class AdminControlador {
 			@RequestParam String direccion, @RequestParam Long telefono, @RequestParam(required = false) String contrasenia) {
 		try {
 			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
-			return "redirect:/admin/registrar-institucion";
+			return "redirect:/instituciones/mostrar";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,7 +193,7 @@ public class AdminControlador {
 		
 		try {
 			institucionServ.modificarInstitucion(archivo, id, nombre, descripcion, direccion, telefono);
-			return "redirect:/admin/registrar-institucion";
+			return "instituciones.html";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -210,7 +203,7 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/registrar-institucion";
+			return "redirect:/admin/modificar-institucion";
 		}
 
 	}
