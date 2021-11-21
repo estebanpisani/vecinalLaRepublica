@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Comercio;
 import com.grupo9.vecinal.Repositorios.ComercioRepositorio;
 
@@ -128,6 +129,24 @@ public class ComercioServicio {
 		} 
 	}
 	
+	
+	@Transactional(readOnly = true)
+	public Comercio buscarComercio(Integer id) throws Exception {
+		try {
+			Optional<Comercio> respuesta = comercioRepo.findById(id);
+
+			if (respuesta.isPresent()) {
+				Comercio comercio = respuesta.get();
+				return comercio;
+			} else {
+				throw new Exception("Comercio no encontrado");
+			}
+
+		} catch (Exception e) {
+			throw new Exception("Comercio no encontrado");
+		}
+
+	}
 	
 	private void validarDatosComercio(String accion, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 
