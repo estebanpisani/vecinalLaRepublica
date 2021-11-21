@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Vecinal "La República" - Panel Usuario</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/styles/login.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+	</script>
+</head>
+
+<body>
+	<div class="main-panel">
+		<div class="title">
+			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b
+				th:text="${usuario.getNombre()} + ' ' + ${usuario.apellido}"></b> :)
+
+			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
+				<a class="btn btn-outline-dark" href="/">
+					<ion-icon name="home"></ion-icon> Inicio
+				</a>
+				<button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button></a>
+			</form>
+		</div>
+		<div class="card text">
+			<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="/usuarios/panel">Perfil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/usuarios/panel-actividades">Actividades</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/usuarios/panel-cambiarcontrasena">Cambiar Contraseña</a>
+					</li>
+				</ul>
+			</div>
+			<div class="card-body">
+
+				<div class="alert alert-danger" role="alert" th:if="${error != null}">
+					<div th:text="${error}"></div>
+				</div>
+
+				<div style="float: left;width: 20%;">
+					<img th:if="${session.usuariologueado.getFoto() != null}"
+						th:src="${'/foto/usuario/'}+${session.usuariologueado.idUsuario}" class="rounded-circle"
+						width="200" height="200">
+
+					<img th:if="${session.usuariologueado.getFoto() == null}" th:src="@{'/Imagenes/sinFoto.jpeg'}"
+						class="rounded-circle" width="200" height="200">
+
+					<a th:if="${session.usuariologueado.getFoto() != null}" class="btn btn-danger"
+						th:href="@{'/usuarios/eliminar-foto/'} + ${usuario.getFoto().getId()}"
+						style="width: 100%;margin-top: 10px;">Eliminar Foto</a>
+
+				</div>
+				<form th:action="@{/usuarios/modificar/}" method="POST" enctype="multipart/form-data"
+					style="float: right;width: 80%;">
+
+					<div class="badge bg-primary text-wrap title z">Mi Perfil</div>
+
+
+					<input th:type="text" th:value="${usuario.idUsuario}" name="idUsuario" hidden>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
+						<input th:type="text" th:value="${usuario.nombreUsuario}" name="nombreUsuario"
+							class="form-control" placeholder="Escriba su nombre de usuario" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Nombre</label>
+						<input th:type="text" th:value="${usuario.nombre}" name="nombre" class="form-control"
+							placeholder="Escriba su nombre de usuario" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Apellido</label>
+						<input th:type="text" th:value="${usuario.apellido}" name="apellido" class="form-control"
+							placeholder="pepito@gmail.com" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Email</label>
+						<input th:type="email" th:value="${usuario.emailUsuario}" name="emailUsuario"
+							class="form-control" placeholder="pepito@gmail.com" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Telefono</label>
+						<input th:type="text" th:value="${usuario.telefono}" name="telefono" class="form-control"
+							placeholder="Escriba su telefono">
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
+						<input th:type="file" name="foto" class="form-control">
+					</div>
+
+					<button th:type="submit" class="btn btn-primary btn-color">Modificar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+		<footer>Todos los derechos reservados a la familia <b>Lategano</b></footer>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

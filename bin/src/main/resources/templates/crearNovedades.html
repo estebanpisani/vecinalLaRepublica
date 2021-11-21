@@ -30,44 +30,29 @@
 			<a href="">Ingresar</a>
 		</span>
 	</nav>
-	<p style="color: red" th:if="${errorLista != null}" th:text="${errorLista}"></p><br>
-	<table class="table table-striped table-dark">
-		<thead>
-			<tr>
-				<th>Título</th>
-				<th>Descripción</th>
-				<th>Destacado</th>
-				<th>Fecha</th>
-			</tr>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="novedad:${novedades}">
-				<td th:text="${novedad.titulo}"></td>
-				<td th:text="${novedad.descripcion}"></td>
-				<td th:text="${novedad.destacado}"></td>
-				<td
-					th:text="${novedad.fecha.getDayOfMonth()} + '/' + ${novedad.fecha.getMonthValue()} + '/' + ${novedad.fecha.getYear()}">
-				</td>
-			</tr>
-		</tbody>
-	</table>
+
 	<div class="main">
 		<div class="left-r">
-			<form th:action="@{/novedades/crear}" method="POST">
+			<form th:action="@{/admin/crear-novedades}" method="POST" enctype="multipart/form-data">
 
 				<p style="color: red" th:if="${error != null}" th:text="${error}"></p><br>
+				
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Foto</label>
+					<input th:type="file" name="foto" class="form-control" required>
+				</div>
+				
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Título Noticia</label>
 					<input th:type="text" name="titulo" class="form-control" required>
 				</div>
 
 				<div class="mb-3">
-					<label for="exampleInputPassword1" class="form-label">Email</label>
+					<label for="exampleInputPassword1" class="form-label">Descripcion</label>
 					<input th:type="text" name="descripcion" class="form-control" required>
 				</div>
 				<div class="mb-3">
-					<label for="exampleInputPassword1" class="form-label">Email</label>
+					<label for="exampleInputPassword1" class="form-label">Destacado(true/false)</label>
 					<input th:type="text" name="destacado" class="form-control" required>
 				</div>
 

@@ -55,7 +55,7 @@
 
 				<!--CREAR-->
 
-				<form th:if="${institucion == null}" th:action="@{/admin/registrar-institucion}" method="POST" style="float: left;width: 42%;">
+				<form th:if="${institucion == null}" th:action="@{/admin/registro-institucion}" method="POST" style="float: left;width: 42%;">
 					
 					<div class="alert alert-danger" role="alert" th:if="${error != null}">
 						<div th:text="${error}"></div>
@@ -65,7 +65,7 @@
 
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Nombre de la Institución</label>
-						<input th:type="text" th:value="${nombre}" name="nombre" class="form-control"
+						<input th:type="text" th:value="${nombreInstitucion}" name="nombreInstitucion" class="form-control"
 						placeholder="Escriba el nombre de la institución." required>
 					</div>
 
@@ -100,7 +100,7 @@
 				<!--MODIFICAR-->
 
 				<form th:if="${institucion!=null}" th:action="@{/admin/modificar-institucion}" method="POST"
-				th:each="inst : ${institucion}" style="float: left;width: 42%;">
+				th:each="act : ${institucion}" style="float: left;width: 42%;">
 
 				<div class="alert alert-danger" role="alert" th:if="${error != null}">
 					<div th:text="${error}"></div>
@@ -110,22 +110,22 @@
 
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Nombre de la Institución</label>
-					<input th:type="text" th:value="${inst.nombre}" name="nombre"
+					<input th:type="text" th:value="${inst.nombreInstitucion}" name="nombreInstitucion"
 					class="form-control" placeholder="Escriba el nombre de la institución." required>
-					<input th:type="hidden" th:value="${inst.idInstitucion}" name="id" class="form-control" required>
+					<input th:type="hidden" th:value="${inst.idInstituciones}" name="id" class="form-control" required>
 				</div>
 
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Descripción de la Institución</label>
-					<textarea th:type="text" th:text="${inst.descripcion}" name="descripcion"
+					<textarea th:type="text" th:text="${inst.descripcionInstitucion}" name="descripcion"
 					class="form-control" required></textarea>
 				</div>
 
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Dirección de la Institución</label>
-					<input th:type="text" th:value="${inst.direccion}" name="direccion"
+					<input th:type="text" th:value="${inst.direccionInstitucion}" name="direccionInstitucion"
 					class="form-control" placeholder="Escriba la dirección de la institución." required>
-					<input th:type="hidden" th:value="${inst.direccion}" name="direccion" class="form-control" required>
+					<input th:type="hidden" th:value="${inst.direccionInstituciones}" name="direccion" class="form-control" required>
 				</div>
 
 				<div class="mb-3">
