@@ -65,13 +65,7 @@ a{
 .text{
     color: white;
         text-align: center;
-    padding: 20px;
-}
-
-.text_2{
-    color: white;
-        text-align: center;
-    padding: 5px;
+    padding: 30px;
 }
 
 .fa{
@@ -81,7 +75,7 @@ a{
 .title {
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 30px;
 }
 
 .opacity {

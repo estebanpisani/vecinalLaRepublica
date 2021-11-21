@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.grupo9.vecinal.Entidades.Comercio;
 import com.grupo9.vecinal.Entidades.Foto;
 import com.grupo9.vecinal.Entidades.Institucion;
 import com.grupo9.vecinal.Repositorios.InstitucionRepositorio;
@@ -183,22 +182,6 @@ public class InstitucionServicio {
 		} 
 	}
 	
-	@Transactional(readOnly = true)
-	public Institucion buscarInstitucion(Integer id) throws Exception {
-		try {
-			Optional<Institucion> respuesta = institucionRepo.findById(id);
-
-			if (respuesta.isPresent()) {
-				Institucion institucion = respuesta.get();
-				return institucion;
-			} else {
-				throw new Exception("Institucion no encontrada");
-			}
-
-		} catch (Exception e) {
-			throw new Exception("Institucion no encontrada");
-		}
-
-	}
+	
 
 }
