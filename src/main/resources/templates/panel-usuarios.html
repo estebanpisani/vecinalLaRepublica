@@ -55,39 +55,38 @@
 				<!--Lista-->
 
 
-					<div class="badge bg-primary text-wrap title z">Lista de Usuarios</div>
-					<table class="table" th:if="${usuarios!=null}">
-						<thead>
-							<tr>
-								<th scope="col">Nombre</th>
-								<th scope="col">Apellido</th>
-								<th scope="col">Nombre de Usuario</th>
-								<th scope="col">Email</th>
-								<th scope="col">Teléfono</th>
-								<th scope="col">Alta</th>
-								<th scope="col">Fecha de Baja</th>
-								<th scope="col"></th>								
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="usuario : ${usuarios}">
-								<td th:text="${usuario.nombre}"></td>
-								<td th:text="${usuario.apellido}"></td>
-								<td th:text="${usuario.nombreUsuario}"></td>
-								<td th:text="${usuario.emailUsuario}"></td>
-								<td th:text="${usuario.telefono}"></td>
-								<td th:text="${usuario.alta}"></td>
-								<td th:text="${usuario.fechaDeBaja}"></td>
+				<div class="badge bg-primary text-wrap title z">Lista de Usuarios</div>
+				<table class="table" th:if="${usuarios!=null}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Nombre de Usuario</th>
+							<th scope="col">Email</th>
+							<th scope="col">Teléfono</th>
+							<th scope="col">Teléfono</th>
+							<th scope="col">Fecha de Baja</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario : ${usuarios}">
+							<td th:text="${usuario.nombre}"></td>
+							<td th:text="${usuario.apellido}"></td>
+							<td th:text="${usuario.nombreUsuario}"></td>
+							<td th:text="${usuario.emailUsuario}"></td>
+							<td th:text="${usuario.telefono}"></td>
+							<td th:text="${usuario.alta}"></td>
+							<td th:text="${usuario.fechaDeBaja}"></td>
 
-								<td><button type="button" class="btn btn-danger"> <a
-											th:href="@{'/admin/bajaUsuario/'}+${usuario.idUsuario}"> Dar de Baja
-										</a></button></td>
-							</tr>
+							<td><button type="button" th:class="${usuario.alta} ? 'btn btn-danger' : 'btn btn-success'"> <a
+										th:href="${usuario.alta} ? @{'/admin/bajaUsuario/'}+${usuario.idUsuario} : @{'/admin/altaUsuario/'}+${usuario.idUsuario}" th:text="${usuario.alta} ? 'Dar de Baja' : 'Dar de Alta'"></a></button></td>
+						</tr>
 
-						</tbody>
-					</table>
-				</div>
+					</tbody>
+				</table>
 			</div>
+		</div>
 
 
 		<footer>Todos los derechos reservados a la familia <b>Lategano</b></footer>

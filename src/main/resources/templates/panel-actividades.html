@@ -163,9 +163,9 @@
 						<tr th:each="actividad : ${actividades}">
 							<td th:text="${actividad.nombreActividad}"></td>
 							<td th:text="${actividad.descripcionActividad}"></td>
-							<td th:text="${actividad.fecha}"></td>
+							<td th:text="${actividad.fecha != null} ? ${actividad.fecha.getDayOfMonth()} + '/' + ${actividad.fecha.getMonthValue()} + ' /' + ${actividad.fecha.getYear()}"></td>
 							<td th:text="${actividad.cupo}"></td>
-							<td th:text="${actividad.inscriptos}"></td>
+							<td th:text="${actividad.getUsuarios().size()}"></td>
 							<td><button type="button" class="btn btn-success"> <a
 								th:href="@{'/admin/modificar-actividad/'}+${actividad.idActividades}"> Editar
 							</a> </button></td>
