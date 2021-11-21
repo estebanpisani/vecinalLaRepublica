@@ -125,8 +125,6 @@ public class AdminControlador {
 	////////////////////////////////////////////// FIN ACTIVIDADES //////////////////////////////////////////////
 	
 	
-<<<<<<< HEAD
-=======
 	////////////////////////////////////////////// INICIO COMERCIOS //////////////////////////////////////////////
 	
 	@GetMapping("/panel-comercios")
@@ -140,18 +138,13 @@ public class AdminControlador {
 		
 		return "panel-comercios.html";
 	}
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 
 	@PostMapping("/registrar-comercio")
 	public String registrarComercio(ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		try {
 			comercioServ.crearComercio(nombre, descripcion, direccion, telefono);
-<<<<<<< HEAD
-			return "comercios.html";
-=======
 			return "redirect:/admin/panel-comercios";
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -187,11 +180,7 @@ public class AdminControlador {
 		
 		try {
 			comercioServ.modificarComercio(id, nombre, descripcion, direccion, telefono);
-<<<<<<< HEAD
-			return "comercios.html";
-=======
 			return "redirect:/admin/panel-comercios";
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -201,22 +190,11 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-<<<<<<< HEAD
-			return "redirect:/admin/modificar-comercio";
-=======
 			return "panel-comercios.html";
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 		}
 
 	}
 
-<<<<<<< HEAD
-	@GetMapping("/registrar-institucion")
-	public String registrarInstitucion(ModelMap modelo) {
-		//List<Institucion> instituciones = institucionRepo.findAll();
-		//modelo.put("instituciones", instituciones);
-		return "crearinstituciones.html";
-=======
 	////////////////////////////////////////////// FIN COMERCIOS //////////////////////////////////////////////
 	
 	////////////////////////////////////////////// INICIO INSTITUCIONES //////////////////////////////////////////////
@@ -232,7 +210,6 @@ public class AdminControlador {
 		}
 		
 		return "panel-instituciones.html";
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 	}
 	
 	@PostMapping("/registrar-institucion")
@@ -240,11 +217,7 @@ public class AdminControlador {
 			@RequestParam String direccion, @RequestParam Long telefono, @RequestParam(required = false) String contrasenia) {
 		try {
 			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
-<<<<<<< HEAD
-			return "redirect:/instituciones/mostrar";
-=======
 			return "redirect:/admin/panel-instituciones";
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -280,11 +253,7 @@ public class AdminControlador {
 		
 		try {
 			institucionServ.modificarInstitucion(archivo, id, nombre, descripcion, direccion, telefono);
-<<<<<<< HEAD
-			return "instituciones.html";
-=======
 			return "redirect:/admin/panel-instituciones";
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -294,11 +263,7 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-<<<<<<< HEAD
-			return "redirect:/admin/modificar-institucion";
-=======
 			return "panel-instituciones.html";
->>>>>>> f9c03976fc7531d6f2b0aea73f51c5e75214eef8
 		}
 
 	}
