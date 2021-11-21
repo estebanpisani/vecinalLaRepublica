@@ -125,14 +125,12 @@
 					<label for="exampleInputEmail1" class="form-label">Dirección de la Institución</label>
 					<input th:type="text" th:value="${inst.direccion}" name="direccion"
 					class="form-control" placeholder="Escriba la dirección de la institución." required>
-					<input th:type="hidden" th:value="${inst.direccion}" name="direccion" class="form-control" required>
 				</div>
 
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Teléfono de la Institución</label>
-					<input th:type="text" th:value="${inst.telefonoInstitucion}" name="telefonoInstitucion"
+					<input th:type="text" th:value="${inst.telefono}" name="telefono"
 					class="form-control" placeholder="Escriba el teléfono de la institución." required>
-					<input th:type="hidden" th:value="${inst.telefonoInstituciones}" name="telefono" class="form-control" required>
 				</div>
 
 				<div class="mb-3">

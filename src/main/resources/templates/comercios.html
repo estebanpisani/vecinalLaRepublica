@@ -35,7 +35,7 @@
             <a class="nav-link" href="/actividades/mostrar">Actividades</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/comercios/mostrar">Comercios</a>
+            <a class="nav-link" href="/instituciones/mostrar">Instituciones</a>
         </li>
     </ul>
 </div>
@@ -49,7 +49,7 @@
 
         <div class="section-title">
            <div class="recuperar"><ion-icon name="cart-outline"></ion-icon></div>
-            <h2>Nuestros Comerciones</h2>
+            <h2>Nuestros Comercios</h2>
             <p>Recorré los comercios de nuestro barrio.</p>
         </div>
         
@@ -70,6 +70,8 @@
                                 </div>
 
                                 <div class="text">
+                                	<span th:text="${comercio.getDescripcion()}"></span><br>
+                                	<br>
                                     <span th:text="${comercio.getDireccion()}"></span><br>
                                     <span th:text="${comercio.getTelefono()}"></span>
                                 </div>
