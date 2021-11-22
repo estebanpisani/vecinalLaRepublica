@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>Vecinal "La República" - Panel</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/styles/login.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 	</script>
 </head>
+
 <body>
 	<div class="main-panel">
 		<div class="title">
 			<ion-icon name="person-circle-outline"></ion-icon> Hola, <b
-				th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :) 
+				th:text="${session.usuariologueado.nombre} + ' ' + ${session.usuariologueado.apellido}"></b> :)
 			<form th:action="@{/logout}" method="POST" style="padding: 0;float: right;">
 				<a class="btn btn-outline-dark" href="/">
 					<ion-icon name="home"></ion-icon> Inicio
@@ -48,8 +50,9 @@
 			</div>
 			<div class="card-body">
 				<!--CREAR-->
-				<form th:if="${actividad == null}" th:action="@{/admin/registro-actividad}" method="POST" style="float: left;width: 42%;">
-					
+				<form th:if="${actividad == null}" th:action="@{/admin/registro-actividad}" method="POST" enctype="multipart/form-data"
+					style="float: left;width: 42%;">
+
 					<div class="alert alert-danger" role="alert" th:if="${error != null}">
 						<div th:text="${error}"></div>
 					</div>
@@ -57,17 +60,17 @@
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
 						<input th:type="text" th:value="${nombreActividad}" name="nombreActividad" class="form-control"
-						placeholder="Escriba el nombre de la actividad." required>
+							placeholder="Escriba el nombre de la actividad." required>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Descripción de Actividad</label>
 						<textarea th:type="text" th:value="${descripcion}" name="descripcion" class="form-control"
-						placeholder="Describa la actividad." required></textarea>
+							placeholder="Describa la actividad." required></textarea>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Cupo</label>
 						<input th:type="number" maxlength="500" th:value="${cupo}" name="cupo" class="form-control"
-						required>
+							required>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Fecha</label>
@@ -80,77 +83,80 @@
 					<button th:type="submit" class="btn btn-primary btn-color">Crear actividad</button>
 				</form>
 				<!--MODIFICAR-->
-				<form th:if="${actividad!=null}" th:action="@{/admin/modificar-actividad}" method="POST"
-				th:each="act : ${actividad}" style="float: left;width: 42%;">
-				<div class="alert alert-danger" role="alert" th:if="${error != null}">
-					<div th:text="${error}"></div>
-				</div>
-				<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Modificar Actividad</div>
-				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
-					<input th:type="text" th:value="${act.nombreActividad}" name="nombreActividad"
-					class="form-control" placeholder="Escriba el nombre de la actividad." required>
-					<input th:type="hidden" th:value="${act.idActividades}" name="id" class="form-control" required>
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Descripción de Actividad</label>
-					<textarea th:type="text" th:text="${act.descripcionActividad}" name="descripcion"
-					class="form-control" required></textarea>
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Cupo</label>
-					<input th:type="number" maxlength="500" th:value="${act.cupo}" name="cupo" class="form-control"
-					required>
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Fecha</label>
-					<input type="date" th:value="${act.fecha}" name="fecha" class="form-control" required>
-				</div>
-				<div class="mb-3">
+				<form th:if="${actividad!=null}" th:action="@{/admin/modificar-actividad}" method="POST" enctype="multipart/form-data"
+					th:each="act : ${actividad}" style="float: left;width: 42%;">
+					<div class="alert alert-danger" role="alert" th:if="${error != null}">
+						<div th:text="${error}"></div>
+					</div>
+					<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Modificar Actividad</div>
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Nombre de Actividad</label>
+						<input th:type="text" th:value="${act.nombreActividad}" name="nombreActividad"
+							class="form-control" placeholder="Escriba el nombre de la actividad." required>
+						<input th:type="hidden" th:value="${act.idActividades}" name="id" class="form-control" required>
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Descripción de Actividad</label>
+						<textarea th:type="text" th:text="${act.descripcionActividad}" name="descripcion"
+							class="form-control" required></textarea>
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Cupo</label>
+						<input th:type="number" maxlength="500" th:value="${act.cupo}" name="cupo" class="form-control"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Fecha</label>
+						<input type="date" th:value="${act.fecha}" name="fecha" class="form-control" required>
+					</div>
+					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>
 						<input th:type="file" name="foto" class="form-control">
-				</div>
-				<button th:type="submit" class="btn btn-primary btn-color">Editar actividad</button>
-			</form>
-			<!--Lista-->
+					</div>
+					<button th:type="submit" class="btn btn-primary btn-color">Editar actividad</button>
+				</form>
+				<!--Lista-->
 
-			<div  style="float: right;width: 55%;">
-				<div class="badge bg-primary text-wrap title z">Lista de Actividades</div>
-				<table class="table" th:if="${actividades!=null}">
-				<table class="table table-striped table-hover" th:if="${actividades!=null}">
-					<thead>
-						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Descripción</th>
-							<th scope="col">Fecha</th>
-							<th scope="col">Cupo</th>
-							<th scope="col">Inscriptos</th>
-							<th scope="col">Editar</th>
-							<th scope="col">Dar Baja</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="actividad : ${actividades}">
-							<td th:text="${actividad.nombreActividad}"></td>
-							<td th:text="${actividad.descripcionActividad}"></td>
-							<td th:text="${actividad.fecha != null} ? ${actividad.fecha.getDayOfMonth()} + '/' + ${actividad.fecha.getMonthValue()} + ' /' + ${actividad.fecha.getYear()}"></td>
-							<td th:text="${actividad.cupo}"></td>
-							<td th:text="${actividad.getUsuarios().size()}"></td>
-							<td><button type="button" class="btn btn-success"> <a
-								th:href="@{'/admin/modificar-actividad/'}+${actividad.idActividades}"> Editar
-							</a> </button></td>
-							<td><button type="button" class="btn btn-danger"> <a
-								th:href="@{'/admin/baja-actividad/'}+${actividad.idActividades}"> Eliminar
-							</a></button></td>
-						</tr>
-					</tbody>
-				</table>
+				<div style="float: right;width: 55%;">
+					<div class="badge bg-primary text-wrap title z">Lista de Actividades</div>
+					<table class="table" th:if="${actividades!=null}">
+						<table class="table table-striped table-hover" th:if="${actividades!=null}">
+							<thead>
+								<tr>
+									<th scope="col">Nombre</th>
+									<th scope="col">Descripción</th>
+									<th scope="col">Fecha</th>
+									<th scope="col">Inscriptos</th>
+									<th scope="col">Editar</th>
+									<th scope="col">Dar Baja</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="actividad : ${actividades}">
+									<td th:text="${actividad.nombreActividad}"></td>
+									<td th:text="${actividad.descripcionActividad}"></td>
+									<td
+										th:text="${actividad.fecha != null} ? ${actividad.fecha.getDayOfMonth()} + '/' + ${actividad.fecha.getMonthValue()} + ' /' + ${actividad.fecha.getYear()}">
+									</td>
+									<td th:text="${actividad.getUsuarios().size()} +'/'+${actividad.cupo}"></td>
+									<td><button type="button" class="btn btn-success"> <a
+												th:href="@{'/admin/modificar-actividad/'}+${actividad.idActividades}">
+												Editar
+											</a> </button></td>
+									<td><button type="button" class="btn btn-danger"> <a
+												th:href="@{'/admin/baja-actividad/'}+${actividad.idActividades}">
+												Eliminar
+											</a></button></td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
 			</div>
 		</div>
+		<footer>Todos los derechos reservados a la familia <b>Lategano</b></footer>
 	</div>
-	<footer>Todos los derechos reservados a la familia <b>Lategano</b></footer>
-</div>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

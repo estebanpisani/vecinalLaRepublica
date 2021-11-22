@@ -48,7 +48,7 @@
 			</div>
 			<div class="card-body">
 				<!--CREAR-->
-				<form th:if="${comercio==null}" th:action="@{/admin/registrar-comercio}" method="POST" style="float: left;width: 42%;">
+				<form th:if="${comercio==null}" th:action="@{/admin/registrar-comercio}" method="POST" enctype="multipart/form-data" style="float: left;width: 42%;">
 					<p style=" color: red" th:if="${error != null}" th:text="${error}">
 					</p>
 					
@@ -81,7 +81,7 @@
 					<button th:type="submit" class="btn btn-primary btn-color">Crear Comercio</button>
 				</form>
 				<!--MODIFICAR-->
-				<form th:if="${comercio!=null}" th:action="@{/admin/modificar-comercio}" method="POST" style="float: left;width: 42%;">
+				<form th:if="${comercio!=null}" th:action="@{/admin/modificar-comercio}" method="POST" enctype="multipart/form-data" style="float: left;width: 42%;">
 				<div class="alert alert-danger" role="alert" th:if="${error != null}">
 					<div th:text="${error}"></div>
 				</div>

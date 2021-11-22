@@ -140,10 +140,10 @@ public class AdminControlador {
 	}
 
 	@PostMapping("/registrar-comercio")
-	public String registrarComercio(ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
+	public String registrarComercio(@RequestParam(required = false) MultipartFile foto, ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		try {
-			comercioServ.crearComercio(nombre, descripcion, direccion, telefono);
+			comercioServ.crearComercio(foto, nombre, descripcion, direccion, telefono);
 			return "redirect:/admin/panel-comercios";
 			
 		} catch (Exception e) {
@@ -175,11 +175,11 @@ public class AdminControlador {
 	}
 	
 	@PostMapping("/modificar-comercio")
-	public String modificarComercio(ModelMap modelo, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
+	public String modificarComercio(@RequestParam(required = false) MultipartFile foto, ModelMap modelo, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		
 		try {
-			comercioServ.modificarComercio(id, nombre, descripcion, direccion, telefono);
+			comercioServ.modificarComercio(foto, id, nombre, descripcion, direccion, telefono);
 			return "redirect:/admin/panel-comercios";
 			
 		} catch (Exception e) {
@@ -219,10 +219,10 @@ public class AdminControlador {
 	}
 	
 	@PostMapping("/registrar-institucion")
-	public String registrarInstitucion(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre, @RequestParam String descripcion,
+	public String registrarInstitucion(ModelMap modelo, @RequestParam(required = false) MultipartFile foto, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono, @RequestParam(required = false) String contrasenia) {
 		try {
-			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
+			institucionServ.crearInstitucion(foto, nombre, descripcion, direccion, telefono);
 			return "redirect:/admin/panel-instituciones";
 			
 		} catch (Exception e) {
@@ -254,11 +254,11 @@ public class AdminControlador {
 	}
 	
 	@PostMapping("/modificar-institucion")
-	public String modificarInstitucion(ModelMap modelo, MultipartFile archivo, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
+	public String modificarInstitucion(ModelMap modelo, @RequestParam(required = false) MultipartFile foto, @RequestParam Integer id, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		
 		try {
-			institucionServ.modificarInstitucion(archivo, id, nombre, descripcion, direccion, telefono);
+			institucionServ.modificarInstitucion(foto, id, nombre, descripcion, direccion, telefono);
 			return "redirect:/admin/panel-instituciones";
 			
 		} catch (Exception e) {

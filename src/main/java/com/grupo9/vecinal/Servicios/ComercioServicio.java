@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Comercio;
+import com.grupo9.vecinal.Entidades.Foto;
 import com.grupo9.vecinal.Repositorios.ComercioRepositorio;
 
 @Service
@@ -16,9 +17,12 @@ public class ComercioServicio {
 	
 	@Autowired
 	ComercioRepositorio comercioRepo;
+	
+	@Autowired
+	FotoServicio fotoServ;
 
 	@Transactional
-	public void crearComercio(String nombre, String descripcion, String direccion, Long telefono) throws Exception {
+	public void crearComercio(MultipartFile archivo, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 
 		try {
 			
@@ -31,7 +35,8 @@ public class ComercioServicio {
 			comercio.setDireccion(direccion);
 			comercio.setAlta(true);
 			comercio.setTelefono(telefono);
-			
+			Foto foto = fotoServ.guardar(archivo);
+			comercio.setFoto(foto);
 			comercioRepo.save(comercio);
 
 		} catch (Exception e) {
@@ -42,7 +47,7 @@ public class ComercioServicio {
 	}
 	
 	@Transactional
-	public void modificarComercio(Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
+	public void modificarComercio(MultipartFile archivo,Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 
 		try {
 			
@@ -58,7 +63,12 @@ public class ComercioServicio {
 				comercio.setDescripcion(descripcion);
 				comercio.setDireccion(direccion);
 				comercio.setTelefono(telefono);
-				
+				Integer idFoto = null;
+				if (comercio.getFoto() != null) {
+					idFoto = comercio.getFoto().getId()
+;				}
+				Foto foto = fotoServ.actualizar(idFoto, archivo);
+				comercio.setFoto(foto);
 				comercioRepo.save(comercio);
 				
 			}else {

@@ -64,7 +64,6 @@
 							<th scope="col">Nombre de Usuario</th>
 							<th scope="col">Email</th>
 							<th scope="col">Teléfono</th>
-							<th scope="col">Teléfono</th>
 							<th scope="col">Fecha de Baja</th>
 							<th scope="col"></th>
 						</tr>
@@ -76,7 +75,6 @@
 							<td th:text="${usuario.nombreUsuario}"></td>
 							<td th:text="${usuario.emailUsuario}"></td>
 							<td th:text="${usuario.telefono}"></td>
-							<td th:text="${usuario.alta}"></td>
 							<td th:text="${usuario.fechaDeBaja}"></td>
 
 							<td><button type="button" th:class="${usuario.alta} ? 'btn btn-danger' : 'btn btn-success'"> <a
