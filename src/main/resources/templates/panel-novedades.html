@@ -57,7 +57,7 @@
 					<div th:text="${error}"></div>
 				</div>
 
-				<form th:if="${novedad == null}" th:action="@{/admin/crear-novedades}" method="POST"
+				<form th:if="${novedad == null}" th:action="@{/admin/crear-novedades}" method="POST" enctype="multipart/form-data"
 					style="float: left;width: 42%;">
 
 					<div class="alert alert-danger" role="alert" th:if="${error != null}">
@@ -68,7 +68,7 @@
 
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Titulo de Novedad</label>
-						<input th:type="text" th:value="${tituloNovedad}" name="tituloNovedad" class="form-control"
+						<input th:type="text" th:value="${tituloNovedad}" name="titulo" class="form-control"
 							placeholder="Escriba el titulo de la novedad." required>
 					</div>
 
@@ -94,7 +94,7 @@
 
 
 				<!--MODIFICAR-->
-				<form th:if="${novedad!=null}" th:action="@{/admin/modificar-novedades}" method="POST"
+				<form th:if="${novedad!=null}" th:action="@{/admin/modificar-novedades}" method="POST" enctype="multipart/form-data"
 					th:each="act : ${novedad}" style="float: left;width: 42%;">
 					<div class="alert alert-danger" role="alert" th:if="${error != null}">
 						<div th:text="${error}"></div>

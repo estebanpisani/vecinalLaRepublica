@@ -48,7 +48,7 @@
 			</div>
 			<div class="card-body">
 				<!--CREAR-->
-				<form th:if="${institucion == null}" th:action="@{/admin/registrar-institucion}" method="POST" style="float: left;width: 42%;">
+				<form th:if="${institucion == null}" th:action="@{/admin/registrar-institucion}" enctype="multipart/form-data" method="POST"  style="float: left;width: 42%;">
 					
 					<div class="alert alert-danger" role="alert" th:if="${error != null}">
 						<div th:text="${error}"></div>
@@ -81,7 +81,7 @@
 					<button th:type="submit" class="btn btn-primary btn-color">Crear institución</button>
 				</form>
 				<!--MODIFICAR-->
-				<form th:if="${institucion!=null}" th:action="@{/admin/modificar-institucion}" method="POST" style="float: left;width: 42%;">
+				<form th:if="${institucion!=null}" th:action="@{/admin/modificar-institucion}" enctype="multipart/form-data" method="POST"  style="float: left;width: 42%;">
 				<div class="alert alert-danger" role="alert" th:if="${error != null}">
 					<div th:text="${error}"></div>
 				</div>

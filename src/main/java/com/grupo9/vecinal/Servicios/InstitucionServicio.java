@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.grupo9.vecinal.Entidades.Comercio;
 import com.grupo9.vecinal.Entidades.Foto;
 import com.grupo9.vecinal.Entidades.Institucion;
 import com.grupo9.vecinal.Repositorios.InstitucionRepositorio;

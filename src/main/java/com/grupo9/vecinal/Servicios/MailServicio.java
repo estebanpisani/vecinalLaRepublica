@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.grupo9.vecinal.Entidades.Actividad;
 import com.grupo9.vecinal.Entidades.Usuario;
 
 @Service
@@ -21,6 +22,9 @@ public class MailServicio {
 
 	@Autowired
 	private UsuarioServicio usuarioServ;
+	
+	@Autowired
+	private ActividadServicio actividadServ;
 
 	public void sendRecuperarDatos(Usuario usuario) throws MessagingException, UnsupportedEncodingException {
 		String toAddress = usuario.getEmailUsuario();
@@ -97,9 +101,6 @@ public class MailServicio {
 				helper.setSubject(subject);
 
 				content = content.replace("[[name]]", usuario.getNombre() + " " + usuario.getApellido());
-				String verifyURL = "http://localhost:8081/usuarios/verificacion/" + usuario.getCodValidacion();
-
-				content = content.replace("[[URL]]", verifyURL);
 
 				helper.setText(content, true);
 
@@ -110,18 +111,18 @@ public class MailServicio {
 
 	}
 	
-	/*public void sendEmailActividadInscriptos(Integer idActividad)
+	public void sendEmailActividadInscriptos(Integer idActividad)
 			throws MessagingException, UnsupportedEncodingException, Exception {
-		List<Usuario> usuarios = usuarioServ.mostrarUsuariosAlta();
-		if (usuarios.isEmpty()) {
+		Actividad actividad = actividadServ.buscarActividad(idActividad);
+		if (actividad == null) {
 			throw new Exception("No hay usuarios registrados para mandar correos");
 		} else {
-			for (Usuario usuario : usuarios) {
+			for (Usuario usuario : actividad.getUsuarios()) {
 				String toAddress = usuario.getEmailUsuario();
 				String fromAddress = "larepublica.vecinal@gmail.com";
 				String senderName = "Vecinal La República";
-				String subject = titulo;
-				String content = "[[name]],<br>" + descripcion + "<br><br>" + "Vecinal La República.";
+				String subject = actividad.getNombreActividad();
+				String content = "[[name]],<br>" + actividad.getDescripcionActividad() + "<br><br>" + "Vecinal La República.";
 
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -131,9 +132,6 @@ public class MailServicio {
 				helper.setSubject(subject);
 
 				content = content.replace("[[name]]", usuario.getNombre() + " " + usuario.getApellido());
-				String verifyURL = "http://localhost:8081/usuarios/verificacion/" + usuario.getCodValidacion();
-
-				content = content.replace("[[URL]]", verifyURL);
 
 				helper.setText(content, true);
 
@@ -142,6 +140,6 @@ public class MailServicio {
 
 		}
 
-	}*/
+	}
 
 }
