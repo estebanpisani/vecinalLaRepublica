@@ -98,7 +98,8 @@ textarea{
     margin-bottom: 20px;
 }
 .olvidar {
-    margin: 5px 0px 5px 0px;
+    margin: 5px 0px 15px 0px;
+    text-align: center;
 }
 .olvideDatos {
     text-decoration: none;
@@ -117,3 +118,8 @@ textarea{
     background-color: #262626!important;
     border-color: #181818!important;
 } 
+
+.login-footer {
+    border-top: 1px solid #d4d5d6;
+    text-align: center;
+}

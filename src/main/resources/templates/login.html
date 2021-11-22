@@ -28,25 +28,34 @@
 				<div th:text="${ok}"></div>
 			</div>
 
-			Nombre de Usuario:
 			<div class="input-group mb-3">
+				<label class="form-label" style="width: 100%;">Nombre de Usuario</label>
 				<span class="input-group-text" id="inputGroup-sizing-sm" style="height: 38px !important;">
 					<ion-icon name="person-circle-outline"></ion-icon>
 				</span>
 				<input type="text" name="nombreUsuario" class="form-control" placeholder="Nombre de Usuario">
 			</div>
-			Contraseña:
+			
 			<div class="input-group mb-3">
+				<label class="form-label" style="width: 100%;">Contraseña</label>
 				<span class="input-group-text" id="inputGroup-sizing-sm" style="height: 38px !important;">
 					<ion-icon name="lock-closed-outline"></ion-icon>
 				</span>
 				<input type="password" name="contrasenia" class="form-control" placeholder="Contraseña">
 			</div>
-                        <div class="olvidar">
-			<a href="/usuarios/recuperar" class="olvideDatos">Olvidé mis datos</a>
-                        </div>
+
 			<button th:type="submit" class="btn btn-primary btn-color">Ingresar</button>
-			<a href="/usuarios/registro" class="btn btn-primary btn-color">Crear Cuenta</a>
+
+			<div class="olvidar">
+			<a href="/usuarios/recuperar" class="olvideDatos">¿Te has olvidado la contraseña?</a>
+                        </div>
+
+			<div class="login-footer">
+
+				<a href="/usuarios/registro" class="btn btn-primary btn-color" style="margin-top: 10px;">Crear Cuenta</a>
+
+				<a href="/" class="olvideDatos">Volver al inicio</a>
+			</div>
 		</form>
 	</div>
 
