@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/instituciones.css">
+    <link rel="stylesheet" type="text/css" href="/styles/instituciones.css">
 
     <title>Vecinal "La Republica"</title>
 </head>
@@ -18,197 +17,113 @@
 <body>
     <!--HEADER-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-		  <h1>Vecinal "La República"</h1>
-		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="float-right">
-		  <div class="collapse navbar-collapse" id="navbarScroll" >			
-			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-			  <li class="nav-item">
-				<a class="nav-link active" aria-current="page" href="#">Instituciones</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="#">Inicio</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="#">Actividades</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="#">Comercios</a>
-			  </li>
-			</ul>
-		</div>
-		</div>
-		</div>
-	  </nav>
+      <div class="container-fluid">
+        <h1 class="text-light" style="color:#F8F9FA; letter-spacing: 3px; font-weight: 300; font-size: 25px;">Vecinal "La República"</h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="float-right">
+        <div class="collapse navbar-collapse" id="navbarScroll" >			
+         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/instituciones/mostrar">Instituciones</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/actividades/mostrar">Actividades</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/comercios/mostrar">Comercios</a>
+        </li>
+    </ul>
+</div>
+</div>
+</div>
+</nav>
 
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+    <div class="container" data-aos="fade-up">
 
+        <div class="section-title">
+           <div class="recuperar"><ion-icon name="business-outline"></ion-icon></div>
+            <h2>Nuestras Instituciones</h2>
+            <p>Recorré los lugares más importantes de nuestro barrio.</p>
+        </div>
+        
+        <div class="box">
+            <div class="container">
+                <div class="row">
 
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="institucion: ${instituciones}">
 
+                        <div class="box-part">
+                            <div class="fondo">
+                              <img th:if="${institucion.getFoto() != null}" th:src="${'/foto/institucion/'}+${institucion.getIdInstitucion()}" width="100%" height="100%">
+                            </div>
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-title">
-                <h2>Nuestras Instituciones</h2>
-                <p>Sin todos estos lugares, nuestra vecinal "La Republica" no seria lo mismo.</p>
-            </div>
-     <!--FINALIZA SERVICEs-->
-            <div class="box">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                            <div class="box-part text-center">
-
-                                <i class="fa fa-futbol-o fa-3x" aria-hidden="true"></i>
-
-
+                            <div class="opacity">
                                 <div class="title">
-                                    <h4>Club Social y Deportivo "Adelmar Galetto"</h4>
+                                    <h4 th:text="${institucion.getNombre()}"></h4>
                                 </div>
 
                                 <div class="text">
-                                    <span>Avenida JuanCarlos 2547<br> +54 341 7854157</span>
+                                    <span th:text="${institucion.getDireccion()}"></span><br>
+                                    <span th:text="${institucion.getTelefono()}"></span>
                                 </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                            <div class="box-part text-center">
-
-                                <i class="fa fa-user-o fa-3x" aria-hidden="true"></i>
-
-                                <div class="title">
-                                    <h4>Escuela de Educacion Tecnica "Freddie"</h4>
-                                </div>
-
-                                <div class="text">
-                                    <span>Cortada Saca la mano de ahi 4784 <br> +54 8774652</span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                            <div class="box-part text-center">
-
-                                <i class="fa fa-paperclip fa-3x" aria-hidden="true"></i>
-
-                                <div class="title">
-                                    <h4>Club Deportivo Barrial "Esteban Pisani"</h4>
-                                </div>
-
-                                <div class="text">
-                                    <span>Cortada Saca la mano de ahi 4784 <br> +54 8774652.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                            <div class="box-part text-center">
-
-                                <i class="fa fa-folder-o fa-3x" aria-hidden="true"></i>
-
-                                <div class="title">
-                                    <h4>Escuela Primaria N°17 "Martin Orona"</h4>
-                                </div>
-
-                                <div class="text">
-                                    <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed.
-                                        Elitr scripta ocurreret qui ad.</span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                            <div class="box-part text-center">
-
-                                <i class="fa fa-handshake-o fa-3x" aria-hidden="true"></i>
-
-                                <div class="title">
-                                    <h4>Iglesia "Nuestro Sagrado Corazon Lategano"</h4>
-                                </div>
-
-                                <div class="text">
-                                    <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed.
-                                        Elitr scripta ocurreret qui ad.</span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                            <div class="box-part text-center">
-
-                                <i class="fa fa-folder-o fa-3x" aria-hidden="true"></i>
-
-                                <div class="title">
-                                    <h4>Ferreteria "El coso del cosito"</h4>
-                                </div>
-
-                                <div class="text">
-                                    <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed.
-                                        Elitr scripta ocurreret qui ad.</span>
-                                </div>
-
-                            </div>
+                            </div> 
                         </div>
 
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+</section>
 
-     <!--FOOTER-->
+<!--FOOTER-->
 
-     <footer style="background-color: #222;">
-		<div class="container p-4">
-		  <div class="row">
-			<div class="col-lg-6 col-md-12 mb-4">
-			  <h5 class="mb-3 text-light">Dirección:</h5>
-			  <p class="text-light">
-				Paraná y 9 de Julio.
-			  </p>
-			  <h5 class="mb-3 text-light">Teléfono:</h5>
-			  <p class="text-light">
-				341-666
-			  </p>
-			</div>
-			
-			<div class="col-lg-3 col-md-6 mb-4">
-				<h5 class="mb-1 text-light">Horarios</h5>
-				<table class="table" style="border-color: #ccc;">
-				  <tbody>
-					<tr class="text-white">
-					  <td>Lun - Vie:</td>
-					  <td>8hs - 22 hs</td>
-					</tr>
-					<tr class="text-white">
-					  <td>Sáb - Dom:</td>
-					  <td>8 hs - 13 hs</td>
-					</tr>
-				  </tbody>
-				</table>
-			  </div>
-			</div>
-		  </div>
-		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:#ccc;">
-			© 2021 Familia Lategano
-		  </div>
-		  <!-- Copyright -->
-	  </footer>
-        
+<footer style="background-color: #222;">
+    <div class="container p-4">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 mb-4">
+          <h5 class="mb-3 text-light">Dirección:</h5>
+          <p class="text-light">
+            Paraná y 9 de Julio.
+        </p>
+        <h5 class="mb-3 text-light">Teléfono:</h5>
+        <p class="text-light">
+            341-666
+        </p>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-4">
+        <h5 class="mb-1 text-light">Horarios</h5>
+        <table class="table" style="border-color: #ccc;">
+          <tbody>
+            <tr class="text-white">
+              <td>Lun - Vie:</td>
+              <td>8hs - 22 hs</td>
+          </tr>
+          <tr class="text-white">
+              <td>Sáb - Dom:</td>
+              <td>8 hs - 13 hs</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+</div>
+</div>
+<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:#ccc;">
+    © 2021 Familia Lategano
+</div>
+<!-- Copyright -->
+</footer>
 
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

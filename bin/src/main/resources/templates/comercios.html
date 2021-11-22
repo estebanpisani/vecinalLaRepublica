@@ -23,10 +23,10 @@
          <span class="navbar-toggler-icon"></span>
      </button>
      <div class="float-right">
-        <div class="collapse navbar-collapse" id="navbarScroll" >			
+        <div class="collapse navbar-collapse" id="navbarScroll" >           
          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/instituciones/mostrar">Instituciones</a>
+            <a class="nav-link active" aria-current="page" href="/comercios/mostrar">Comercios</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/">Inicio</a>
@@ -37,9 +37,6 @@
         <li class="nav-item">
             <a class="nav-link" href="/comercios/mostrar">Comercios</a>
         </li>
-        <li class="nav-item">
-		<a class="nav-link" href="/novedades/mostrar">Novedades</a>
-	</li>
     </ul>
 </div>
 </div>
@@ -51,34 +48,30 @@
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-           <div class="recuperar"><ion-icon name="business-outline"></ion-icon></div>
-            <h2>Nuestras Instituciones</h2>
-            <p>Recorré los lugares más importantes de nuestro barrio.</p>
+           <div class="recuperar"><ion-icon name="cart-outline"></ion-icon></div>
+            <h2>Nuestros Comerciones</h2>
+            <p>Recorré los comercios de nuestro barrio.</p>
         </div>
         
         <div class="box">
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="institucion: ${instituciones}">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:each="comercio: ${comercios}">
 
                         <div class="box-part">
                             <div class="fondo">
-                              <img th:if="${institucion.getFoto() != null}" th:src="${'/foto/institucion/'}+${institucion.getIdInstitucion()}" width="100%" height="100%">
+                              <img th:if="${comercio.getFoto() != null}" th:src="${'/foto/comercio/'}+${comercio.getIdComercio()}" width="100%" height="100%">
                             </div>
 
                             <div class="opacity">
                                 <div class="title">
-                                    <h4 th:text="${institucion.getNombre()}"></h4>
-                                </div>
-                                
-                                <div class="text_2">
-                                	<span th:text="${institucion.getDescripcion()}"></span><br>
+                                    <h4 th:text="${comercio.getNombre()}"></h4>
                                 </div>
 
                                 <div class="text">
-                                    <span th:text="${institucion.getDireccion()}"></span><br>
-                                    <span th:text="${institucion.getTelefono()}"></span>
+                                    <span th:text="${comercio.getDireccion()}"></span><br>
+                                    <span th:text="${comercio.getTelefono()}"></span>
                                 </div>
                             </div> 
                         </div>

@@ -45,25 +45,24 @@ public class AdminControlador {
 	@Autowired
 	InstitucionServicio institucionServ;
 	
-	@GetMapping("/bajaUsuario")
-	public String bajaUsuario() {
-		return "bajaUsuario_back.html";
+	@GetMapping("/bajaUsuario/{idUsuario}")
+	public String bajaUsuario(@PathVariable("idUsuario") Integer id) throws Exception {
+			usuarioServ.bajaUsuario(id);
+		return "redirect:/admin/panel-usuarios";
 	}
 
-	@PostMapping("/bajaUsuario")
-	public String bajarUsuario(@RequestParam Integer id, ModelMap modelo) {
+	////////////////////////////////////////////// INICIO ACTIVIDADES //////////////////////////////////////////////
+	
+	@GetMapping("/panel-actividades")
+	public String panelAdminActividades(ModelMap modelo) {
+
 		try {
-			usuarioServ.bajaUsuario(id);
+			List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
+			modelo.put("actividades", actividades);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 		}
-		return "bajaUsuario_back.html";
-	}
-	
-	@GetMapping("/registro-actividad")
-	public String registroActividad(ModelMap modelo) throws Exception{
-		List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
-		modelo.put("actividades", actividades);
+		
 		return "panel-actividades.html";
 	}
 
@@ -74,7 +73,7 @@ public class AdminControlador {
 		try {
 			actividadServ.crearActividad(nombreActividad, descripcion, fecha, cupo);
 
-			return "redirect:/admin/registro-actividad";
+			return "redirect:/admin/panel-actividades";
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			modelo.put("nombreActividad", nombreActividad);
@@ -109,30 +108,43 @@ public class AdminControlador {
 		try {
 			
 			actividadServ.modificarActividad(nombreActividad, descripcion, fecha, cupo, id);
-			return "redirect:/admin/registro-actividad";
+			return "redirect:/admin/panel-actividades";
 		} catch (Exception e) {
 			Actividad actividad = actividadServ.buscarActividad(id);
 			modelo.addAttribute("actividad", actividad);
 			modelo.put("error", e.getMessage());
-			return "redirect:/admin/registro-actividad";
+			return "panel-actividades.html";
 		}
 	}
-	
-	
+		
 	@GetMapping("/baja-actividad/{idActividad}")
 	public String bajaActividad(@PathVariable("idActividad") Integer id) throws Exception {	
 			actividadServ.bajaActividad(id);
-			return "redirect:/admin/registro-actividad";
+			return "redirect:/admin/panel-actividades";
 	}	
+	////////////////////////////////////////////// FIN ACTIVIDADES //////////////////////////////////////////////
 	
 	
+	////////////////////////////////////////////// INICIO COMERCIOS //////////////////////////////////////////////
+	
+	@GetMapping("/panel-comercios")
+	public String panelAdminComercios(ModelMap modelo) {
+		try {
+			List<Comercio> comercios = comercioServ.mostrarComerciosAlta();
+			modelo.addAttribute("comercios", comercios);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		return "panel-comercios.html";
+	}
 
 	@PostMapping("/registrar-comercio")
 	public String registrarComercio(ModelMap modelo, @RequestParam String nombre, @RequestParam String descripcion,
 			@RequestParam String direccion, @RequestParam Long telefono) {
 		try {
 			comercioServ.crearComercio(nombre, descripcion, direccion, telefono);
-			return "comercios.html";
+			return "redirect:/admin/panel-comercios";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,9 +154,24 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/registrar-comercio";
+			return "panel-comercios.html";
 		}
 
+	}
+	
+	@GetMapping("/modificar-comercio/{idComercio}")
+	public String modificarComercio(@PathVariable("idComercio") Integer idComercio, ModelMap modelo) {
+		try {
+			
+			List<Comercio> comercios = comercioServ.mostrarComerciosAlta();
+			modelo.put("comercios", comercios);
+			
+			Comercio comercio = comercioServ.buscarComercio(idComercio);
+			modelo.addAttribute("comercio", comercio);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		return "panel-comercios.html";
 	}
 	
 	@PostMapping("/modificar-comercio")
@@ -153,7 +180,7 @@ public class AdminControlador {
 		
 		try {
 			comercioServ.modificarComercio(id, nombre, descripcion, direccion, telefono);
-			return "comercios.html";
+			return "redirect:/admin/panel-comercios";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,16 +190,32 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/modificar-comercio";
+			return "panel-comercios.html";
 		}
 
 	}
+	
+	@GetMapping("/baja-comercio/{idComercio}")
+	public String bajaComercio(@PathVariable("idComercio") Integer id) throws Exception {	
+			comercioServ.bajaComercio(id);
+			return "redirect:/admin/panel-comercios";
+	}
 
-	@GetMapping("/registrar-institucion")
-	public String registrarInstitucion(ModelMap modelo) {
-		//List<Institucion> instituciones = institucionRepo.findAll();
-		//modelo.put("instituciones", instituciones);
-		return "crearinstituciones.html";
+	////////////////////////////////////////////// FIN COMERCIOS //////////////////////////////////////////////
+	
+	////////////////////////////////////////////// INICIO INSTITUCIONES //////////////////////////////////////////////
+	
+	@GetMapping("/panel-instituciones")
+	public String panelAdminInstituciones(ModelMap modelo) {
+
+		try {
+			List<Institucion> instituciones = institucionServ.mostrarInstituciones();
+			modelo.addAttribute("instituciones", instituciones);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		return "panel-instituciones.html";
 	}
 	
 	@PostMapping("/registrar-institucion")
@@ -180,7 +223,7 @@ public class AdminControlador {
 			@RequestParam String direccion, @RequestParam Long telefono, @RequestParam(required = false) String contrasenia) {
 		try {
 			institucionServ.crearInstitucion(archivo, nombre, descripcion, direccion, telefono);
-			return "redirect:/instituciones/mostrar";
+			return "redirect:/admin/panel-instituciones";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -190,9 +233,24 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/registrar-institucion";
+			return "panel-instituciones.html";
 		}
 
+	}
+	
+	@GetMapping("/modificar-institucion/{idInstitucion}")
+	public String modificarInstitucion(@PathVariable("idInstitucion") Integer idInstitucion, ModelMap modelo) {
+		try {
+			
+			List<Institucion> instituciones = institucionServ.mostrarInstituciones();
+			modelo.put("instituciones", instituciones);
+			
+			Institucion institucion = institucionServ.buscarInstitucion(idInstitucion);
+			modelo.addAttribute("institucion", institucion);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		return "panel-instituciones.html";
 	}
 	
 	@PostMapping("/modificar-institucion")
@@ -201,7 +259,7 @@ public class AdminControlador {
 		
 		try {
 			institucionServ.modificarInstitucion(archivo, id, nombre, descripcion, direccion, telefono);
-			return "instituciones.html";
+			return "redirect:/admin/panel-instituciones";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,14 +269,31 @@ public class AdminControlador {
 			modelo.put("direccion", direccion);
 			modelo.put("telefono", telefono);
 			
-			return "redirect:/admin/modificar-institucion";
+			return "panel-instituciones.html";
 		}
 
 	}
 	
-	@GetMapping("/crear-novedades")
-	public String crearNovedad(ModelMap modelo) {
-		return "crearNovedades.html";
+	@GetMapping("/baja-institucion/{idInstitucion}")
+	public String bajaInstitucion(@PathVariable("idInstitucion") Integer id) throws Exception {	
+			institucionServ.bajaInstitucion(id);
+			return "redirect:/admin/panel-instituciones";
+	}
+	
+	////////////////////////////////////////////// FIN INSTITUCIONES //////////////////////////////////////////////
+	
+	////////////////////////////////////////////// INICIO NOVEDADES //////////////////////////////////////////////
+	
+	@GetMapping("/panel-novedades")
+	public String panelAdminNovedades(ModelMap modelo) {
+		try {
+			List<Novedad> novedades = novedadServ.mostrarTodasNovedades();
+			modelo.addAttribute("novedades", novedades);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		
+		return "panel-novedades.html";
 	}
 
 	@PostMapping("/crear-novedades")
@@ -231,6 +306,22 @@ public class AdminControlador {
 		return "redirect:/admin/panel-novedades";
 	}
 	
+	@GetMapping("/modificar-novedad/{idNovedad}")
+	public String modificarNovedad(@PathVariable("idNovedad") Integer idNovedad, ModelMap modelo) {
+		try {
+			
+			List<Novedad> novedades = novedadServ.mostrarAltaNovedades();
+			modelo.put("novedades", novedades);
+			
+			Novedad novedad = novedadServ.mostrarNovedad(idNovedad);
+			modelo.addAttribute("novedad", novedad);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		return "panel-novedades.html";
+	}
+	
+	
 	@PostMapping("/modificar-novedades")
 	public String modificarNovedades(ModelMap modelo, @RequestParam(required = false) MultipartFile foto,
 			@RequestParam String titulo, @RequestParam String descripcion,
@@ -240,7 +331,7 @@ public class AdminControlador {
 			novedadServ.modificarNovedad(foto, titulo, descripcion, destacado, id);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
-			return "pnel-novedades.html";
+			return "panel-novedades.html";
 		}
 
 		return "redirect:/admin/panel-novedades";
@@ -249,8 +340,10 @@ public class AdminControlador {
 	@GetMapping("/baja-novedad/{id}")
 	public String bajaNovedad(@PathVariable("id") Integer id) throws Exception {	
 			novedadServ.bajaNovedad(id);
-			return "redirect:/admin/panel-novedad";
+			return "redirect:/admin/panel-novedades";
 	}
+	
+	////////////////////////////////////////////// FIN NOVEDADES //////////////////////////////////////////////
 	
 	@GetMapping("/panel")
 	public String panelAdministrador(ModelMap modelo) {
@@ -260,7 +353,7 @@ public class AdminControlador {
 		List<Novedad> novedades = novedadServ.mostrarTodasNovedades();
 		List<Institucion> instituciones = institucionServ.mostrarInstituciones();
 		List<Comercio> comercios = comercioServ.mostrarComercios();
-		modelo.addAttribute("usuarios", usuarios.size());
+		modelo.put("usuarios", usuarios.size());
 		modelo.addAttribute("actividades", actividades.size());
 		modelo.addAttribute("novedades", novedades.size());
 		modelo.addAttribute("instituciones", instituciones.size());
@@ -285,60 +378,14 @@ public class AdminControlador {
 		return "panel-usuarios.html";
 	}
 	
-	@GetMapping("/panel-actividades")
-	public String panelAdminActividades(ModelMap modelo) {
 
-		try {
-			List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
-			modelo.put("actividades", actividades);
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-		}
-		
-		
-		return "panel-actividades.html";
-	}
 	
 	
-	@GetMapping("/panel-novedades")
-	public String panelAdminNovedades(ModelMap modelo) {
-		try {
-			List<Novedad> novedades = novedadServ.mostrarTodasNovedades();
-			modelo.addAttribute("novedades", novedades);
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-		}
-		
-		
-		return "panel-novedades.html";
-	}
+
 	
-	@GetMapping("/panel-instituciones")
-	public String panelAdminInstituciones(ModelMap modelo) {
 
-		try {
-			List<Institucion> instituciones = institucionServ.mostrarInstituciones();
-			modelo.addAttribute("instituciones", instituciones);
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-		}
-		
-		
-		return "panel-instituciones.html";
-	}
 
-	@GetMapping("/panel-comercios")
-	public String panelAdminComercios(ModelMap modelo) {
-		try {
-			List<Comercio> comercios = comercioServ.mostrarComercios();
-			modelo.addAttribute("comercios", comercios);
-		} catch (Exception e) {
-			modelo.put("error", e.getMessage());
-		}
-		
-		
-		return "panel-comercios.html";
-	}
+
 	
 
 	

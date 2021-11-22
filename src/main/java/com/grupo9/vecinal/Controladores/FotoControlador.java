@@ -93,10 +93,10 @@ public class FotoControlador {
 		}
 	}
 
-	/*@GetMapping("/comercio/{id}")
+	@GetMapping("/comercio/{id}")
 	public ResponseEntity<byte[]> FotoComercio(@PathVariable Integer id) {
 		try {
-			Comercio comercio = comercioServ.altaInstitucion(id);
+			Comercio comercio = comercioServ.buscarComercio(id);
 			if (comercio.getFoto()==null) {
 				throw new Exception("El usuario no posee foto");
 			}
@@ -108,7 +108,7 @@ public class FotoControlador {
 		} catch (Exception e) {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
-	}*/
+	}
 	
 	@GetMapping("/actividad/{id}")
 	public ResponseEntity<byte[]> FotoActividad(@PathVariable Integer id) {

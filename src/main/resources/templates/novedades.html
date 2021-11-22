@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8">
@@ -37,6 +37,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="/comercios/mostrar">Comercios</a>
 						</li>
+                                                 <li class="nav-item">
+                                                    <a class="nav-link" href="/actividades/mostrar">Actividades</a>
+                                                </li>
 					</ul>
 				</div>
 			</div>
@@ -65,7 +68,7 @@
 							<div class="widget single-news">
 								<div class="image">
 									<img th:if="${novedadDestacada.foto != null}"
-										th:src="${'/foto/novedad/mostrar/'}+${novedadDestacada.novedadId}"
+										th:src="${'/foto/novedad/'}+${novedadDestacada.novedadId}" 
 										class="img-responsive">
 									<img th:if="${novedadDestacada.foto == null}"
 										src="https://via.placeholder.com/300x200/FFB6C1/000000" class="img-responsive">
@@ -75,8 +78,7 @@
 									<div class="category"><a>Noticias</a></div>
 									<h3><a th:text="${novedadDestacada.titulo}"
 											th:href="@{'/novedades/mostrar/'} + ${novedadDestacada.novedadId}"></a></h3>
-									<time th:if="novedad.fecha != null"
-										th:text="${novedadDestacada.fecha.getDayOfMonth()} + '/' + ${novedadDestacada.fecha.getMonthValue()} + '/' + ${novedadDestacada.fecha.getYear()}"></time>
+									<time th:if="novedad.fecha != null"	th:text="${novedadDestacada.fecha.getDayOfMonth()} + '/' + ${novedadDestacada.fecha.getMonthValue()} + '/' + ${novedadDestacada.fecha.getYear()}"></time>
 								</div>
 							</div>
 						</div>
@@ -98,7 +100,7 @@
 						<div class="widget single-news">
 							<div class="image">
 								<img th:if="${novedadNoDestacada.foto != null}"
-									th:src="${'/foto/novedad/mostrar/'}+${novedadNoDestacada.novedadId}" class="img-responsive">
+									th:src="${'/foto/novedad/'}+${novedadNoDestacada.novedadId}" width="300" height="200" class="img-responsive">
 								<img th:if="${novedadNoDestacada.foto == null}"
 									src="https://via.placeholder.com/300x200/FFB6C1/000000" class="img-responsive">
 								<span class="gradient"></span>
@@ -127,7 +129,7 @@
 			</div>
 			<div class="image">
 
-				<img th:if="${novedad.foto != null}" th:src="${'/foto/novedad/'}+${novedad.novedadId}"
+				<img th:if="${novedad.foto != null}" th:src="${'/foto/novedad/'}+${novedad.novedadId}" width="150" height="150"
 					class="img-responsive">
 				<img th:if="${novedad.foto == null}" src="https://via.placeholder.com/300x200/FFB6C1/000000"
 					class="img-responsive">

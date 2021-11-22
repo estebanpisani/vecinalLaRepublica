@@ -31,16 +31,19 @@
 				<div class="collapse navbar-collapse" id="navbarScroll">
 					<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">Actividades</a>
+							<a class="nav-link active" aria-current="page" href="/actividades/mostrar">Actividades</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Inicio</a>
+							<a class="nav-link" href="/">Inicio</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Instituciones</a>
+							<a class="nav-link" href="/instituciones/mostrar">Instituciones</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Comercios</a>
+							<a class="nav-link" href="/comercios/mostrar">Comercios</a>
+						</li>
+                                                <li class="nav-item">
+							<a class="nav-link" href="/novedades/mostrar">Novedades</a>
 						</li>
 					</ul>
 				</div>
@@ -75,10 +78,10 @@
 										aria-valuemin="0" aria-valuemax="${actividad.cupo}"></div><!-- Las propiedades "aria-valuemin" y "aria-valuemax" proporcionan los valores mínimo y máximo -->
 								</div>
 								<div class="mt-3"><span class="text1"
-										th:text="${actividad.inscriptos}+' inscriptos de '"></span><span class="text1"
+										th:text="${actividad.getUsuarios().size()}+' inscriptos de '"></span><span class="text1"
 										th:text="${actividad.cupo}+' cupos disponibles.'"></span></div>
 							</div>
-							<div th:text="'Fecha de inicio: '+${actividad.fecha}"></div>
+							<div th:text="${actividad.fecha != null} ? 'Fecha de inicio: ' + ${actividad.fecha.getDayOfMonth()} + '/' + ${actividad.fecha.getMonthValue()} + '/' + ${actividad.fecha.getYear()} : 'Todas las semanas'"></div>
 							<div th:text="${actividad.descripcionActividad}"></div>
 							<div class="accordion-body__contents">
 								<div th:if="${error != null}" th:text="${error}"></div>		
@@ -192,6 +195,8 @@
 		</div>
 
 		<!---FOOTER-->
+	</section>
+</div>
 
 		<footer style="background-color: #222;">
 			<div class="container p-4">
