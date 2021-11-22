@@ -81,34 +81,31 @@
 					<button th:type="submit" class="btn btn-primary btn-color">Crear institución</button>
 				</form>
 				<!--MODIFICAR-->
-				<form th:if="${institucion!=null}" th:action="@{/admin/modificar-institucion}" method="POST"
-				th:each="inst : ${institucion}" style="float: left;width: 42%;">
+				<form th:if="${institucion!=null}" th:action="@{/admin/modificar-institucion}" method="POST" style="float: left;width: 42%;">
 				<div class="alert alert-danger" role="alert" th:if="${error != null}">
 					<div th:text="${error}"></div>
 				</div>
 				<div class="badge bg-primary text-wrap title z" style="margin-top: -100%;">Modificar Institución</div>
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Nombre de la Institución</label>
-					<input th:type="text" th:value="${inst.nombre}" name="nombre"
+					<input th:type="text" th:value="${institucion.nombre}" name="nombre"
 					class="form-control" placeholder="Escriba el nombre de la institución." required>
-					<input th:type="hidden" th:value="${inst.idInstitucion}" name="id" class="form-control" required>
+					<input th:type="hidden" th:value="${institucion.idInstitucion}" name="id" class="form-control" required>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Descripción de la Institución</label>
-					<textarea th:type="text" th:text="${inst.descripcion}" name="descripcion"
+					<textarea th:type="text" th:text="${institucion.descripcion}" name="descripcion"
 					class="form-control" required></textarea>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Dirección de la Institución</label>
-					<input th:type="text" th:value="${inst.direccion}" name="direccion"
+					<input th:type="text" th:value="${institucion.direccion}" name="direccion"
 					class="form-control" placeholder="Escriba la dirección de la institución." required>
-					<input th:type="hidden" th:value="${inst.direccion}" name="direccion" class="form-control" required>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Teléfono de la Institución</label>
-					<input th:type="text" th:value="${inst.telefonoInstitucion}" name="telefonoInstitucion"
+					<input th:type="text" th:value="${institucion.telefono}" name="telefono"
 					class="form-control" placeholder="Escriba el teléfono de la institución." required>
-					<input th:type="hidden" th:value="${inst.telefonoInstituciones}" name="telefono" class="form-control" required>
 				</div>
 				<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Cambiar Foto</label>

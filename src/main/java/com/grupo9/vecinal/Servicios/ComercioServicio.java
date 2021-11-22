@@ -129,6 +129,16 @@ public class ComercioServicio {
 		} 
 	}
 	
+	@Transactional(readOnly = true)
+	public List<Comercio> mostrarComerciosAlta() throws Exception {
+		try {
+		return comercioRepo.comerciosAlta();
+		
+		}catch (Exception e) {
+			throw new Exception("No se encontraron comercios guardados");
+		} 
+	}
+	
 	
 	@Transactional(readOnly = true)
 	public Comercio buscarComercio(Integer id) throws Exception {
@@ -147,6 +157,7 @@ public class ComercioServicio {
 		}
 
 	}
+	
 	
 	private void validarDatosComercio(String accion, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 

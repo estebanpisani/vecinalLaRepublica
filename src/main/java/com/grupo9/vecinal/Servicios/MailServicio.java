@@ -109,5 +109,39 @@ public class MailServicio {
 		}
 
 	}
+	
+	/*public void sendEmailActividadInscriptos(Integer idActividad)
+			throws MessagingException, UnsupportedEncodingException, Exception {
+		List<Usuario> usuarios = usuarioServ.mostrarUsuariosAlta();
+		if (usuarios.isEmpty()) {
+			throw new Exception("No hay usuarios registrados para mandar correos");
+		} else {
+			for (Usuario usuario : usuarios) {
+				String toAddress = usuario.getEmailUsuario();
+				String fromAddress = "larepublica.vecinal@gmail.com";
+				String senderName = "Vecinal La República";
+				String subject = titulo;
+				String content = "[[name]],<br>" + descripcion + "<br><br>" + "Vecinal La República.";
+
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message);
+
+				helper.setFrom(fromAddress, senderName);
+				helper.setTo(toAddress);
+				helper.setSubject(subject);
+
+				content = content.replace("[[name]]", usuario.getNombre() + " " + usuario.getApellido());
+				String verifyURL = "http://localhost:8081/usuarios/verificacion/" + usuario.getCodValidacion();
+
+				content = content.replace("[[URL]]", verifyURL);
+
+				helper.setText(content, true);
+
+				mailSender.send(message);
+			}
+
+		}
+
+	}*/
 
 }

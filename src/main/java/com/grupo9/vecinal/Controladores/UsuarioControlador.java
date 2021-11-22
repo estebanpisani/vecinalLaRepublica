@@ -166,7 +166,7 @@ public class UsuarioControlador {
 		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
 		modelo.addAttribute("usuario", usuario);
 		
-		return "panel_usuario.html";
+		return "panel_usuario";
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")

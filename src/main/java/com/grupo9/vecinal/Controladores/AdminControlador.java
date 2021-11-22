@@ -130,7 +130,7 @@ public class AdminControlador {
 	@GetMapping("/panel-comercios")
 	public String panelAdminComercios(ModelMap modelo) {
 		try {
-			List<Comercio> comercios = comercioServ.mostrarComercios();
+			List<Comercio> comercios = comercioServ.mostrarComerciosAlta();
 			modelo.addAttribute("comercios", comercios);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
@@ -163,7 +163,7 @@ public class AdminControlador {
 	public String modificarComercio(@PathVariable("idComercio") Integer idComercio, ModelMap modelo) {
 		try {
 			
-			List<Comercio> comercios = comercioServ.mostrarComercios();
+			List<Comercio> comercios = comercioServ.mostrarComerciosAlta();
 			modelo.put("comercios", comercios);
 			
 			Comercio comercio = comercioServ.buscarComercio(idComercio);
@@ -193,6 +193,12 @@ public class AdminControlador {
 			return "panel-comercios.html";
 		}
 
+	}
+	
+	@GetMapping("/baja-comercio/{idComercio}")
+	public String bajaComercio(@PathVariable("idComercio") Integer id) throws Exception {	
+			comercioServ.bajaComercio(id);
+			return "redirect:/admin/panel-comercios";
 	}
 
 	////////////////////////////////////////////// FIN COMERCIOS //////////////////////////////////////////////
@@ -268,6 +274,12 @@ public class AdminControlador {
 
 	}
 	
+	@GetMapping("/baja-institucion/{idInstitucion}")
+	public String bajaInstitucion(@PathVariable("idInstitucion") Integer id) throws Exception {	
+			institucionServ.bajaInstitucion(id);
+			return "redirect:/admin/panel-instituciones";
+	}
+	
 	////////////////////////////////////////////// FIN INSTITUCIONES //////////////////////////////////////////////
 	
 	////////////////////////////////////////////// INICIO NOVEDADES //////////////////////////////////////////////
@@ -294,6 +306,22 @@ public class AdminControlador {
 		return "redirect:/admin/panel-novedades";
 	}
 	
+	@GetMapping("/modificar-novedad/{idNovedad}")
+	public String modificarNovedad(@PathVariable("idNovedad") Integer idNovedad, ModelMap modelo) {
+		try {
+			
+			List<Novedad> novedades = novedadServ.mostrarAltaNovedades();
+			modelo.put("novedades", novedades);
+			
+			Novedad novedad = novedadServ.mostrarNovedad(idNovedad);
+			modelo.addAttribute("novedad", novedad);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+		return "panel-novedades.html";
+	}
+	
+	
 	@PostMapping("/modificar-novedades")
 	public String modificarNovedades(ModelMap modelo, @RequestParam(required = false) MultipartFile foto,
 			@RequestParam String titulo, @RequestParam String descripcion,
@@ -312,7 +340,7 @@ public class AdminControlador {
 	@GetMapping("/baja-novedad/{id}")
 	public String bajaNovedad(@PathVariable("id") Integer id) throws Exception {	
 			novedadServ.bajaNovedad(id);
-			return "redirect:/admin/panel-novedad";
+			return "redirect:/admin/panel-novedades";
 	}
 	
 	////////////////////////////////////////////// FIN NOVEDADES //////////////////////////////////////////////
