@@ -27,7 +27,6 @@ public class NovedadControlador {
 			modelo.addAttribute("novedadesDestacadas", novedadesDestacadas);
 			List<Novedad> novedadesNoDestacadas = novedadServ.mostrarNovedadesNoDestacadas();
 			modelo.addAttribute("novedadesNoDestacadas", novedadesNoDestacadas);
-			modelo.put("novedades", true);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 		}
@@ -41,7 +40,6 @@ public class NovedadControlador {
 		try {
 			Novedad novedad = novedadServ.mostrarNovedad(id);
 			modelo.addAttribute("novedad", novedad);
-			modelo.put("novedades", false);
 			
 			List<Novedad> novedadesList = novedadServ.mostrarAltaNovedades();
 			modelo.addAttribute("novedades1", novedadesList);
@@ -50,7 +48,7 @@ public class NovedadControlador {
 			modelo.put("error", e.getMessage());
 		}
 
-		return "novedades.html";
+		return "novedades-muestra.html";
 	}
 	
 }

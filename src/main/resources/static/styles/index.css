@@ -258,7 +258,9 @@ h1{
     filter: alpha(opacity=0);
 }
 
-
+.time {
+    color: #ffff;
+}
 
 /*Actividades*/
 
