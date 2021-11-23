@@ -74,28 +74,6 @@ nav > a:focus, a:hover {
     background-size: 100% 1px;
 } 
 
-.right {
-      float: right;
-      padding-right: 100px;
-}
-
-.right > a {
-    color: #fff;
-    font-weight: 300;
-    font-size: 19px;
-    text-decoration: none;
-    line-height: 50px;
-    margin-left: 40px;
-    padding: 15px;
-    letter-spacing: 3px;
-}
-
-.right > a:hover {
-    background-color: #ccc;
-    color: #000;
-    transition: .8s;
-}
-
 
 
 body{ 
@@ -128,10 +106,11 @@ margin-left: 50px;
 
 .otras-noticias-titulo {
     display: inline-block;
-    margin: 30px auto 20px auto;
-    padding-left: 80px;
+    margin: 192px auto 20px auto;
+    padding-left: 30px;
     font-weight: 300;
-    letter-spacing: 3px;
+    color: #fff;
+    font-weight: 700;
 }
 
 .widget.single-news {
@@ -223,8 +202,70 @@ margin-left: 50px;
     justify-content: space-between;
 }
 
+.novedades-box {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
 
 
+.image {
+    overflow: hidden;
+    height: 250px;
+    position: absolute;
+    width: 100%;
+}
 
+.op {
+    position: relative;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7847514005602241) 29%, rgba(0,0,0,0.6699054621848739) 41%, rgba(0,0,0,0.4906337535014006) 50%, rgba(0,0,0,0) 100%);
+}
 
+.time {
+    margin-top: 10px;
+    color: #ffff;
+    float: right;
+    margin: 207px auto 20px auto;
+    padding-right: 30px;
+}
 
+.left {
+    float: left;
+    border-radius: 5px;
+    border: 1px solid #2125293b;
+    box-shadow: 0px 0px 50px 0px #00000033;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 70%;
+}
+
+.right {
+    float: right;
+    border-radius: 5px;
+    border: 1px solid #2125293b;
+    box-shadow: 0px 0px 50px 0px #00000033;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 29%;
+}
+
+.masnovedades {
+    padding: 15px;
+    border-bottom: 1px solid #787878;
+    float: left;
+    width: 100%;
+}
+
+.bg-primary {
+    background-color: #212529!important;
+}
+
+a {
+    color: #212529;
+    text-decoration: underline;
+    float: left;
+}
+
+a:hover {
+    color: #1d1f20;
+}

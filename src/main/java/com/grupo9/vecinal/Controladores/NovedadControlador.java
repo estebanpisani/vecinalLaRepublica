@@ -42,6 +42,9 @@ public class NovedadControlador {
 			Novedad novedad = novedadServ.mostrarNovedad(id);
 			modelo.addAttribute("novedad", novedad);
 			modelo.put("novedades", false);
+			
+			List<Novedad> novedadesList = novedadServ.mostrarAltaNovedades();
+			modelo.addAttribute("novedades1", novedadesList);
 
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());

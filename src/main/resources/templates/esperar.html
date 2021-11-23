@@ -20,14 +20,21 @@
 
 		<div style="text-align: center;font-size: 20px;font-weight: 700;">¡Gracias por registrarse!</div>
 		<div style="text-align: center;color: #5a5a5a99;margin-bottom: 20px;">Por favor verifique su correo electronico para validar su cuenta</div>
+
+		<div class="login-footer" style="padding: 5px;margin-bottom: -10px;">
+			<a href="/" class="olvideDatos">Volver al inicio</a>
+		</div>
 	</div>
 
 	<div class="login" th:if="${verificado != null}">
 		<div class="title">Registrado Correctamente</div>
-</script>
 
 		<div style="text-align: center;font-size: 20px;font-weight: 700;">Usuario dado de alta</div>
 		<div style="text-align: center;color: #5a5a5a99;margin-bottom: 20px;"><script type="text/javascript">temporizador();</script></div>
+
+		<div class="login-footer" style="padding: 5px;margin-bottom: -10px;">
+			<a href="/" class="olvideDatos">Volver al inicio</a>
+		</div>
 	</div>
 </body>
 </html>
