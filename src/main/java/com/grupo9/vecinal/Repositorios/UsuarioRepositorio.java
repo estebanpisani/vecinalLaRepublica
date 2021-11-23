@@ -15,6 +15,9 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
 	@Query("SELECT u FROM Usuario u WHERE u.alta = true ORDER BY u.apellido ASC, u.nombre ASC")
 	public List<Usuario> usuariosAlta();
 	
+	@Query("SELECT u FROM Usuario u WHERE u.admin = false ORDER BY u.apellido ASC, u.nombre ASC")
+	public List<Usuario> usuariosSinAdmin();
+	
 	@Query("SELECT u FROM Usuario u WHERE u.alta = false ORDER BY u.apellido ASC, u.nombre ASC")
 	public List<Usuario> usuariosBaja();
 	

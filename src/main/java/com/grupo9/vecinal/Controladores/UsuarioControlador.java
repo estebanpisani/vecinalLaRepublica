@@ -34,9 +34,9 @@ public class UsuarioControlador {
 	}
 
 	@PostMapping("/registro")
-	public String registro(@RequestParam(required = false) MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
-			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String emailUsuario,
-			@RequestParam String nombre, @RequestParam String apellido,
+	public String registro(@RequestParam(required = false) MultipartFile foto, ModelMap modelo,
+			@RequestParam String nombreUsuario, @RequestParam String contrasenia, @RequestParam String contrasenia2,
+			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam(required = false) Long telefono) {
 
 		try {
@@ -56,12 +56,12 @@ public class UsuarioControlador {
 			return "registro.html";
 		}
 	}
-	
+
 	@GetMapping("/verificacion/{code}")
 	public String usuarioValidado(@PathVariable("code") String verificacion, ModelMap modelo) {
 		try {
 			usuarioServ.altaUsuario(verificacion);
-			modelo.addAttribute("verificado",verificacion);
+			modelo.addAttribute("verificado", verificacion);
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 		}
@@ -71,7 +71,8 @@ public class UsuarioControlador {
 	@PostMapping("/modificar")
 	public String modificarUsuario(MultipartFile foto, ModelMap modelo, @RequestParam String nombreUsuario,
 			@RequestParam String emailUsuario, @RequestParam String nombre, @RequestParam String apellido,
-			@RequestParam(required = false) Long telefono, @RequestParam Integer idUsuario, HttpSession session) throws Exception {
+			@RequestParam(required = false) Long telefono, @RequestParam Integer idUsuario, HttpSession session)
+			throws Exception {
 
 		try {
 			usuarioServ.modificarUsuario(foto, nombreUsuario, emailUsuario, nombre, apellido, telefono, idUsuario);
@@ -87,33 +88,36 @@ public class UsuarioControlador {
 
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/inscripcion/{idActividad}")
-	public String inscripcion(HttpSession session, @PathVariable("idActividad") Integer idActividad, ModelMap modelo){
+	public String inscripcion(HttpSession session, @PathVariable("idActividad") Integer idActividad, ModelMap modelo) {
 
-			try {
-				Usuario usuario=(Usuario)session.getAttribute("usuariologueado");
-				usuarioServ.inscripcionActividad(usuario.getIdUsuario(), idActividad);
-				session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(usuario.getIdUsuario()));
+		try {
+			Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
+			usuarioServ.inscripcionActividad(usuario.getIdUsuario(), idActividad);
+			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(usuario.getIdUsuario()));
 
-			} catch (Exception e) {
-				modelo.put("error", e.getMessage());
-				return "redirect:/actividades/mostrar";
-			}
-
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
 			return "redirect:/actividades/mostrar";
+		}
+
+		return "redirect:/actividades/mostrar";
 	}
-	
+
 	@GetMapping("/recuperar")
 	public String recuperar(ModelMap modelo) {
+
 		modelo.addAttribute("contrasenia", false);
+
 		return "recuperar_back.html";
 	}
-	
+
 	@PostMapping("/recuperar")
-	public String recuperando(ModelMap modelo,@RequestParam String mail, @RequestParam(required = false) String contrasenia, @RequestParam(required = false) String contrasenia2) {
+	public String recuperando(ModelMap modelo, @RequestParam String mail,
+			@RequestParam(required = false) String contrasenia, @RequestParam(required = false) String contrasenia2) {
 		try {
 			if (usuarioServ.recuperarUsuarioOContrasenia(mail, contrasenia, contrasenia2)) {
 				return "redirect:/login";
-			}else {
+			} else {
 				return "recuperar_back.html";
 			}
 		} catch (Exception e) {
@@ -121,23 +125,22 @@ public class UsuarioControlador {
 			modelo.addAttribute("contrasenia", false);
 			return "recuperar_back.html";
 		}
-		
-		
+
 	}
-	
+
 	@GetMapping("/recuperar/{codigo}")
-	public String recuperando(@PathVariable String codigo,ModelMap modelo) {
+	public String recuperando(@PathVariable String codigo, ModelMap modelo) {
 		try {
 			Usuario usuario = usuarioServ.buscarUsuarioCodValidacion(codigo);
 			if (usuario != null) {
 				modelo.addAttribute("contrasenia", true);
-				modelo.addAttribute("mail",usuario.getEmailUsuario());
+				modelo.addAttribute("mail", usuario.getEmailUsuario());
 				return "recuperar_back.html";
 			}
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 		}
-		
+
 		return "recuperar_back.html";
 	}
 
@@ -145,7 +148,7 @@ public class UsuarioControlador {
 	@GetMapping("/desinscripcion/{idActividad}")
 	public String desinscribir(HttpSession session, @PathVariable("idActividad") Integer idActividad, ModelMap modelo) {
 		try {
-			Usuario usuario=(Usuario)session.getAttribute("usuariologueado");
+			Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
 			usuarioServ.desinscripcionActividad(usuario.getIdUsuario(), idActividad);
 			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(usuario.getIdUsuario()));
 
@@ -157,18 +160,16 @@ public class UsuarioControlador {
 		return "redirect:/usuarios/panel-actividades";
 	}
 
-	
-
 	// Panel
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/panel")
 	public String panelUsuario(HttpSession session, ModelMap modelo) {
 		Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
 		modelo.addAttribute("usuario", usuario);
-		
+
 		return "panel_usuario";
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/panel-actividades")
 	public String panelUsuarioActividades(HttpSession session, ModelMap modelo) throws Exception {
@@ -176,39 +177,41 @@ public class UsuarioControlador {
 		modelo.addAttribute("usuario", usuario);
 		return "panel_actividades_usuario.html";
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/panel-cambiarcontrasena")
 	public String panelCambiarContrasena() {
-		
+
 		return "panel_cambiarcontrasena";
 	}
-	
+
 	@PostMapping("/panel-cambiarcontrasena")
-	public String panelContraseniaCambiada(HttpSession session,ModelMap modelo, @RequestParam Integer id, @RequestParam String contraseniaActual, @RequestParam String contraseniaNueva, @RequestParam String contraseniaNueva2) {
+	public String panelContraseniaCambiada(HttpSession session, ModelMap modelo, @RequestParam Integer id,
+			@RequestParam String contraseniaActual, @RequestParam String contraseniaNueva,
+			@RequestParam String contraseniaNueva2) {
 		try {
 			usuarioServ.modificarContrasenia(contraseniaActual, contraseniaNueva, contraseniaNueva2, id);
 			session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(id));
 			modelo.put("ok", "¡Contraseña cambiada con éxito!");
 			return "panel_cambiarcontrasena";
-			
+
 		} catch (Exception e) {
 			modelo.put("error", e.getMessage());
 			return "panel_cambiarcontrasena";
 		}
-		
+
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 	@GetMapping("/eliminar-foto/{idFoto}")
-	public String eliminarFoto(HttpSession session, ModelMap modelo,@PathVariable("idFoto") Integer idFoto) {
+	public String eliminarFoto(HttpSession session, ModelMap modelo, @PathVariable("idFoto") Integer idFoto) {
 		try {
-			Usuario usuario =(Usuario)session.getAttribute("usuariologueado");
-			if (usuario.getFoto()!=null) {
-				usuarioServ.eliminarFotoUsuario(usuario.getIdUsuario(),idFoto);
-				session.setAttribute("usuariologueado",usuarioServ.buscarUsuario(usuario.getIdUsuario()));
+			Usuario usuario = (Usuario) session.getAttribute("usuariologueado");
+			if (usuario.getFoto() != null) {
+				usuarioServ.eliminarFotoUsuario(usuario.getIdUsuario(), idFoto);
+				session.setAttribute("usuariologueado", usuarioServ.buscarUsuario(usuario.getIdUsuario()));
 				return "redirect:/usuarios/panel";
-			}else {
+			} else {
 				modelo.put("error", "No hay foto para eliminar");
 				return "panel_usuario.html";
 			}
@@ -216,7 +219,6 @@ public class UsuarioControlador {
 			modelo.put("error", e.getMessage());
 			return "panel_usuario.html";
 		}
-		
-		
+
 	}
 }

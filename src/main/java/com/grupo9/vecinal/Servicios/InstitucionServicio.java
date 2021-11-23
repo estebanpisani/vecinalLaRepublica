@@ -49,7 +49,7 @@ public class InstitucionServicio {
 	}
 	
 	@Transactional
-	public void modificarInstitucion(MultipartFile archivo, Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
+	public void modificarInstitucion(MultipartFile foto, Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 
 		try {
 			
@@ -65,13 +65,13 @@ public class InstitucionServicio {
 				institucion.setDescripcion(descripcion);
 				institucion.setDireccion(direccion);
 				institucion.setTelefono(telefono);
-				
-				Integer idFoto = null;
-				if (institucion.getFoto() != null) {
-					idFoto = institucion.getFoto().getId()
-;				}
-				Foto foto = fotoServ.actualizar(idFoto, archivo);
-				institucion.setFoto(foto);
+				if (!foto.isEmpty()) {
+					if (institucion.getFoto() != null) {
+						institucion.setFoto(fotoServ.actualizar(institucion.getFoto().getId(), foto));
+					} else {
+						institucion.setFoto(fotoServ.guardar(foto));
+					}
+				}
 				
 				institucionRepo.save(institucion);
 				
@@ -169,6 +169,16 @@ public class InstitucionServicio {
 			throw new Exception("No hay institucion con ese Id");
 		} else {
 			return institucion;
+		}
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Institucion> mostrarInstitucionesAlta() throws Exception {
+		List<Institucion> instituciones = institucionRepo.institucionesAlta();
+		if (instituciones.isEmpty()) {
+			throw new Exception("No hay institucion activas");
+		} else {
+			return instituciones;
 		}
 	}
 	

@@ -136,6 +136,7 @@ public class UsuarioServicio implements UserDetailsService {
 				validarContrasenia(contrasenia, contrasenia2);
 				String encriptada = new BCryptPasswordEncoder(4).encode(contrasenia);
 				usuario.setContrasenia(encriptada);
+				usuario.setCodValidacion(null);
 				usuarioRepo.save(usuario);
 				return true;
 			}
@@ -319,6 +320,25 @@ public class UsuarioServicio implements UserDetailsService {
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	@Transactional
+	public Boolean estoyInscripto(Integer idUsuario, Integer idActividad) throws Exception {
+		try {
+			Usuario usuario = buscarUsuario(idUsuario);
+			Actividad actividad = actividadServ.buscarActividad(idActividad);
+		
+			for (Actividad act : usuario.getActividades()) {
+				if (act.getIdActividades().equals(actividad.getIdActividades())) {
+					return true;
+				}
+
+			}
+			return false;
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 
 	@Transactional
 	public void desinscripcionActividad(Integer idUsuario, Integer idActividad) throws Exception {
@@ -367,6 +387,17 @@ public class UsuarioServicio implements UserDetailsService {
 	public List<Usuario> mostrarUsuariosAlta() throws Exception {
 		try {
 			return usuarioRepo.usuariosAlta();
+
+		} catch (Exception e) {
+			throw new Exception("No se encontraron afiliados");
+		}
+
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Usuario> mostrarUsuariosSinAdmin() throws Exception {
+		try {
+			return usuarioRepo.usuariosSinAdmin();
 
 		} catch (Exception e) {
 			throw new Exception("No se encontraron afiliados");

@@ -2,6 +2,8 @@ package com.grupo9.vecinal.Controladores;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,10 +22,10 @@ public class ActividadControlador {
 	private ActividadServicio actividadServ;
 	
 	@GetMapping("/mostrar")
-	public String mostrarActividades(ModelMap modelo) throws Exception {
+	public String mostrarActividades(HttpSession session,ModelMap modelo) throws Exception {
 		try {
 			List<Actividad> actividades = actividadServ.mostrarActividadFechaReciente();
-			modelo.put("actividades", actividades);						
+			modelo.addAttribute("actividades", actividades);	
 		} catch (Exception e) {			
 			modelo.put("error", e.getMessage());
 		}

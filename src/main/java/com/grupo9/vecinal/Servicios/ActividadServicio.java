@@ -169,6 +169,17 @@ public class ActividadServicio {
 	}
 	
 	@Transactional(readOnly = true)
+	public List<Actividad> mostrarActividadAltaInscriptos() throws Exception {
+		try {
+			return actividadRepo.actividadAltaInscriptos();
+
+		} catch (Exception e) {
+			throw new Exception("No se encontraron actividades dadas de alta.");
+		}
+
+	}
+	
+	@Transactional(readOnly = true)
 	public List<Actividad> mostrarActividadBaja() throws Exception {
 		try {
 			return actividadRepo.actividadBaja();

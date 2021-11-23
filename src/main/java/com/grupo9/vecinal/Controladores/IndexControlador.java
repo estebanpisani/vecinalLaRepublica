@@ -40,9 +40,9 @@ public class IndexControlador {
 				novedadesDestacadas = novedadServ.mostrarNovedadesDestacadas().subList(0, 3);
 			}
 			modelo.addAttribute("novedades", novedadesDestacadas);
-			List<Actividad> actividades = actividadServ.mostrarActividadAlta();
+			List<Actividad> actividades = actividadServ.mostrarActividadAltaInscriptos();
 			if (actividades.size() > 3) {
-				actividades = actividadServ.mostrarActividadAlta().subList(0, 3);
+				actividades = actividadServ.mostrarActividadAltaInscriptos().subList(0, 3);
 			}
 			modelo.addAttribute("actividades", actividades);
 		} catch (Exception e) {

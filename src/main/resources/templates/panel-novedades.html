@@ -133,7 +133,6 @@
 							<thead>
 								<tr>
 									<th scope="col">Titulo</th>
-									<th scope="col">Descripción</th>
 									<th scope="col">Editar</th>
 									<th scope="col">Dar Baja</th>
 								</tr>
@@ -141,7 +140,6 @@
 							<tbody>
 								<tr th:each="novedad : ${novedades}">
 									<td th:text="${novedad.titulo}"></td>
-									<td th:text="${novedad.descripcion}"></td>
 									<td><button type="button" class="btn btn-success"> <a
 												th:href="@{'/admin/modificar-novedad/'}+${novedad.novedadId}"> Editar
 											</a> </button></td>

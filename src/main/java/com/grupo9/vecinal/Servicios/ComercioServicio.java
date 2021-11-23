@@ -47,7 +47,7 @@ public class ComercioServicio {
 	}
 	
 	@Transactional
-	public void modificarComercio(MultipartFile archivo,Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
+	public void modificarComercio(MultipartFile foto,Integer id, String nombre, String descripcion, String direccion, Long telefono) throws Exception {
 
 		try {
 			
@@ -63,12 +63,13 @@ public class ComercioServicio {
 				comercio.setDescripcion(descripcion);
 				comercio.setDireccion(direccion);
 				comercio.setTelefono(telefono);
-				Integer idFoto = null;
-				if (comercio.getFoto() != null) {
-					idFoto = comercio.getFoto().getId()
-;				}
-				Foto foto = fotoServ.actualizar(idFoto, archivo);
-				comercio.setFoto(foto);
+				if (!foto.isEmpty()) {
+					if (comercio.getFoto() != null) {
+						comercio.setFoto(fotoServ.actualizar(comercio.getFoto().getId(), foto));
+					} else {
+						comercio.setFoto(fotoServ.guardar(foto));
+					}
+				}
 				comercioRepo.save(comercio);
 				
 			}else {

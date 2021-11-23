@@ -66,7 +66,11 @@ public class NovedadServicio {
 				novedad.setFecha(LocalDateTime.now().minusHours(3));
 				novedad.setDestacado(destacado);
 				if (!foto.isEmpty()) {
-					novedad.setFoto(fotoServ.actualizar(novedad.getFoto().getId(), foto));
+					if (novedad.getFoto() != null) {
+						novedad.setFoto(fotoServ.actualizar(novedad.getFoto().getId(), foto));
+					} else {
+						novedad.setFoto(fotoServ.guardar(foto));
+					}
 				}
 				novedadRepo.save(novedad);
 

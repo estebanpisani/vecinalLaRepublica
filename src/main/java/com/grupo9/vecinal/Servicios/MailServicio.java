@@ -90,8 +90,8 @@ public class MailServicio {
 				String toAddress = usuario.getEmailUsuario();
 				String fromAddress = "larepublica.vecinal@gmail.com";
 				String senderName = "Vecinal La República";
-				String subject = titulo;
-				String content = "[[name]],<br>" + descripcion + "<br><br>" + "Vecinal La República.";
+				String subject = "Novedades importantes: "+titulo;
+				String content = "[[name]],<br> Nueva información de interes: "+"<b>"+titulo+"</b>"+"<br>" + descripcion + "<br><br>" + "Vecinal La República.";
 
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message);

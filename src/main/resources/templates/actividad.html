@@ -95,7 +95,9 @@
 							</div>							
 
 							<div class="accordion-body__contents" th:unless="${error != null}">
-								<a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+								<p th:if="${actividad.getUsuarios().size()>=actividad.cupo}">Cupos llenos</p>
+								
+								<a th:if="${actividad.getUsuarios().size()<actividad.cupo}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
 									th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades}">Inscribirse</a>
 								<br>
 							</div>
