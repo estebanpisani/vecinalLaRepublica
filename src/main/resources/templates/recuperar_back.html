@@ -22,7 +22,9 @@
       <div class="alert alert-success" role="alert" th:if="${ok != null}">
         <div th:text="${ok}"></div>
       </div>
+      
       <div class="recuperar"><ion-icon name="lock-closed-outline"></ion-icon></div>
+
       <div th:if="${contrasenia==false}" class="mb-3">
        <div style="text-align: center;font-size: 20px;font-weight: 700;">¿Tenés problemas para entrar?</div>
        <div style="text-align: center;color: #5a5a5a99;margin-bottom: 20px;">Introduci tu correo electrónico y te enviaremos un enlace para que vuelvas a entrar en tu cuenta.</div>
@@ -39,6 +41,10 @@
 
     <button th:if="${contrasenia==false}" th:type="submit" class="btn btn-primary btn-color">Enviar correo</button>
     <button th:if="${contrasenia}" th:type="submit" class="btn btn-primary btn-color">Crear contraseña</button>
+
+    <div class="login-footer" style="padding: 5px;margin-bottom: -10px;">
+      <a href="/" class="olvideDatos">Volver al inicio</a>
+    </div>
   </form>
 </div>
 
