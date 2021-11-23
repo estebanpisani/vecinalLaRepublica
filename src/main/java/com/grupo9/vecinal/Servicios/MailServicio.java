@@ -121,8 +121,9 @@ public class MailServicio {
 				String toAddress = usuario.getEmailUsuario();
 				String fromAddress = "larepublica.vecinal@gmail.com";
 				String senderName = "Vecinal La República";
-				String subject = actividad.getNombreActividad();
-				String content = "[[name]],<br>" + actividad.getDescripcionActividad() + "<br><br>" + "Vecinal La República.";
+				String subject = "Recordatorio de actividad: "+actividad.getNombreActividad();
+				String content = "[[name]],<br> Le recordamos que se encuentra inscripto a la actividad: "+actividad.getNombreActividad()
+				 +"<br>"+ actividad.getDescripcionActividad() + "<br><br>" + "Vecinal La República.";
 
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message);

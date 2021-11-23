@@ -138,7 +138,7 @@
 									<td
 										th:text="${actividad.fecha != null} ? ${actividad.fecha.getDayOfMonth()} + '/' + ${actividad.fecha.getMonthValue()} + ' /' + ${actividad.fecha.getYear()}">
 									</td>
-									<td th:text="${actividad.getUsuarios().size()} +'/'+${actividad.cupo}"></td>
+									<td><a class="olvideDatos" th:href="@{'/admin/inscriptos-actividad/'}+${actividad.idActividades}" th:text="${actividad.getUsuarios().size()} +'/'+${actividad.cupo}">pepe</a></td>
 									<td><button type="button" class="btn btn-success"> <a
 												th:href="@{'/admin/modificar-actividad/'}+${actividad.idActividades}">
 												Editar

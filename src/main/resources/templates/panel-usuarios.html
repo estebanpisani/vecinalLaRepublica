@@ -78,7 +78,7 @@
 							<td th:text="${usuario.fechaDeBaja}"></td>
 
 							<td><button type="button" th:class="${usuario.alta} ? 'btn btn-danger' : 'btn btn-success'"> <a
-										th:href="${usuario.alta} ? @{'/admin/bajaUsuario/'}+${usuario.idUsuario} : @{'/admin/altaUsuario/'}+${usuario.idUsuario}" th:text="${usuario.alta} ? 'Dar de Baja' : 'Dar de Alta'"></a></button></td>
+										th:href="${usuario.alta} ? @{'/admin/bajaUsuario/'}+${usuario.idUsuario} : @{'/admin/altaUsuario/'}+${usuario.codValidacion}" th:text="${usuario.alta} ? 'Dar de Baja' : 'Dar de Alta'"></a></button></td>
 						</tr>
 
 					</tbody>

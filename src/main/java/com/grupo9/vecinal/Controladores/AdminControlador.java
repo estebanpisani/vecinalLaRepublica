@@ -1,7 +1,11 @@
 package com.grupo9.vecinal.Controladores;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Set;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +26,7 @@ import com.grupo9.vecinal.Entidades.Usuario;
 import com.grupo9.vecinal.Servicios.ActividadServicio;
 import com.grupo9.vecinal.Servicios.ComercioServicio;
 import com.grupo9.vecinal.Servicios.InstitucionServicio;
+import com.grupo9.vecinal.Servicios.MailServicio;
 import com.grupo9.vecinal.Servicios.NovedadServicio;
 import com.grupo9.vecinal.Servicios.UsuarioServicio;
 
@@ -44,10 +49,19 @@ public class AdminControlador {
 
 	@Autowired
 	InstitucionServicio institucionServ;
+	
+	@Autowired
+	MailServicio mailServ;
 
 	@GetMapping("/bajaUsuario/{idUsuario}")
 	public String bajaUsuario(@PathVariable("idUsuario") Integer id) throws Exception {
 		usuarioServ.bajaUsuario(id);
+		return "redirect:/admin/panel-usuarios";
+	}
+	
+	@GetMapping("/altaUsuario/{codValidacion}")
+	public String altaUsuario(@PathVariable("codValidacion") String codValidacion) throws Exception {
+		usuarioServ.altaUsuario(codValidacion);
 		return "redirect:/admin/panel-usuarios";
 	}
 
@@ -66,7 +80,39 @@ public class AdminControlador {
 
 		return "panel-actividades.html";
 	}
+	
+	@GetMapping("/inscriptos-actividad/{id}")
+	public String inscriptosActividad(ModelMap modelo,@PathVariable("id") Integer id) {
 
+		try {
+			Actividad actividad = actividadServ.buscarActividad(id);
+			Set<Usuario> usuarios = actividad.getUsuarios();
+			modelo.addAttribute("usuarios", usuarios);
+			modelo.addAttribute("actividad", actividad);
+		} catch (Exception e) {
+			modelo.put("error", e.getMessage());
+		}
+
+		return "lista-inscriptos.html";
+	}
+	
+	@PostMapping("/mandar-mails")
+	public String mandarMailInscriptos(@RequestParam Integer idActividad) {
+		try {
+			mailServ.sendEmailActividadInscriptos(idActividad);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+		return "redirect:/admin/panel-actividades";
+	}
+	
 	@PostMapping("/registro-actividad")
 	public String registroActividad(ModelMap modelo, @RequestParam String nombreActividad,
 			@RequestParam String descripcion, @RequestParam String fecha, @RequestParam Integer cupo)
