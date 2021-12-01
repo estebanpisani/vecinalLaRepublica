@@ -460,8 +460,8 @@ public class UsuarioServicio implements UserDetailsService {
 
 		List<Usuario> usuario1 = usuarioRepo.findAll();
 		for (Usuario usuario2 : usuario1) {
-			if (usuario2.getNombreUsuario().equals(nombreUsuario)
-					&& (usuario == null || !usuario.getNombreUsuario().equals(nombreUsuario))) {
+			if (usuario2.getNombreUsuario().equalsIgnoreCase(nombreUsuario)
+					&& (usuario == null || !usuario.getNombreUsuario().equalsIgnoreCase(nombreUsuario))) {
 				throw new Exception(
 						"El nombre de usuario: " + nombreUsuario + " ya existe, por favor ingrese uno distinto");
 			}
