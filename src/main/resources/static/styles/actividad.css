@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+:root {
+    --turquesa: #b4f0cd;
+    --grisOscuro: #262626;
+    --grisClaro: #2e2e2e;
+    --grisMasClaro: #4a4a4a;
+    --blancoBackground: #F8F9FA;
+}
+
+
+body {
+  margin: 0;
+  font-family:'Ubuntu', sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  line-height: 1.5;
+  color: #222;
+  background-color: #f7f7f7;
+}
+
+
+/* Header */
+
+h1 {
+  letter-spacing: 3px;
+  font-weight: 300;
+  font-size: 25px;
+  margin: 0;
+  color: var(--blancoBackground);
+}
+
+/* Main */
+.main {
+    width: 100%;
+    border-radius: 2%;
+}
+
+
+/* Acordeon */
+
+.accordion {
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  
+  
+}
+
+.accordion-header,
+.accordion-body {
+  background: white;
+  
+}
+
+
+.accordion-header {
+  padding: 1.5em 1.5em;
+  background: #222; /*Color panel*/
+  color: white; /*Color letra*/
+  cursor: pointer;
+  font-size: .7em;
+  letter-spacing: .1em;
+  transition: all .3s;
+  text-transform: uppercase;   
+}
+
+.accordion__item {
+    border-bottom: 1px solid #222; /*Color borde*/
+}
+
+.accordion__item .accordion__item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+}
+
+.accordion-header:hover {
+  background: rgb(53, 53, 53); /*Color cuando esta posicionado arriba*/
+  position: relative;
+  z-index: 5;
+}
+ 
+.accordion-body {
+ /*Color de fondo del texto*/
+  background: rgb(53, 53, 53);
+  color: #fcfcfc;
+  display: none;
+  
+}
+
+.accordion-body__contents { /*Contenido de acordeon*/
+  padding: 1.5em 1.5em;
+  font-size: .85em;
+
+}
+
+.accordion__item.active:last-child .accordion-header {
+  border-radius: none;
+  
+}
+
+.accordion:first-child > .accordion__item > .accordion-header { /*Borde de acordeon*/
+  border-bottom: 1px solid transparent;
+}
+
+.accordion__item > .accordion-header:after { /*Flecha desplegable*/
+  content: "\f3d0";
+  font-family: IonIcons;
+  font-size: 1.2em;
+  float: right;
+  position: relative;
+  top: -2px;
+  transition: .3s all;
+  transform: rotate(0deg);
+  
+}
+
+.accordion__item.active > .accordion-header:after {
+  transform: rotate(-180deg);
+}
+
+.accordion__item.active .accordion-header {  /*Color cuando esta abierto*/
+  background: rgb(53, 53, 53);
+  
+}
+
+.accordion__item .accordion__item .accordion-header {
+/*Color sub panel*/
+  background: rgb(77, 76, 76);
+  color: #fcfcfc;
+}
+
+@media screen and (max-width: 1000px) {
+  body {
+    padding: 1em;
+  }
+  
+  .accordion {
+    width: 100%;
+  }
+}
+
+/*Actividades*/
+
+.main > .actividades {   
+  width: 100%;
+  margin: auto;
+}
+
+
+.actividades-titulo {
+  display: inline-block;
+  margin: 40px auto 30px auto;
+  padding-left: 60px;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+.titulo-btn-actividades {
+  height: 100px;
+}
+
+
+.btn-secondary{
+  width: fit-content;
+  font-size: .85em;
+  float: right;
+}
+
+.img-responsive{
+  margin-left: 37%;
+}
+
+.contenedor{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+ .col-md-4 {
+    min-height: 150px;
+    margin-left: 33%;
+    padding: 50px;
+}
+  
+  .heading > a {
+      text-decoration: none;
+      color: #222;
+  }
+  
+  .heading > a:hover {
+      color: #ccc;
+  }
+  
+
+  
+  
+  .progress {
+      height: 10px;
+      border-radius: 10px
+  }
+  
+  .progress div {
+      background-color: #222;
+  }
+  
+  .text1 {
+      font-size: 14px;
+      font-weight: 600;
+  }
+
+  .text2 {
+      color: #a5aec0;
+  }
+
+  .mt-5 {
+      margin-bottom: 0px;
+      text-align: center;
+      
+  }
+
+  .mt-3 {
+  	  text-align:center;
+  }
+
+  /* Footer */
+
+footer{
+  background-color: #222;
+  width: 100%;  
+  margin-top: 30px;
+}
+
+.tel {
+  padding-top: 20px;
+}
+
+  /* Footer */
+.row {
+  display: flex;
+  justify-content:space-between;
+

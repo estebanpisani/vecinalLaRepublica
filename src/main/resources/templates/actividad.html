@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+		integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/styles/actividad.css">
+
+
+	<title>Vecinal "La Republica"</title>
+</head>
+
+<body>
+
+	<!-- HEADER -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<h1>Vecinal "La República"</h1>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+				aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="float-right">
+				<div class="collapse navbar-collapse" id="navbarScroll">
+					<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/actividades/mostrar">Actividades</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/instituciones/mostrar">Instituciones</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/comercios/mostrar">Comercios</a>
+						</li>
+                                                <li class="nav-item">
+							<a class="nav-link" href="/novedades/mostrar">Novedades</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- MAIN -->
+
+	<div class="contenedor">
+		<div class="main">
+			<!--Actividades-->
+			<section class="actividades">
+				<div class="titulo-btn-actividades">
+					<h3 class="actividades-titulo">Actividades</h3>
+				</div>
+
+
+				<!--Actividad 1-->
+
+				<div class="accordion js-accordion">
+
+
+					<div class="accordion__item js-accordion-item" th:each="actividad : ${actividades}">
+
+						<div class="accordion-header js-accordion-header" th:text="${actividad.nombreActividad}">
+						</div>
+						<div class="accordion-body js-accordion-body">
+							<div class="col-md-4">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" aria-valuenow="${actividad.getUsuarios().size()}"		
+										aria-valuemin="0" aria-valuemax="${actividad.cupo}"></div><!-- Las propiedades "aria-valuemin" y "aria-valuemax" proporcionan los valores mínimo y máximo -->
+								</div>
+								<div class="mt-3"><span class="text1"
+										th:text="${actividad.getUsuarios().size()}+' inscriptos de '"></span><span class="text1"
+										th:text="${actividad.cupo}+' cupos disponibles.'"></span></div>
+							</div>
+							<div th:text="${actividad.fecha != null} ? 'Fecha de inicio: ' + ${actividad.fecha.getDayOfMonth()} + '/' + ${actividad.fecha.getMonthValue()} + '/' + ${actividad.fecha.getYear()} : 'Todas las semanas'"></div>
+							<div th:text="${actividad.descripcionActividad}"></div>
+							<div class="accordion-body__contents">
+								<div th:if="${error != null}" th:text="${error}"></div>		
+								<br>
+							</div>
+							
+							<div class="accordion-body__contents" th:if="${error != null}" >
+								<a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+									th:href="#" th:text="${error}"></a>
+								<br>
+							</div>							
+
+							<div class="accordion-body__contents" th:unless="${error != null}">
+								<p th:if="${actividad.getUsuarios().size()>=actividad.cupo}">Cupos llenos</p>
+								
+								<a th:if="${actividad.getUsuarios().size()<actividad.cupo}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+									th:href="@{'/usuarios/inscripcion/'}+${actividad.idActividades}">Inscribirse</a>
+								<br>
+							</div>
+						</div><!-- end of accordion body -->
+					</div><!-- end of accordion item -->
+
+					<!--Actividades-->
+
+<!-- <script th:inline="javascript">
+        function traer() {
+            var calculo = (((${actividad.getUsuarios().size()}*100)/${actividad.cupo}));
+
+            var elem = document.getElementById('myDiv');
+
+            elem.style.width = calculo + '%';
+            alert(calculo);
+        }
+        console.log(calculo);
+        window.onload = percent();
+</script> -->
+
+					<script>
+						(new IntersectionObserver(function (e, o) {
+							if (e[0].intersectionRatio > 0) {
+								document.documentElement.removeAttribute('class');
+							} else {
+								document.documentElement.setAttribute('class', 'stuck');
+							};
+						})).observe(document.querySelector('.trigger'));
+					</script>
+
+					<script>
+						var accordion = (function () {
+
+							var $accordion = $('.js-accordion');
+							var $accordion_header = $accordion.find('.js-accordion-header');
+							var $accordion_item = $('.js-accordion-item');
+
+							// default settings 
+							var settings = {
+								// animation speed
+								speed: 400,
+
+								// close all other accordion items if true
+								oneOpen: false
+							};
+
+							return {
+								// pass configurable object literal
+								init: function ($settings) {
+									$accordion_header.on('click', function () {
+										accordion.toggle($(this));
+									});
+
+									$.extend(settings, $settings);
+
+									// ensure only one accordion is active if oneOpen is true
+									if (settings.oneOpen && $('.js-accordion-item.active').length > 1) {
+										$('.js-accordion-item.active:not(:first)').removeClass('active');
+									}
+
+									// reveal the active accordion bodies
+									$('.js-accordion-item.active').find('> .js-accordion-body').show();
+								},
+								toggle: function ($this) {
+
+									if (settings.oneOpen && $this[0] != $this.closest('.js-accordion').find('> .js-accordion-item.active > .js-accordion-header')[0]) {
+										$this.closest('.js-accordion')
+											.find('> .js-accordion-item')
+											.removeClass('active')
+											.find('.js-accordion-body')
+											.slideUp()
+									}
+
+									// show/hide the clicked accordion item
+									$this.closest('.js-accordion-item').toggleClass('active');
+									$this.next().stop().slideToggle(settings.speed);
+								}
+							}
+						})();
+
+						$(document).ready(function () {
+							accordion.init({speed: 300, oneOpen: true});
+						});
+					</script>
+
+
+
+
+				</div>
+
+
+		</div>
+
+		<div class="alert alert-danger" role="alert" th:if="${error != null}">
+			<div th:text="${error}"></div>
+		</div>
+
+		<!---FOOTER-->
+	</section>
+</div>
+
+		<footer style="background-color: #222;">
+			<div class="container p-4">
+				<div class="row">
+					<div class="col-lg-6 col-md-12 mb-4">
+						<h5 class="mb-3 text-light">Dirección:</h5>
+						<p class="text-light">
+							Paraná 1382.
+						</p>
+						<h5 class="mb-3 text-light">Teléfono:</h5>
+						<p class="text-light">
+							341-6894577
+						</p>
+					</div>
+
+					<div class="col-lg-3 col-md-6 mb-4">
+						<h5 class="mb-1 text-light">Horarios</h5>
+						<table class="table" style="border-color: #ccc;">
+							<tbody>
+								<tr class="text-white">
+									<td>Lun - Vie:</td>
+									<td>8hs - 22 hs</td>
+								</tr>
+								<tr class="text-white">
+									<td>Sáb - Dom:</td>
+									<td>8 hs - 13 hs</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:#ccc;">
+				© 2021 Familia Lategano
+			</div>
+			<!-- Copyright -->
+		</footer>
+</body>
+
+</html>
