@@ -28,6 +28,7 @@ El sitio cuenta con cuatro secciones de información útil:
   - HTML
   - CSS - Bootstrap
   - JavaScript
+  - Thymeleaf
 
 * Back End:
   - Java (Spring Framework)
