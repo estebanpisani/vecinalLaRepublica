@@ -38,12 +38,12 @@ El sitio cuenta con cuatro secciones de información útil:
 ### Colaboradores:
 El proyecto fue desarrollado por un equipo de ocho desarrolladores:
 - Equipo Front End:
-  - Gabriela Locatelli
-  - Martín Oroná
-  - Bruno Lategano
-  - Keyla Mottes
-  - Gretta Ambrosi
+  - [Gabriela Locatelli](https://github.com/GabyLoc)
+  - [Martín Oroná](https://github.com/MartinOrona)
+  - [Bruno Lategano](https://github.com/BrunoLategano)
+  - [Keyla Mottes](https://github.com/keilamottes)
+  - [Gretta Ambrosi](https://github.com/gretambro)
 - Equipo Back End:
-  - Adelmar Galetto
-  - Freddye Delgado
-  - Esteban Pisani
+  - [Adelmar Galetto](https://github.com/AdelmarGaletto)
+  - [Freddye Delgado](https://github.com/fredito999)
+  - [Esteban Pisani](https://github.com/estebanpisani)
