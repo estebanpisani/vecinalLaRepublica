@@ -1,5 +1,5 @@
 # Vecinal "La Republica"
-## Sitio web creado para la gestión de la vecinal "La República" del barrio homónimo ubicado en la ciudad de Rosario, Argentina.
+## Aplicación Web desarrollada para la gestión de la vecinal "La República" del barrio homónimo ubicado en la ciudad de Rosario, Argentina.
 ### Descripción:
 El sitio cuenta con cuatro secciones de información útil:
 - [ ] Comercios
@@ -26,13 +26,15 @@ El sitio cuenta con cuatro secciones de información útil:
 ### Tecnologías usadas:
 * Front End:
   - HTML
-  - CSS - Bootstrap
+  - CSS
   - JavaScript
+  - Bootstrap
   - Thymeleaf
 
 * Back End:
-  - Java (Spring Framework)
-* Database:
+  - Spring Boot
+  
+* DataBase:
   - MySQL
 
 ### Colaboradores:
