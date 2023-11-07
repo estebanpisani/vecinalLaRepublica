@@ -12,7 +12,7 @@ El sitio cuenta con cuatro secciones de información útil:
   Una vez registrado, basta con hacer click en el botón *Soy vecino*, ubicado en la parte superior derecha del index, para iniciar sesión.
   El formulario de login cuenta con la posibilidad de enviar un correo para volver a generar la contraseña, si esta fue olvidada.
   
-  #### Incripción a actividades:
+  #### Inscripción a actividades:
   
   Un usuario puede incribirse a una actividad. Para ello, sólo basta con hacer click en *Ver más* en la sección *Actividades*, buscar la actividad deseada y hacer click en el botón *Inscribirse*. Si el cupo no superó su límite, ya se encontrará inscripto.
 ### Panel de Usuario.
@@ -43,8 +43,6 @@ El proyecto fue desarrollado por un equipo de ocho desarrolladores:
   - [Gabriela Locatelli](https://github.com/GabyLoc)
   - [Martín Oroná](https://github.com/MartinOrona)
   - [Bruno Lategano](https://github.com/BrunoLategano)
-  - [Keyla Mottes](https://github.com/keilamottes)
-  - [Gretta Ambrosi](https://github.com/gretambro)
 - Equipo Back End:
   - [Adelmar Galetto](https://github.com/AdelmarGaletto)
   - [Freddye Delgado](https://github.com/fredito999)
